@@ -1,141 +1,599 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Biya — Artista & Streamer</title>
-
-    <meta name="description" content="Biya — artista digital e streamer. Landing inspirada em layout Hololive, estética monocromática e presença marcante." />
-    <meta property="og:title" content="Biya — Artista & Streamer" />
-    <meta property="og:description" content="Arte, presença e atmosfera. Biya, artista digital e streamer." />
-    <meta property="og:image" content="assets/preview-biya.webp" />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="pt_BR" />
-
-    <link rel="icon" type="image/png" href="assets/favicon.png" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-
-  <body>
-    <!-- ===== HEADER ===== -->
-    <header class="site-header">
-      <div class="wrap">
-        <a href="#hero" class="brand" aria-label="Voltar ao topo">
-          <img src="assets/favicon.png" alt="Logo Biya" class="logo-icon" />
-          
-        </a>
-
-        <nav class="nav" aria-label="Navegação principal">
-          <ul>
-            <li><a href="#sobre">Sobre</a></li>
-            <li><a href="#trabalhos">Arte</a></li>
-            <li><a href="#lives">Lives</a></li>
-            
-          </ul>
-        </nav>
-      </div>
-    </header>
-
-    <!-- ===== HERO ===== -->
-    <section class="hero" id="hero" aria-label="Apresentação de Biya">
-      <div class="hero-bg-text left" aria-hidden="true">BI</div>
-      <div class="hero-bg-text right" aria-hidden="true">YA</div>
-
-      <div class="hero-content">
-        <p class="handle">@BiyA_YU</p>
-        <h1 class="hero-title">Artista & Streamer</h1>
-        <h2 class="hero-subtitle">\\ O //</h2>
-
-        <figure class="hero-image">
-          <img src="assets/biya2.png" alt="Retrato artístico da Biya em preto e branco" />
-        </figure>
-        
-        <div class="hero-cta">
-          <a href="https://www.youtube.com/@biyaYU" target="_blank" rel="noopener noreferrer" class="btn">YouTube</a>
-          <a href="https://x.com/BiyA_YU" target="_blank" rel="noopener noreferrer" class="btn-outline">X</a>
-        </div>
-      </div>
-    </section>
-
-<!-- ===== SOBRE ===== -->
-<section id="sobre" class="sobre" aria-label="Sobre Biya">
-  <div class="sobre-inner">
-    <h2 class="section-title">SOBRE</h2>
-    <div class="sobre-card">
-      <p>
-        O espaço aqui é dedicado à arte e ao processo. As transmissões mostram o que acontece entre um traço e outro — as pausas, as tentativas, os acertos.
-      </p>
-      <p>
-        As criações seguem um ritmo calmo, guiado pela luz, pela cor e pela presença do momento. Cada trabalho é um registro de como algo simples pode ganhar forma quando o olhar desacelera.
-      </p>
-      <p>
-        Biya atua entre o digital e o cotidiano, buscando traduzir atmosfera em composição. É menos sobre a artista e mais sobre o que emerge do silêncio quando alguém se permite observar.
-      </p>
-    </div>
+<html lang="pt-BR">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="light dark" name="color-scheme"/>
+  <meta content="noindex, nofollow" name="robots"/>
+  <meta content="Biya &mdash; artista digital e VTuber. Ilustra&ccedil;&otilde;es, personagens, v&iacute;deos e projetos em uma experi&ecirc;ncia visual interativa." data-i18n-content="meta.description" name="description"/>
+  <title data-i18n="document.title">
+   BIYA &mdash; Arte, personagens e cria&ccedil;&otilde;es
+  </title>
+  <link as="image" href="assets/avatars/crystal.webp" rel="preload"/>
+  <link href="src/css/tokens.css" rel="stylesheet"/>
+  <link href="src/css/base.css" rel="stylesheet"/>
+  <link href="src/css/layout.css" rel="stylesheet"/>
+  <link href="src/css/components.css" rel="stylesheet"/>
+  <link href="src/css/motion.css" rel="stylesheet"/>
+  <script src="src/js/main.js" type="module">
+  </script>
+  <meta content="#f5f5fa" name="theme-color"/>
+  <meta content="website" property="og:type"/>
+  <meta content="BIYA &mdash; Arte, personagens e cria&ccedil;&otilde;es" data-i18n-content="document.title" property="og:title"/>
+  <meta content="Arte, personagens e cria&ccedil;&otilde;es de Biya." data-i18n-content="meta.description" property="og:description"/>
+  <meta content="pt_BR" data-i18n-content="meta.locale" property="og:locale"/>
+  <meta content="summary_large_image" name="twitter:card"/>
+  <link href="assets/artwork/crystal-symbol.webp" rel="icon" type="image/webp"/>
+ </head>
+ <body data-world="crystal">
+  <a class="skip-link" data-i18n="skip" href="#main">
+   Pular para o conte&uacute;do
+  </a>
+  <div aria-hidden="true" class="progress">
+   <span id="scroll-progress">
+   </span>
   </div>
-</section>
-
-
-    <!-- ===== ARTE ===== -->
-    <section id="trabalhos" class="arte" aria-label="Galeria de arte">
-      <div class="arte-inner">
-        <h2 class="section-title">ARTE</h2>
-        <div class="arte-grid">
-          <figure class="arte-item">
-            <img src="assets/shots/shot1.webp" alt="Arte 1 de Biya" />
-          </figure>
-          <figure class="arte-item">
-            <img src="assets/shots/shot2.webp" alt="Arte 2 de Biya" />
-          </figure>
-          <figure class="arte-item">
-            <img src="assets/shots/shot3.webp" alt="Arte 3 de Biya" />
-          </figure>
-          <figure class="arte-item">
-            <img src="assets/shots/shot4.webp" alt="Arte 4 de Biya" />
-          </figure>
-        </div>
+  <div class="concept-bar">
+   <span>
+    BIYA / PARALLEL WORLDS
+   </span>
+   <span class="bar-middle" data-i18n="preview">
+    VERS&Atilde;O EM DESENVOLVIMENTO
+   </span>
+   <span data-i18n="independent">
+    BIYA / ARTISTA &amp; VTUBER
+   </span>
+  </div>
+  <header class="header">
+   <a aria-label="Biya, voltar ao in&iacute;cio" class="brand" data-i18n-aria-label="brand.aria" href="#portal">
+    B
+    <span aria-hidden="true">
+     ✦
+    </span>
+    YA
+    <span class="brand-mark">
+     / 02
+    </span>
+   </a>
+   <nav aria-label="Navega&ccedil;&atilde;o principal" class="header-nav" data-i18n-aria-label="nav.aria">
+    <a class="current" data-i18n="nav.portal" href="#portal">
+     Portal
+    </a>
+    <a data-i18n="nav.archive" href="#archive">
+     Arquivo
+    </a>
+    <a data-i18n="nav.signal" href="#signal">
+     Sinal
+    </a>
+    <a data-i18n="nav.about" href="#about">
+     Biya
+    </a>
+   </nav>
+   <div aria-label="Idioma" class="language-switch" data-i18n-aria-label="language.group" role="group">
+    <button aria-pressed="true" class="language-option is-current" data-set-language="pt" lang="pt-BR" type="button">
+     PT
+    </button>
+    <button aria-pressed="false" class="language-option" data-set-language="en" lang="en" type="button">
+     EN
+    </button>
+   </div>
+   <a class="header-link" href="https://x.com/BiyA_YU" rel="noopener noreferrer" target="_blank">
+    @BIYA_YU
+    <span aria-hidden="true">
+     &nearrow;
+    </span>
+   </a>
+  </header>
+  <main id="main">
+   <section aria-labelledby="portal-title" class="portal" id="portal">
+    <div aria-hidden="true" class="portal-noise">
+    </div>
+    <div aria-hidden="true" class="portal-grid">
+    </div>
+    <div aria-hidden="true" class="aura aura-left">
+    </div>
+    <div aria-hidden="true" class="aura aura-right">
+    </div>
+    <span aria-hidden="true" class="portal-serial" data-i18n="chapter1">
+     CAP.01 / IN&Iacute;CIO
+    </span>
+    <div class="portal-copy">
+     <div class="section-index">
+      <span class="index-orb">
+      </span>
+      <span data-i18n="welcome">
+       UM ESPA&Ccedil;O PARA A ARTE
+      </span>
+      <span class="index-line">
+      </span>
+      <span>
+       001
+      </span>
+     </div>
+     <p class="hero-kicker" id="world-kicker">
+      ONDE A LUZ VIRA ARTE
+     </p>
+     <h1 id="portal-title">
+      BIYA
+      <span class="hero-period">
+       .
+      </span>
+     </h1>
+     <p class="hero-subtitle" id="world-title">
+      Arte entre luz
+      <br/>
+      e
+      <em>
+       cristal.
+      </em>
+     </p>
+     <p class="hero-description" id="world-description">
+      Explore a express&atilde;o visual, os personagens e as cria&ccedil;&otilde;es de Biya.
+     </p>
+     <div aria-label="Escolha o universo visual" class="world-control" data-i18n-aria-label="world.control" role="group">
+      <span class="switch-name" data-i18n="world.switch">
+       01 &mdash; ALTERAR FREQU&Ecirc;NCIA
+      </span>
+      <div class="world-buttons">
+       <button aria-pressed="true" class="world-choice is-active" data-set-world="crystal" type="button">
+        <span class="world-indicator">
+        </span>
+        CRYSTAL
+        <span class="shortcut">
+         01
+        </span>
+       </button>
+       <button aria-pressed="false" class="world-choice" data-set-world="ghost" type="button">
+        <span class="world-indicator">
+        </span>
+        GHOST
+        <span class="shortcut">
+         02
+        </span>
+       </button>
       </div>
-    </section>
-
-    <!-- ===== LIVES ===== -->
-    <section id="lives" class="lives" aria-label="Lives de Biya">
-      <div class="lives-inner">
-        <h2 class="section-title">LIVES</h2>
-        <div class="lives-grid">
-          <a href="https://www.youtube.com/live/EHuvsEY4T4E?si=1-nP6Yz_NRkJ-L-N" target="_blank" rel="noopener noreferrer" class="live-card">
-            <img src="assets/lives/live1.webp" alt="Miniatura da live — AO VIVO" />
-            <div class="live-info">
-              <h3>LIVE DRAWING: Ilustração em tempo real</h3>
-            </div>
-          </a>
-
-          <a href="https://www.youtube.com/live/r7hBYHq9TdU?si=gjbiPgfrX3js4Dpy" target="_blank" rel="noopener noreferrer" class="live-card">
-            <img src="assets/lives/live2.webp" alt="Miniatura da próxima live — Chill stream" />
-            <div class="live-info">
-              <h3>CHILL STREAM: Conversas e criação</h3>
-            </div>
-          </a>
-
-          <a href="https://youtu.be/RMa470w521A?si=9WPi57iwKy45dDq2" target="_blank" rel="noopener noreferrer" class="live-card">
-            <img src="assets/lives/live3.webp" alt="Miniatura de live arquivada — Speedpaint" />
-            <div class="live-info">
-              <h3>SPEEDPAINT: Estudo monocromático</h3>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== CONTATO / FOOTER ===== -->
-    <footer class="site-footer" id="contato">
-      <p>© 2025 Biya — artista digital e streamer.</p>
-      <p class="social">
-        <a href="https://www.youtube.com/@biyaYU" target="_blank" rel="noopener noreferrer">YouTube</a> •
-        <a href="https://x.com/BiyA_YU" target="_blank" rel="noopener noreferrer">X</a>
+     </div>
+     <div class="hero-actions">
+      <a class="button-enter" href="#archive">
+       <span data-i18n="explore">
+        EXPLORAR O UNIVERSO
+       </span>
+       <span aria-hidden="true" class="button-symbol">
+        &nearrow;
+       </span>
+      </a>
+      <a class="hero-plain" data-i18n-html="portfolio" href="https://vgen.co/BiyA_YU" rel="noopener noreferrer" target="_blank">
+       Ver portf&oacute;lio
+       <span aria-hidden="true">
+        &nearrow;
+       </span>
+      </a>
+     </div>
+    </div>
+    <div aria-label="Retratos da nova OC da Biya" class="art-stage" data-i18n-aria-label="stage.aria" id="art-stage">
+     <div aria-hidden="true" class="stage-shadow">
+     </div>
+     <div aria-hidden="true" class="stage-shape stage-shape-a">
+     </div>
+     <div aria-hidden="true" class="stage-shape stage-shape-b">
+     </div>
+     <div class="stage-inner">
+      <img alt="Personagem de cabelos brancos iridescentes, traje cristalino, com detalhes rosa e lavanda" class="stage-visual" data-i18n-alt="stage.crystal.alt" decoding="async" fetchpriority="high" height="1280" id="stage-crystal" src="assets/avatars/crystal.webp" width="768"/>
+      <img alt="Fantasia sombria da personagem de Biya, em roxo, com caveira e elementos fantasmag&oacute;ricos" aria-hidden="true" class="stage-visual" data-i18n-alt="stage.ghost.alt" decoding="async" fetchpriority="low" height="1160" id="stage-ghost" src="assets/avatars/ghost.webp" width="1700"/>
+     </div>
+     <div class="stage-sticker">
+      <span aria-hidden="true" class="sticker-symbol">
+       ✳
+      </span>
+      <span data-i18n-html="world.file">
+       BIYA
+       <br/>
+       ARTE
+       <br/>
+       EST&Uacute;DIO
+      </span>
+     </div>
+     <span class="stage-corner corner-top">
+      <span data-i18n="world.number.prefix">
+       MUNDO_0
+      </span>
+      <span id="world-no">
+       1
+      </span>
+     </span>
+     <span class="stage-corner corner-bottom" id="stage-caption">
+      CRYSTAL / LUZ, COR E TEXTURA
+     </span>
+     <span aria-hidden="true" class="stage-vertical" data-i18n="stage.exhibition">
+      ARTE E IDENTIDADE VISUAL
+     </span>
+    </div>
+    <div class="portal-bottom">
+     <span data-i18n="scroll">
+      EXPLORE AS OBRAS
+     </span>
+     <span aria-hidden="true" class="bottom-sigil">
+      ✧　✦　✧
+     </span>
+     <a aria-label="Ir para o arquivo de artes" data-i18n-aria-label="scroll.aria" href="#archive">
+      &darr;
+     </a>
+    </div>
+   </section>
+   <div aria-hidden="true" class="ribbon">
+    <div class="ribbon-inner">
+     <span data-i18n="ribbon.illustration">
+      ILUSTRA&Ccedil;&Atilde;O
+     </span>
+     <span>
+      ✳
+     </span>
+     <span>
+      VTUBER
+     </span>
+     <span>
+      ✳
+     </span>
+     <span data-i18n="ribbon.character">
+      PERSONAGENS &amp; ILUSTRA&Ccedil;&Otilde;ES
+     </span>
+     <span>
+      ✳
+     </span>
+     <span>
+      CRYSTAL / GHOST
+     </span>
+     <span>
+      ✳
+     </span>
+     <span data-i18n="ribbon.illustration">
+      ILUSTRA&Ccedil;&Atilde;O
+     </span>
+     <span>
+      ✳
+     </span>
+     <span>
+      VTUBER
+     </span>
+    </div>
+   </div>
+   <section aria-labelledby="archive-title" class="archive" id="archive">
+    <div aria-hidden="true" class="archive-decor">
+     A
+    </div>
+    <div class="archive-heading">
+     <div>
+      <span class="mini-label" data-i18n-html="chapter2">
+       <span class="little-cross">
+        ✳
+       </span>
+       CAP.02 / ARQUIVO DE ARTES
+      </span>
+      <h2 data-i18n-html="archive.title" id="archive-title">
+       Fragmentos
+       <br/>
+       da
+       <em>
+        imagina&ccedil;&atilde;o.
+       </em>
+      </h2>
+     </div>
+     <div class="archive-lede">
+      <span data-i18n="archive.pretitle">
+       UMA EXPOSI&Ccedil;&Atilde;O EM MOVIMENTO
+      </span>
+      <p data-i18n="archive.desc">
+       Uma sele&ccedil;&atilde;o visual de obras, personagens e estudos criativos. Toque nas setas para explorar.
       </p>
-    </footer>
-
-    <script src="script.js"></script>
-  </body>
+      <span class="archive-lede-arrow">
+       &swarrow;
+      </span>
+     </div>
+    </div>
+    <div aria-label="Visualizador interativo de artes da Biya" class="gallery-experience" data-i18n-aria-label="gallery.aria" role="group" tabindex="0">
+     <div class="art-showcase">
+      <div aria-hidden="true" class="gallery-halo">
+      </div>
+      <span aria-hidden="true" class="gallery-cross gallery-cross-tl">
+       +
+      </span>
+      <span aria-hidden="true" class="gallery-cross gallery-cross-br">
+       +
+      </span>
+      <img alt="OC em uma ilustra&ccedil;&atilde;o rosa com doces" decoding="async" height="2048" id="gallery-image" loading="lazy" src="assets/artwork/character.webp" width="1536"/>
+      <div class="showcase-controls">
+       <button aria-label="Ver arte anterior" class="round-arrow" data-i18n-aria-label="gallery.prev" id="gallery-prev" type="button">
+        &larr;
+       </button>
+       <button aria-label="Ver pr&oacute;xima arte" class="round-arrow" data-i18n-aria-label="gallery.next" id="gallery-next" type="button">
+        &rarr;
+       </button>
+      </div>
+      <button aria-label="Ampliar obra atual" class="expand-art" data-i18n="gallery.expand" data-i18n-aria-label="gallery.expand.aria" id="gallery-expand" type="button">
+       AMPLIAR &nearrow;
+      </button>
+     </div>
+     <div class="gallery-info">
+      <span class="gallery-serial">
+       <span data-i18n="gallery.serial">
+        ARQUIVO / BIYA_YU
+       </span>
+       <span id="gallery-count">
+        01 &mdash; 06
+       </span>
+      </span>
+      <div class="gallery-title-area">
+       <p id="gallery-tag">
+        ILUSTRA&Ccedil;&Atilde;O / OC
+       </p>
+       <h3 id="gallery-title">
+        Doce Devaneio
+       </h3>
+       <p id="gallery-desc">
+        Cena delicada com rosas e doces. T&iacute;tulo de exibi&ccedil;&atilde;o provis&oacute;rio.
+       </p>
+      </div>
+      <div class="gallery-bottom">
+       <div aria-label="Selecionar obra" class="gallery-dots" data-i18n-aria-label="gallery.dots.aria" id="gallery-dots">
+       </div>
+       <span data-i18n="gallery.swipe">
+        DESLIZE / ◀ ▶
+       </span>
+      </div>
+     </div>
+    </div>
+    <div class="archive-footer">
+     <span data-i18n="archive.footer1">
+      UMA SELE&Ccedil;&Atilde;O DO ACERVO DA BIYA
+     </span>
+     <span data-i18n="archive.footer2">
+      T&Iacute;TULOS E CR&Eacute;DITOS EM VALIDA&Ccedil;&Atilde;O
+     </span>
+    </div>
+   </section>
+   <section aria-label="Transi&ccedil;&atilde;o entre universos" class="intermission" data-i18n-aria-label="intermission.aria">
+    <div class="intermission-ink" data-i18n="intermission.label">
+     O OUTRO LADO
+    </div>
+    <p data-i18n-html="intermission.title">
+     Arte em muitas formas.
+     <br/>
+     Um olhar em cada detalhe.
+    </p>
+    <div aria-hidden="true" class="intermission-symbol">
+     ✦
+    </div>
+   </section>
+   <section aria-labelledby="signal-title" class="signal" id="signal">
+    <div class="section-number">
+     <span data-i18n="chapter3">
+      CAP.03 / SINAL RECEBIDO
+     </span>
+     <span data-i18n="chapter3.sub">
+      DO OUTRO LADO DA TELA
+     </span>
+    </div>
+    <div class="signal-heading">
+     <h2 data-i18n-html="signal.title" id="signal-title">
+      NO
+      <em>
+       AR.
+      </em>
+      <span>
+       &nearrow;
+      </span>
+     </h2>
+     <p data-i18n="signal.desc">
+      Al&eacute;m do desenho, existem as transmiss&otilde;es, jogos e encontros. Registros da Biya em movimento.
+     </p>
+    </div>
+    <div class="signal-rail">
+     <a aria-label="Ver no canal da Biya: PHASMOPHOBIA" class="broadcast broadcast-one" data-broadcast="0" data-i18n-video-index="0" href="https://www.youtube.com/@biyaYU" rel="noopener noreferrer" target="_blank">
+      <div class="broadcast-thumb">
+       <img alt="Miniatura de v&iacute;deo de Phasmophobia" data-i18n-alt="media.1.alt" decoding="async" height="414" loading="lazy" src="assets/streams/live1.jpg" width="736"/>
+       <span aria-hidden="true" class="broadcast-play">
+        &nearrow;
+       </span>
+      </div>
+      <div class="broadcast-meta">
+       <span data-i18n="signal.stream1">
+        01 / ARQUIVO DE LIVES
+       </span>
+       <strong>
+        PHASMOPHOBIA
+       </strong>
+       <span data-i18n="signal.channel">
+        VER NO CANAL &nearrow;
+       </span>
+      </div>
+     </a>
+     <a aria-label="Ver no canal da Biya: ALIEN: ISOLATION" class="broadcast broadcast-two" data-broadcast="1" data-i18n-video-index="1" href="https://www.youtube.com/@biyaYU" rel="noopener noreferrer" target="_blank">
+      <div class="broadcast-thumb">
+       <img alt="Miniatura de v&iacute;deo de Alien: Isolation" data-i18n-alt="media.2.alt" decoding="async" height="414" loading="lazy" src="assets/streams/live2.jpg" width="736"/>
+       <span aria-hidden="true" class="broadcast-play">
+        &nearrow;
+       </span>
+      </div>
+      <div class="broadcast-meta">
+       <span data-i18n="signal.stream2">
+        02 / ARQUIVO DE LIVES
+       </span>
+       <strong>
+        ALIEN: ISOLATION
+       </strong>
+       <span data-i18n="signal.channel">
+        VER NO CANAL &nearrow;
+       </span>
+      </div>
+     </a>
+     <a aria-label="Ver no canal da Biya: arquivo de lives" class="broadcast broadcast-three" data-broadcast="2" data-i18n-video-index="2" href="https://www.youtube.com/@biyaYU" rel="noopener noreferrer" target="_blank">
+      <div class="broadcast-thumb">
+       <img alt="Miniatura de v&iacute;deo com texto A Pior VTuber" data-i18n-alt="media.3.alt" decoding="async" height="414" loading="lazy" src="assets/streams/live3.jpg" width="736"/>
+       <span aria-hidden="true" class="broadcast-play">
+        &nearrow;
+       </span>
+      </div>
+      <div class="broadcast-meta">
+       <span data-i18n="signal.stream3">
+        03 / ARQUIVO DE LIVES
+       </span>
+       <strong data-i18n="signal.third">
+        A PIOR VTUBER
+       </strong>
+       <span data-i18n="signal.channel">
+        VER NO CANAL &nearrow;
+       </span>
+      </div>
+     </a>
+    </div>
+    <div class="signal-end">
+     <span data-i18n="signal.end">
+      CONHE&Ccedil;A AS TRANSMISS&Otilde;ES
+     </span>
+     <a data-i18n="signal.visit" href="https://www.youtube.com/@biyaYU" rel="noopener noreferrer" target="_blank">
+      VISITAR O CANAL &nearrow;
+     </a>
+    </div>
+   </section>
+   <section aria-labelledby="about-title" class="about" id="about">
+    <span aria-hidden="true" class="about-signal" data-i18n="about.signal">
+     SINAL / 004
+    </span>
+    <div class="about-art">
+     <div aria-hidden="true" class="about-sun">
+     </div>
+     <img alt="Vers&atilde;o da OC com roupa clara e bon&eacute;" data-i18n-alt="about.photo.alt" decoding="async" height="2048" loading="lazy" src="assets/avatars/casual.webp" width="1536"/>
+     <span class="about-picture-caption" data-i18n="about.picture">
+      VISUAL DA PERSONAGEM &middot; ROUPA ALTERNATIVA
+     </span>
+    </div>
+    <div class="about-copy">
+     <span class="mini-label" data-i18n="chapter4">
+      CAP.04 / CONHE&Ccedil;A A CRIADORA
+     </span>
+     <p class="script-word" data-i18n="about.script">
+      Quem est&aacute; por tr&aacute;s das artes
+     </p>
+     <h2 data-i18n-html="about.title" id="about-title">
+      OI, EU SOU
+      <br/>
+      <em>
+       BIYA.
+      </em>
+     </h2>
+     <p class="about-description" data-i18n="about.desc">
+      Biya &eacute; artista digital, criadora de personagens e VTuber. Conhe&ccedil;a suas ilustra&ccedil;&otilde;es, seus projetos e seus canais.
+     </p>
+     <div class="social-table">
+      <a aria-label="Ver perfil no X" data-i18n-aria-label="social.x" href="https://x.com/BiyA_YU" rel="noopener noreferrer" target="_blank">
+       <span>
+        X / TWITTER
+       </span>
+       <strong>
+        @BiyA_YU
+       </strong>
+       <span>
+        &nearrow;
+       </span>
+      </a>
+      <a aria-label="Explorar portf&oacute;lio no VGen" data-i18n-aria-label="social.vgen" href="https://vgen.co/BiyA_YU" rel="noopener noreferrer" target="_blank">
+       <span data-i18n="about.commissions">
+        ARTES E COMISS&Otilde;ES
+       </span>
+       <strong>
+        VGEN
+       </strong>
+       <span>
+        &nearrow;
+       </span>
+      </a>
+      <a aria-label="Ver v&iacute;deos no YouTube" data-i18n-aria-label="social.yt" href="https://www.youtube.com/@biyaYU" rel="noopener noreferrer" target="_blank">
+       <span data-i18n="about.video">
+        V&Iacute;DEOS E LIVES
+       </span>
+       <strong>
+        YOUTUBE
+       </strong>
+       <span>
+        &nearrow;
+       </span>
+      </a>
+     </div>
+    </div>
+   </section>
+   <footer class="footer">
+    <div class="footer-top">
+     <p data-i18n-html="footer.title">
+      ARTE, PERSONAGENS E
+      <br/>
+      EXPERI&Ecirc;NCIAS DE BIYA
+     </p>
+     <a aria-label="Voltar para o in&iacute;cio" data-i18n="footer.back" data-i18n-aria-label="footer.back.aria" href="#portal">
+      &uarr; VOLTAR AO PORTAL
+     </a>
+    </div>
+    <div class="footer-wordmark">
+     B
+     <span>
+      ✦
+     </span>
+     YA
+    </div>
+    <div class="footer-bottom">
+     <span data-i18n="footer.study">
+      BIYA / PARALLEL WORLDS &middot; PR&Eacute;-LAN&Ccedil;AMENTO
+     </span>
+     <span data-i18n="footer.art">
+      ARTES: MATERIAIS FORNECIDOS PARA REVIS&Atilde;O &middot; CR&Eacute;DITOS EM VALIDA&Ccedil;&Atilde;O
+     </span>
+     <span data-i18n="footer.design">
+      CONTE&Uacute;DO E PUBLICA&Ccedil;&Atilde;O SUJEITOS &Agrave; APROVA&Ccedil;&Atilde;O DA BIYA
+     </span>
+    </div>
+   </footer>
+  </main>
+  <nav aria-label="Navega&ccedil;&atilde;o por cap&iacute;tulos" class="rail-nav" data-i18n-aria-label="rail.aria">
+   <a data-section="portal" href="#portal">
+    <span class="rail-dot">
+    </span>
+    <span>
+     PORTAL
+    </span>
+   </a>
+   <a data-section="archive" href="#archive">
+    <span class="rail-dot">
+    </span>
+    <span data-i18n="rail.archive">
+     ARQUIVO
+    </span>
+   </a>
+   <a data-section="signal" href="#signal">
+    <span class="rail-dot">
+    </span>
+    <span data-i18n="rail.signal">
+     SINAL
+    </span>
+   </a>
+   <a data-section="about" href="#about">
+    <span class="rail-dot">
+    </span>
+    <span data-i18n="rail.about">
+     SOBRE
+    </span>
+   </a>
+  </nav>
+  <dialog aria-label="Obra ampliada" class="image-dialog" data-i18n-aria-label="dialog.aria" id="image-dialog">
+   <div class="dialog-top">
+    <span data-i18n="dialog.title" id="dialog-title">
+     ARQUIVO DE ARTES
+    </span>
+    <button aria-label="Fechar amplia&ccedil;&atilde;o" data-i18n="dialog.close" data-i18n-aria-label="dialog.close.aria" id="dialog-close" type="button">
+     ✕ FECHAR
+    </button>
+   </div>
+   <img alt="Arte ampliada da Biya" data-i18n-alt="dialog.image.alt" decoding="async" height="2048" id="dialog-image" loading="lazy" src="assets/artwork/character.webp" width="1536"/>
+  </dialog>
+  <p aria-atomic="true" aria-live="polite" class="sr-only" id="interaction-status">
+  </p>
+ </body>
 </html>

@@ -1,91 +1,56 @@
-# 🎨 Biya Landing Page
+# BIYA — Parallel Worlds
 
-Landing page minimalista e responsiva inspirada em layouts **VTuber / Hololive-like**, criada para apresentar o trabalho e presença da artista **Biya**.
+Website artístico **em desenvolvimento para a Biya**. Base de referência: `biya-parallel-worlds-v02-pt-en(1).zip`, fornecida por Zara. Esta é uma implementação técnica de pré-lançamento, **não uma publicação oficialmente aprovada**. A atribuição de propriedade, as credenciais, os conteúdos e a disponibilização pública dependem de revisão e autorização expressa da Biya.
 
-![Preview do site](assets/preview-biya.webp)
+## Executar localmente
 
----
+Pré-requisitos: Python 3 ou outro servidor HTTP estático; navegador atualizado.
 
-## 🌙 Estrutura do Projeto
-
+```powershell
+cd biya-landing
+python -m http.server 8000 --bind 127.0.0.1
 ```
 
+Abrir `http://127.0.0.1:8000`. Os arquivos usam **ES Modules**, portanto não abra `index.html` diretamente com `file://` (restrições de segurança do navegador).
+
+## Estrutura
+
+```text
 biya-landing/
-├── index.html        # Página principal
-├── style.css         # Estilos globais (tema escuro + layout responsivo)
-├── script.js         # Interações e animações leves
-│
-└── assets/
-├── favicon.png
-├── preview-biya.webp
-├── biya.png
-│
-├── shots/        # Artes em vitrine
-│   ├── shot1.webp
-│   ├── shot2.webp
-│   ├── shot3.webp
-│   └── shot4.webp
-│
-└── lives/        # Miniaturas das lives
-├── live1.webp
-├── live2.webp
-└── live3.webp
+├── index.html
+├── assets/{artwork,avatars,streams}/
+├── src/css/{tokens,base,layout,components,motion}.css
+├── src/js/{main,state,i18n,world,gallery,navigation}.js
+├── src/data/{artworks,media}.js
+├── src/data/translations/{pt-BR,en}.js
+├── tests/
+├── docs/
+└── README.md
+```
 
-````
+## Recursos
 
----
+- **Crystal/Ghost:** modos de direção de arte, não histórias canônicas ou biografias da Biya. Botões e tecla **G** alternam o modo quando o foco não está em um campo editável ou modal.
+- **Galeria:** navegação por botões, indicadores, setas dentro do componente e gesto horizontal em telas de toque. `dialog` nativo com fechamento por Escape e botão.
+- **Idiomas exclusivos:** português do Brasil (`pt-BR`) e inglês (`en`). O idioma ativo cobre navegação, obras, elementos dinâmicos, documentos e atributos ARIA. Preferência salva quando o navegador permitir.
+- **Responsividade:** adaptação para telas pequenas e grandes, com opção de movimento reduzido.
+- **Sem dependências externas no código JavaScript:** projeto estático leve.
 
-## 🧩 Seções
+## Conteúdo e edição
 
-| Seção | Descrição |
-|-------|------------|
-| **Hero** | Apresenta Biya e seus links principais. |
-| **Sobre** | Texto descritivo e humano sobre o processo artístico. |
-| **Arte** | Galeria visual com imagens sem legendas — vitrine limpa. |
-| **Lives** | Cards clicáveis com links diretos para lives do YouTube. |
-| **Footer** | Créditos e links externos. |
+- Dados e caminhos das obras: `src/data/artworks.js` (títulos/descrições em `src/data/translations/`).
+- Dados das transmissões: `src/data/media.js`. **As URLs de vídeos individuais ainda não foram verificadas; os cartões levam ao canal**, de forma intencional e explícita.
+- Cópias de interface e descrições: `src/data/translations/pt-BR.js` e `en.js`. Uma mesma chave precisa existir nos dois idiomas. Não inserir HTML arbitrário em conteúdo remoto.
+- Cores e tokens: `src/css/tokens.css`; padrões comuns: `base.css`; geometria responsiva: `layout.css`; controles: `components.css`; movimento: `motion.css`.
 
----
+## Validação e publicação
 
-## 🚀 Como usar localmente
-````
-1. Baixe ou clone o repositório:
+1. O site usa `noindex, nofollow` durante a revisão. **Isso não é controle de privacidade**. Nunca publicar conteúdo restrito em repositório ou hospedagem pública.
+2. A identidade oficial e a publicação exigem aprovação da Biya. Não inventar lore, preferências ou dados biográficos.
+3. Todos os 19 recursos de imagem foram derivados da fonte anexada sem gerar novas artes. Escopo de autorização, direitos e créditos finais precisam ser documentados **individualmente**.
+4. Nomes de algumas obras são **rótulos editoriais provisórios**, não títulos oficiais. Consulte `docs/CONTENT_CHECKLIST.md`.
+5. Conferir links e vídeos antes do lançamento; abrir a revisão em uma branch dedicada e fazer testes manuais/automatizados.
+6. Para executar verificações: `python -m unittest discover -s tests` e `python tests/browser_smoke.py` (segundo comando requer `playwright` e Chromium).
+7. Remover `noindex, nofollow` somente após aprovação e testes finais, em configuração de publicação controlada.
 
-   git clone https://github.com/ZaraTakion/biya-landing.git
-   cd biya-landing
-
-2. Abra o arquivo `index.html` no navegador.
-
-3. Substitua as imagens em `assets/` pelos seus arquivos reais (mesmos nomes e formatos).
-
-4. Edite os textos no `index.html` se quiser personalizar seções.
-````
----
-
-## 🌐 Publicação
-
-O projeto está publicado via **GitHub Pages**:
-
-➡️ **[https://zaratakion.github.io/biya-landing/](https://zaratakion.github.io/biya-landing/)**
-
----
-
-## ⚡ Tecnologias
-
-* **HTML5** sem dependências externas
-* **CSS3** moderno (Grid + Flexbox)
-* **JavaScript** puro (animações e scroll suave)
-
----
-
-## 📜 Créditos
-
-Design e desenvolvimento: [@ZaraTakion](https://github.com/ZaraTakion)
-Arte: **Biya_YU** — conceito e identidade visual.
-
----
-
-## 🪶 Licença
-
-Este projeto é de uso **pessoal e artístico**.
-Não é permitido uso comercial sem autorização prévia da artista.
+Arquitetura, decisões e critérios de aceite em `docs/ARCHITECTURE.md` e `docs/TEST_PLAN.md`.

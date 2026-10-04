@@ -1,0 +1,29 @@
+/* BIYA / TOKENS — modular stylesheet, derived from V02. */
+:root {
+  --white: #f9f8ff;
+  --paper: #f5f5fa;
+  --ink: #211f31;
+  --muted: #58516c;
+  --edge: #d8d9e4;
+  --violet: #8075c8;
+  --pink: #dfafcf;
+  --ghost: #161323;
+  --ease: cubic-bezier(.19,1,.22,1);
+  --font-body: Arial, Helvetica, sans-serif;
+  --font-display: "Arial Black", Arial, sans-serif;
+  --focus: #7750cf;
+  --space-xs: .5rem;
+  --space-sm: 1rem;
+  --space-lg: clamp(1.5rem,4vw,4rem);
+  --radius-control: 4px;
+  --layer-nav: 20;
+  --layer-dialog: 200;
+}
+body[data-world="ghost"] {
+  --paper: #181524;
+  --ink: #f9f5ff;
+  --muted: #c1b8ce;
+  --edge: #574a69;
+  --violet: #bb91ee;
+  --pink: #a58bcf;
+}
