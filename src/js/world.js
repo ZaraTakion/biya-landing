@@ -22,6 +22,17 @@ function render() {
     button.classList.toggle('is-active', active);
   });
 }
+function animateWorldCopy() {
+  if (reducedMotion.matches || typeof Element === 'undefined' || !Element.prototype.animate) return;
+  [byId('world-kicker'), byId('world-title'), byId('world-description'), byId('stage-caption')]
+    .filter(Boolean)
+    .forEach((element, index) => {
+      element.animate(
+        [{ opacity: .58 }, { opacity: 1 }],
+        { duration: 300 + index * 35, delay: index * 18, easing: 'cubic-bezier(.22,1,.36,1)' }
+      );
+    });
+}
 function parallax() {
   if (!matchMedia('(pointer:fine)').matches || reducedMotion.matches) return;
   const portal = document.querySelector('.portal');
@@ -29,8 +40,8 @@ function parallax() {
   let pending = false; let x = 0; let y = 0;
   portal.addEventListener('pointermove', event => {
     const rect = portal.getBoundingClientRect();
-    x = ((event.clientX - rect.left) / rect.width - 0.5) * 11;
-    y = ((event.clientY - rect.top) / rect.height - 0.5) * 9;
+    x = ((event.clientX - rect.left) / rect.width - 0.5) * 6;
+    y = ((event.clientY - rect.top) / rect.height - 0.5) * 5;
     if (!pending) { pending = true; requestAnimationFrame(() => {
       stage.style.transform = `translate3d(${x}px,${y}px,0)`;
       pending = false;
@@ -54,7 +65,10 @@ export function initWorld() {
   });
   subscribe((state, changed) => {
     if (changed === 'world' || changed === 'language') render();
-    if (changed === 'world') announce(t('world.announce.' + state.world));
+    if (changed === 'world') {
+      animateWorldCopy();
+      announce(t('world.announce.' + state.world));
+    }
   });
   render();
   parallax();

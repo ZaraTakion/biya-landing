@@ -22,10 +22,17 @@ class TestStructure(unittest.TestCase):
     def test_expected_files_exist(self):
         for name in ['index.html','src/css/tokens.css','src/css/base.css','src/css/layout.css',
                      'src/css/components.css','src/css/motion.css','src/js/main.js','src/js/state.js',
-                     'src/js/i18n.js','src/js/world.js','src/js/gallery.js','src/js/navigation.js',
+                     'src/js/i18n.js','src/js/world.js','src/js/gallery.js','src/js/navigation.js','src/js/motion.js',
                      'src/data/artworks.js','src/data/media.js','src/data/translations/pt-BR.js',
                      'src/data/translations/en.js','README.md']:
             with self.subTest(name=name): self.assertTrue((ROOT/name).exists())
+
+    def test_motion_accessibility_contract(self):
+        css=(ROOT/'src/css/motion.css').read_text(encoding='utf-8')
+        js=(ROOT/'src/js/motion.js').read_text(encoding='utf-8')
+        self.assertRegex(css, r'prefers-reduced-motion\s*:\s*reduce')
+        self.assertIn('IntersectionObserver', js)
+        self.assertIn("prefers-reduced-motion: reduce", js)
 
     def test_assets_and_dimensions(self):
         for img in self.parser.images:

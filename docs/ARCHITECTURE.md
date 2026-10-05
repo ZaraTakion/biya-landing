@@ -10,6 +10,7 @@ Site de apresentação e portfólio destinado à Biya, artista e VTuber. Crystal
 - `world`: atualiza o universo, a OC, a cópia editorial, ARIA e movimentos suaves não essenciais.
 - `gallery`: dados externos ao componente, foco, modal, setas, swipe e estado ARIA.
 - `navigation`: progressão de leitura e navegação por seções com IntersectionObserver.
+- `motion`: camada progressiva de entradas por rolagem e microinterações; usa apenas movimento não essencial, com fallback imediato para `prefers-reduced-motion`.
 - `media/artworks`: metadados separados do DOM, a serem verificados antes da publicação.
 
 ## Escolhas
@@ -17,6 +18,7 @@ Site de apresentação e portfólio destinado à Biya, artista e VTuber. Crystal
 - ES Modules: dependências explícitas, funções pequenas e módulos testáveis.
 - Acessibilidade: imagens dimensionadas, `aria-pressed`, regiões ao vivo, `dialog` nativo, skip-link, foco visível, modo movimento reduzido, apenas imagem ativa exposta ao leitor de tela.
 - Mobile: ordem de leitura em coluna com ajustes progressivos de viewport.
+- Motion design: transições curtas, `opacity`/`translate`/`scale` em amplitudes discretas, parallax de baixa amplitude e animações decorativas lentas. A estrutura e o layout permanecem inalterados.
 
 ## Barreiras de publicação
 A Biya deve aprovar textos, visual, recursos, direitos de uso, créditos, plataforma de hospedagem, domínio e administração. Não publicar como site oficial antecipadamente. O repositório no GitHub é público: **branch não é privacidade**.
