@@ -18,6 +18,12 @@
   --radius-control: 4px;
   --layer-nav: 20;
   --layer-dialog: 200;
+  --motion-fast: 180ms;
+  --motion-base: 360ms;
+  --motion-slow: 700ms;
+  --motion-reveal: 680ms;
+  --motion-distance: 14px;
+  --motion-ease: cubic-bezier(.22,1,.36,1);
 }
 body[data-world="ghost"] {
   --paper: #181524;
