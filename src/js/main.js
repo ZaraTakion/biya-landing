@@ -3,7 +3,6 @@ import { initI18n, t } from './i18n.js';
 import { initWorld } from './world.js';
 import { initGallery } from './gallery.js';
 import { initNavigation } from './navigation.js';
-import { initMotion } from './motion.js';
 import { media } from '../data/media.js';
 import { subscribe } from './state.js';
 
@@ -20,6 +19,5 @@ initI18n();
 initWorld();
 initGallery();
 initNavigation();
-initMotion();
 renderMediaLabels();
 subscribe((state, type) => { if (type === 'language') renderMediaLabels(); });
