@@ -226,6 +226,13 @@ function Portal({
 
   return (
     <section className="portal" id="portal" aria-labelledby="portal-title">
+      <div className="world-scene" data-scene={world} key={world} aria-hidden="true">
+        <span className="scene-light" />
+        <span className="scene-ring" />
+        <span className="scene-fragment scene-fragment-one" />
+        <span className="scene-fragment scene-fragment-two" />
+        <span className="scene-fragment scene-fragment-three" />
+      </div>
       <div className="aura aura-left" aria-hidden="true" />
       <div className="aura aura-right" aria-hidden="true" />
       <span className="portal-serial" aria-hidden="true">01 / {world === 'crystal' ? 'LIGHT STUDY' : 'AFTER DARK'}</span>
@@ -332,6 +339,7 @@ function Archive({ language }: { language: Language }) {
 
       <div
         className="gallery-experience"
+        data-art-index={index}
         role="group"
         aria-label={language === 'pt' ? 'Visualizador interativo de artes da Biya' : 'Interactive viewer for Biya’s art'}
         tabIndex={0}
@@ -355,6 +363,7 @@ function Archive({ language }: { language: Language }) {
           <span className="gallery-cross gallery-cross-tl" aria-hidden="true">+</span>
           <span className="gallery-cross gallery-cross-br" aria-hidden="true">+</span>
           <ProtectedImage
+            key={art.id}
             id="gallery-image"
             src={art.src}
             alt={artCopy.alt}
@@ -370,11 +379,14 @@ function Archive({ language }: { language: Language }) {
           <button className="expand-art" type="button" onClick={() => setDialogOpen(true)}>{t.expand}</button>
         </div>
         <div className="gallery-info">
+          <div className="gallery-progress" aria-hidden="true">
+            <span style={{ transform: `scaleX(${(index + 1) / artworks.length})` }} />
+          </div>
           <span className="gallery-serial">
             <span>ARCHIVE / BIYA_YU</span>
             <span>{String(index + 1).padStart(2, '0')} — {String(artworks.length).padStart(2, '0')}</span>
           </span>
-          <div className="gallery-title-area">
+          <div className="gallery-title-area" key={art.id}>
             <p>{artCopy.tag}</p>
             <h3>{artCopy.title}</h3>
             <p>{artCopy.desc}</p>
