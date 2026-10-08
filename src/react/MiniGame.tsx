@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Language, World } from './data';
 import { copy } from './data';
-import { nextWorld, resolvePulse, type PulseItem, type PulseKind } from './gameLogic';
+import { canvasResolution, nextWorld, resolvePulse, shouldAdvancePulse, type PulseItem, type PulseKind } from './gameLogic';
 
 type Status = 'idle' | 'running' | 'over';
 
@@ -72,6 +72,9 @@ export default function MiniGame({ language }: { language: Language }) {
   const missesRef = useRef(0);
   const bestRef = useRef(0);
   const toggleRef = useRef<() => void>(() => undefined);
+  const redrawRef = useRef<() => void>(() => undefined);
+  const copyRef = useRef(t);
+  copyRef.current = t;
 
   const [world, setWorld] = useState<World>('crystal');
   const [status, setStatus] = useState<Status>('idle');
@@ -101,6 +104,8 @@ export default function MiniGame({ language }: { language: Language }) {
     let dpr = 1;
     let raf = 0;
     let previous = performance.now();
+    let onScreen = !('IntersectionObserver' in window);
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let spawnClock = 0;
     let nextId = 1;
     let items: PulseItem[] = [];
@@ -108,11 +113,12 @@ export default function MiniGame({ language }: { language: Language }) {
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
-      width = Math.max(300, Math.round(rect.width));
-      height = Math.max(270, Math.min(440, Math.round(width * (window.innerWidth < 600 ? 0.74 : 0.54))));
-      dpr = Math.min(devicePixelRatio || 1, 2);
-      canvas.width = Math.round(width * dpr);
-      canvas.height = Math.round(height * dpr);
+      const resolution = canvasResolution(rect.width, rect.height, window.devicePixelRatio || 1);
+      width = resolution.width;
+      height = resolution.height;
+      dpr = resolution.dpr;
+      canvas.width = resolution.pixelWidth;
+      canvas.height = resolution.pixelHeight;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
@@ -149,6 +155,7 @@ export default function MiniGame({ language }: { language: Language }) {
       reset();
       statusRef.current = 'running';
       setStatus('running');
+      startAnimation();
     };
 
     const toggle = () => {
@@ -159,6 +166,7 @@ export default function MiniGame({ language }: { language: Language }) {
       const next = nextWorld(worldRef.current);
       worldRef.current = next;
       setWorld(next);
+      if (!raf) draw();
     };
     toggleRef.current = toggle;
 
@@ -250,7 +258,7 @@ export default function MiniGame({ language }: { language: Language }) {
       ctx.strokeStyle = ghost ? '#b786dd' : '#8075c8';
       ctx.lineWidth = 1;
       const spacing = 56;
-      const offset = (performance.now() * 0.012) % spacing;
+      const offset = reducedMotion.matches ? 0 : (performance.now() * 0.012) % spacing;
       for (let x = -spacing + offset; x < width + spacing; x += spacing) {
         ctx.beginPath();
         ctx.moveTo(x, 0);
@@ -260,7 +268,7 @@ export default function MiniGame({ language }: { language: Language }) {
       ctx.globalAlpha = 1;
 
       const captureX = width * 0.22;
-      const pulse = (Math.sin(performance.now() * 0.004) + 1) / 2;
+      const pulse = reducedMotion.matches ? 0.25 : (Math.sin(performance.now() * 0.004) + 1) / 2;
       ctx.strokeStyle = ghost ? '#d7adf1' : '#8e85c8';
       ctx.lineWidth = 2;
       ctx.beginPath();
@@ -318,32 +326,80 @@ export default function MiniGame({ language }: { language: Language }) {
         ctx.textAlign = 'center';
         ctx.fillStyle = ghost ? '#f6e8ff' : '#28243a';
         ctx.font = '900 23px Arial';
-        ctx.fillText(statusRef.current === 'over' ? t.gameOver : t.gameReady, width / 2, height / 2 - 5);
+        ctx.fillText(statusRef.current === 'over' ? copyRef.current.gameOver : copyRef.current.gameReady, width / 2, height / 2 - 5);
         ctx.font = '700 11px Arial';
-        ctx.fillText(t.gameHow, width / 2, height / 2 + 25);
+        ctx.fillText(copyRef.current.gameHow, width / 2, height / 2 + 25);
         ctx.textAlign = 'start';
       }
     };
 
     const loop = (now: number) => {
+      raf = 0;
       const dt = Math.min(0.034, (now - previous) / 1000);
       previous = now;
       update(dt);
       draw();
+      if (shouldAdvancePulse(statusRef.current, onScreen, !document.hidden)) {
+        raf = requestAnimationFrame(loop);
+      }
+    };
+
+    const startAnimation = () => {
+      if (raf || !shouldAdvancePulse(statusRef.current, onScreen, !document.hidden)) return;
+      previous = performance.now();
       raf = requestAnimationFrame(loop);
     };
+    const stopAnimation = () => {
+      if (raf) cancelAnimationFrame(raf);
+      raf = 0;
+    };
 
-    const observer = new ResizeObserver(resize);
-    observer.observe(canvas);
+    const onVisibilityChange = () => {
+      if (document.hidden) stopAnimation();
+      else {
+        draw();
+        startAnimation();
+      }
+    };
+    const onReducedMotionChange = () => draw();
+
+    const resizeObserver = new ResizeObserver(() => {
+      resize();
+      draw();
+    });
+    resizeObserver.observe(canvas);
+    const intersectionObserver = 'IntersectionObserver' in window
+      ? new IntersectionObserver(entries => {
+        onScreen = Boolean(entries[0]?.isIntersecting);
+        if (onScreen) {
+          draw();
+          startAnimation();
+        } else {
+          stopAnimation();
+        }
+      }, { threshold: 0 })
+      : null;
+    intersectionObserver?.observe(canvas);
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    reducedMotion.addEventListener('change', onReducedMotionChange);
+    redrawRef.current = draw;
     resize();
-    raf = requestAnimationFrame(loop);
+    draw();
 
     return () => {
-      observer.disconnect();
-      cancelAnimationFrame(raf);
+      intersectionObserver?.disconnect();
+      resizeObserver.disconnect();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+      reducedMotion.removeEventListener('change', onReducedMotionChange);
+      stopAnimation();
+      redrawRef.current = () => undefined;
       toggleRef.current = () => undefined;
     };
-  }, [t.gameHow, t.gameOver, t.gameReady]);
+  }, []);
+
+  useEffect(() => {
+    redrawRef.current();
+  }, [language]);
 
   const activate = () => {
     toggleRef.current();
@@ -368,12 +424,13 @@ export default function MiniGame({ language }: { language: Language }) {
             <div><span>{t.gameScore}</span><strong>{score}</strong></div>
             <div><span>{t.gameCombo}</span><strong>×{combo}</strong></div>
             <div><span>{t.gameBest}</span><strong>{best}</strong></div>
-            <div><span>MISS</span><strong>{misses}/3</strong></div>
+            <div><span>{t.gameMiss}</span><strong>{misses}/3</strong></div>
           </div>
           <canvas
             ref={canvasRef}
             className="pulse-canvas"
             tabIndex={0}
+            role="button"
             aria-label={t.gameHow}
             aria-describedby="pulse-help"
             onPointerDown={event => {

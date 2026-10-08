@@ -39,3 +39,23 @@ Confere o conteúdo gerado em `dist/`, metadados sociais, sitemap, robots, polic
 - [ ] Conferir alternância PT/EN e Crystal/Ghost com redução de movimento ativada.
 
 O checklist manual complementa as cinco baterias automatizadas; não é marcado como concluído sem reprodução no navegador em cada resolução.
+
+
+## Validação da otimização de Canvas — V5.3
+
+### Automático
+- Testar o cálculo de resolução interna a partir do tamanho real do Canvas (incluindo largura estreita).
+- Verificar limite de `devicePixelRatio` e entradas inválidas.
+- Verificar a condição de pausa em tela fora da viewport, aba oculta e partida não iniciada.
+- Garantir paridade de chaves de internacionalização e que "ERROS / MISSES" apareça conforme o idioma.
+
+### Manual em navegador
+- [ ] Entrar no jogo e alternar Crystal/Ghost pelo toque, clique e Enter/Espaço.
+- [ ] Rolar para fora do jogo durante uma partida, voltar e verificar que não houve penalidades ocultas.
+- [ ] Ocultar a aba com uma partida iniciada; ao retornar não deve haver salto de tempo.
+- [ ] Medir ausência de overflow horizontal em 320, 375, 420, 768, 1440 e 3840 px.
+- [ ] Alterar o idioma PT/EN durante uma partida e verificar placar e continuidade.
+- [ ] Ativar `prefers-reduced-motion` e conferir remoção de animações apenas decorativas.
+- [ ] Confirmar que a partida funciona após voltar para a aba e sem animação constante na página inicial.
+
+As cinco baterias de CI **não substituem** estes testes manuais. Não marcar itens não observados como aprovados.
