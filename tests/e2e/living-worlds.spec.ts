@@ -21,6 +21,7 @@ test('fine pointer lights the scene without moving the artwork itself', async ({
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/');
+  await expect(page.locator('html')).toHaveClass(/motion-ready/);
   await page.locator('.portal').dispatchEvent('pointermove', {
     pointerType: 'mouse',
     clientX: 975,
