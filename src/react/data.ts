@@ -99,8 +99,8 @@ export const copy = {
     policy: 'POLÍTICA DAS ARTES',
     authorized: 'PUBLICAÇÃO E USO DOS MATERIAIS SELECIONADOS AUTORIZADOS PELA BIYA',
     protection: 'SEM AUTORIZAÇÃO: REPOST, DATASET, TREINAMENTO OU GERAÇÃO POR IA',
-    easterEgg: 'NÃO INVOCA ELE.',
-    easterHint: 'A frequência 666 foi bloqueada com sucesso.',
+    easterEgg: 'FREQUÊNCIA BRANCA ENCONTRADA 🤍',
+    easterHint: 'BIYA // KKKKK // SIGNAL OK',
     close: 'FECHAR',
   },
   en: {
@@ -158,8 +158,8 @@ export const copy = {
     policy: 'ARTWORK POLICY',
     authorized: 'PUBLICATION AND DISPLAY OF SELECTED MATERIALS AUTHORIZED BY BIYA',
     protection: 'NO UNAUTHORIZED REPOST, DATASET, MODEL TRAINING OR GENERATIVE-AI USE',
-    easterEgg: 'DON’T SUMMON HIM.',
-    easterHint: 'Frequency 666 was successfully blocked.',
+    easterEgg: 'WHITE HEART FREQUENCY FOUND 🤍',
+    easterHint: 'BIYA // KKKKK // SIGNAL OK',
     close: 'CLOSE',
   },
 } as const;
