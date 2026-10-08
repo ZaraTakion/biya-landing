@@ -14,9 +14,11 @@ interface Props {
  */
 export default function WorldDock({ language, world, active, setWorld }: Props) {
   const [pastPortal, setPastPortal] = useState(false);
+  const [nearFooter, setNearFooter] = useState(false);
 
   useEffect(() => {
     const portal = document.getElementById('portal');
+    const footer = document.querySelector<HTMLElement>('.footer');
     if (!portal) return undefined;
     let frame = 0;
     const update = () => {
@@ -25,6 +27,11 @@ export default function WorldDock({ language, world, active, setWorld }: Props) 
       // Direct geometry also handles programmatic jumps to an archive anchor.
       const remaining = portal.getBoundingClientRect().bottom;
       setPastPortal(remaining < Math.max(140, window.innerHeight * .36));
+      // The bottom-fixed control must clear the footer's social and policy
+      // links before it can cover them, especially at 320px / zoom.
+      if (footer) {
+        setNearFooter(footer.getBoundingClientRect().top < window.innerHeight - Math.min(180, window.innerHeight * .26));
+      }
     };
     const onScroll = () => {
       if (!frame) frame = window.requestAnimationFrame(update);
@@ -40,8 +47,8 @@ export default function WorldDock({ language, world, active, setWorld }: Props) 
   }, []);
 
   // The full-size frequency selector remains in the portal.
-  // Don't overlay interactive game controls or an open modal.
-  if (!pastPortal || active === 'game') return null;
+  // Don't overlay interactive game controls, footer navigation or a dialog.
+  if (!pastPortal || nearFooter || active === 'game') return null;
 
   return (
     <aside className="biya-world-dock" aria-label={language === 'pt' ? 'Mudar a atmosfera do site' : 'Change the site atmosphere'}>
