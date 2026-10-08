@@ -10,6 +10,7 @@ import './react/react.css';
 import './react/design-v2.css';
 import './react/design-v6.css';
 import './react/living-worlds.css';
+import './react/world-resonance-v7.css';
 
 const root = document.getElementById('root');
 if (!root) throw new Error('Root element not found.');
