@@ -20,7 +20,7 @@ test('mobile disclosure supports Escape, outside dismissal, and desktop resize',
   await expect(menu).toHaveAttribute('inert', '');
 
   await trigger.click();
-  await page.locator('#portal-title').click();
+  // Click the concept-bar outside the expanded overlay rather than an obscured element.\n  await page.mouse.click(6, 6);
   await expect(menu).toHaveAttribute('inert', '');
 
   await trigger.click();
