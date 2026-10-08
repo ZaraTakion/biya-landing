@@ -77,6 +77,8 @@ function Header({
 }) {
   const t = copy[language];
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLElement>(null);
   const nav = [
     ['portal', t.nav[0]],
     ['archive', t.nav[1]],
@@ -86,12 +88,37 @@ function Header({
   ] as const;
 
   useEffect(() => {
+    if (!menuOpen) return undefined;
+
     const onEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setMenuOpen(false);
+      if (event.key !== 'Escape') return;
+      event.preventDefault();
+      setMenuOpen(false);
+      menuButtonRef.current?.focus();
     };
-    addEventListener('keydown', onEscape);
-    return () => removeEventListener('keydown', onEscape);
-  }, []);
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (menuRef.current?.contains(target) || menuButtonRef.current?.contains(target)) return;
+      setMenuOpen(false);
+    };
+    const desktop = window.matchMedia('(min-width: 901px)');
+    const onDesktop = () => {
+      if (desktop.matches) {
+        setMenuOpen(false);
+        if (menuRef.current?.contains(document.activeElement)) menuButtonRef.current?.focus();
+      }
+    };
+
+    document.addEventListener('keydown', onEscape);
+    document.addEventListener('pointerdown', onPointerDown);
+    desktop.addEventListener('change', onDesktop);
+    return () => {
+      document.removeEventListener('keydown', onEscape);
+      document.removeEventListener('pointerdown', onPointerDown);
+      desktop.removeEventListener('change', onDesktop);
+    };
+  }, [menuOpen]);
 
   return (
     <>
@@ -135,6 +162,7 @@ function Header({
           @BIYA_YU <span aria-hidden="true">↗</span>
         </a>
         <button
+          ref={menuButtonRef}
           className="mobile-menu-button"
           type="button"
           aria-expanded={menuOpen}
@@ -146,7 +174,9 @@ function Header({
           <span />
         </button>
         <nav
+          ref={menuRef}
           id="mobile-menu"
+          inert={!menuOpen}
           className={`mobile-menu ${menuOpen ? 'is-open' : ''}`}
           aria-label={language === 'pt' ? 'Menu móvel' : 'Mobile menu'}
         >
