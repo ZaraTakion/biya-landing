@@ -751,3 +751,15 @@ body:not([data-world="ghost"]) .section-index, body:not([data-world="ghost"]) .h
 .language-option {
   min-width: 40px;
 }
+
+
+/* V4 final publication details. */
+.footer-policy {
+  color: #cdb7dc;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.footer-policy:hover { color: #fff; }
+.about-art img { transition: transform 700ms var(--motion-signature); }
