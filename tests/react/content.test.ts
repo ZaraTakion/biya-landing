@@ -20,4 +20,15 @@ describe('Biya public content contract', () => {
   it('uses only HTTPS for public external links', () => {
     for (const value of Object.values(links)) expect(value.startsWith('https://')).toBe(true);
   });
+  it('keeps the two language dictionaries aligned and localizes game errors', () => {
+    expect(Object.keys(copy.pt).sort()).toEqual(Object.keys(copy.en).sort());
+    expect(copy.pt.gameMiss).toBe('ERROS');
+    expect(copy.en.gameMiss).toBe('MISSES');
+  });
+
+  it('uses unique artwork identifiers and paths to prevent gallery collisions', () => {
+    expect(new Set(artworks.map(item => item.id)).size).toBe(artworks.length);
+    expect(new Set(artworks.map(item => item.src)).size).toBe(artworks.length);
+    expect(artworks.every(item => item.src.startsWith('/assets/'))).toBe(true);
+  });
 });
