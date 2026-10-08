@@ -424,12 +424,13 @@ export default function MiniGame({ language }: { language: Language }) {
             <div><span>{t.gameScore}</span><strong>{score}</strong></div>
             <div><span>{t.gameCombo}</span><strong>×{combo}</strong></div>
             <div><span>{t.gameBest}</span><strong>{best}</strong></div>
-            <div><span>MISS</span><strong>{misses}/3</strong></div>
+            <div><span>{t.gameMiss}</span><strong>{misses}/3</strong></div>
           </div>
           <canvas
             ref={canvasRef}
             className="pulse-canvas"
             tabIndex={0}
+            role="button"
             aria-label={t.gameHow}
             aria-describedby="pulse-help"
             onPointerDown={event => {
