@@ -769,3 +769,9 @@ body[data-world="ghost"] .signal {
   background-image: radial-gradient(circle at 83% 14%, rgba(92, 51, 114, .26), transparent 31%);
   color: #f0e7f6;
 }
+
+/* On a world change the Signal foreground changes immediately. Animating its
+   backdrop for 650ms creates a brief light-on-light state (measured 2.04:1).
+   Keep decorative motions elsewhere, but switch this contrast-critical canvas
+   atomically with its text. */
+.signal { transition: none; }
