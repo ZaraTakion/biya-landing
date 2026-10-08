@@ -564,7 +564,7 @@ function About({ language }: { language: Language }) {
         <div className="about-facts" aria-label={language === 'pt' ? 'Áreas públicas da Biya' : 'Biya public creative areas'}>
           <span>ART / CHARACTERS</span>
           <span>VTUBER / STREAMS</span>
-          <span>COMMISSIONS / VGEN</span>
+          <span>PROFILE / VGEN</span>
         </div>
         <div className="social-table">
           <a href={links.x} rel={externalRel} target="_blank">
@@ -605,7 +605,7 @@ function Footer({ language }: { language: Language }) {
       </button>
       <div className="footer-links">
         <a href={links.x} rel={externalRel} target="_blank"><span>X / TWITTER</span><strong>@BiyA_YU ↗</strong></a>
-        <a href={links.vgen} rel={externalRel} target="_blank"><span>VGEN</span><strong>{language === 'pt' ? 'ARTES & COMISSÕES' : 'ART & COMMISSIONS'} ↗</strong></a>
+        <a href={links.vgen} rel={externalRel} target="_blank"><span>VGEN</span><strong>{language === 'pt' ? 'PERFIL DA BIYA' : 'BIYA PROFILE'} ↗</strong></a>
         <a href={links.youtube} rel={externalRel} target="_blank"><span>YOUTUBE</span><strong>{language === 'pt' ? 'VÍDEOS & LIVES' : 'VIDEOS & STREAMS'} ↗</strong></a>
         <a href="/art-policy"><span>RIGHTS</span><strong>{t.policy} ↗</strong></a>
       </div>
