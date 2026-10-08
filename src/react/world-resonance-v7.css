@@ -1,0 +1,414 @@
+/* BIYA V7 / WORLD RESONANCE — interface and CSS lighting, never image editing.
+   Crystal: refraction, paper and pearlescent light.
+   Ghost: quiet ultraviolet, lanterns and nocturnal depth.
+   All movement is transform/opacity only and respects reduced motion. */
+
+:root {
+  --resonance-ease: cubic-bezier(.22,1,.36,1);
+  --resonance-luminous: #b58ebc;
+  --resonance-on: #362540;
+}
+body[data-world="ghost"] {
+  --resonance-luminous: #e0a8ed;
+  --resonance-on: #f6e8fb;
+}
+
+/* Useful two-world selector; not a decorative second site navigation. */
+.biya-world-dock {
+  position: fixed;
+  z-index: 108;
+  right: clamp(14px,2.3vw,34px);
+  bottom: clamp(14px,2.2vw,30px);
+  display: grid;
+  gap: 7px;
+  padding: 11px;
+  max-width: calc(100vw - 28px);
+  border: 1px solid rgba(113,73,127,.32);
+  border-radius: 16px;
+  background: rgba(253,246,251,.96);
+  color: #37253e;
+  box-shadow: 0 16px 46px rgba(45,25,57,.19);
+  backdrop-filter: blur(18px);
+  animation: biya-dock-in 340ms var(--resonance-ease) both;
+}
+.biya-world-dock-label {
+  padding: 0 5px;
+  color: #6d467e;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .17em;
+}
+.biya-world-dock-options {
+  display: flex;
+  gap: 4px;
+  border-radius: 10px;
+  background: rgba(93,55,106,.09);
+  padding: 3px;
+}
+.biya-world-dock-options button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: #593966;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .08em;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+.biya-world-dock-options button.is-current {
+  color: #fff;
+  background: #493053;
+  box-shadow: 0 2px 9px rgba(60,33,69,.15);
+}
+.biya-world-dock-icon { font-size: 17px; line-height: 1; }
+.biya-world-dock-options button:focus-visible,
+.biya-theatre button:focus-visible {
+  outline: 3px solid #edb2fa;
+  outline-offset: 3px;
+}
+body[data-world="ghost"] .biya-world-dock {
+  border-color: rgba(224,163,238,.34);
+  background: rgba(36,21,48,.96);
+  color: #f5e5fa;
+  box-shadow: 0 16px 50px rgba(10,4,18,.5);
+}
+body[data-world="ghost"] .biya-world-dock-label { color: #edbdf6; }
+body[data-world="ghost"] .biya-world-dock-options { background: rgba(196,122,222,.11); }
+body[data-world="ghost"] .biya-world-dock-options button { color: #efd0f5; }
+body[data-world="ghost"] .biya-world-dock-options button.is-current {
+  background: #e5b2ed; color: #291636;
+}
+body:has(.react-dialog-backdrop) .biya-world-dock { display: none; }
+@keyframes biya-dock-in {
+  from { opacity: 0; transform: translateY(14px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* The art theatre: a dark exhibition space with real editorial navigation. */
+.react-dialog.biya-theatre {
+  width: min(1220px,100%);
+  max-height: min(96dvh,1000px);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(216,166,230,.44);
+  border-radius: 16px;
+  background: #191322;
+  color: #fff3ff;
+  overflow: auto;
+  overscroll-behavior: contain;
+  box-shadow: 0 35px 110px rgba(0,0,0,.5);
+}
+.biya-theatre-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 13px clamp(12px,2vw,27px);
+  border-bottom: 1px solid rgba(218,166,233,.19);
+  background: #201729;
+}
+.biya-theatre-header-copy {
+  display: flex; align-items: baseline; flex-wrap: wrap;
+  gap: 12px; color: #e8c5f0; font-size: 10px;
+  font-weight: 800; letter-spacing: .14em;
+}
+.biya-theatre-count { color: #f9e6fd; font-variant-numeric: tabular-nums; }
+.biya-theatre-header > button {
+  min-height: 44px;
+  padding: 9px 15px;
+  border: 1px solid rgba(226,173,243,.39);
+  border-radius: 8px;
+  background: #3b2949;
+  color: #fff4ff;
+  font: 800 11px/1.4 "Segoe UI",sans-serif;
+  cursor: pointer;
+}
+.biya-theatre-stage {
+  min-height: 240px;
+  display: grid;
+  grid-template-columns: 64px minmax(0,1fr) 64px;
+  align-items: center;
+  gap: clamp(4px,1vw,15px);
+  padding: clamp(8px,1.6vw,18px);
+  background:
+    radial-gradient(ellipse at 50% 46%,rgba(115,75,148,.25),transparent 60%),
+    linear-gradient(145deg,#191323,#241a30);
+  isolation: isolate;
+}
+.biya-theatre-stage > .protected-frame {
+  width: 100%;
+  height: clamp(200px,49dvh,520px);
+  max-height: none;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(244,203,255,.08);
+  border-radius: 9px;
+  background: radial-gradient(ellipse at center,#322740,#1b1524 76%);
+}
+.biya-theatre-stage > .protected-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  animation: biya-theatre-arrive 400ms var(--resonance-ease) both;
+}
+.biya-theatre-stage > .protected-frame .rights-badge { right: 8px; bottom: 8px; }
+.biya-theatre-arrow {
+  width: min(100%,54px);
+  min-height: 60px;
+  justify-self: center;
+  border: 1px solid rgba(222,160,240,.3);
+  border-radius: 10px;
+  color: #fff1fa;
+  background: rgba(117,75,141,.22);
+  font-size: 24px;
+  cursor: pointer;
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+.biya-theatre-arrow:hover { background: rgba(175,109,206,.33); border-color: #d69de6; }
+.biya-theatre-details {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 22px;
+  padding: 13px clamp(15px,2.7vw,35px) 17px;
+  border-top: 1px solid rgba(225,168,238,.14);
+}
+.biya-theatre-tag {
+  color: #e5b9ed;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.biya-theatre-details h3 {
+  margin: 5px 0 7px;
+  font-family: Georgia,"Times New Roman",serif;
+  color: #fff2fc;
+  font-size: clamp(25px,3.5vw,44px);
+  line-height: 1.05;
+  font-weight: 500;
+}
+.biya-theatre-details p:not(.dialog-rights) {
+  margin: 0;
+  max-width: 65ch;
+  color: #e5cfe9;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.biya-theatre-details .dialog-rights {
+  max-width: 190px; flex: 0 0 auto;
+  color: #e3cce6; line-height: 1.5;
+}
+.biya-theatre-filmstrip {
+  display: flex;
+  gap: 8px;
+  padding: 10px clamp(12px,2.6vw,34px) 16px;
+  overflow-x: auto;
+  scrollbar-color: #9f74b0 #211a2c;
+  border-top: 1px solid rgba(235,191,246,.15);
+  scroll-snap-type: x proximity;
+}
+.biya-theatre-filmstrip button {
+  position: relative;
+  flex: 0 0 clamp(60px,8vw,88px);
+  height: clamp(65px,8.8vw,88px);
+  overflow: hidden;
+  border: 2px solid transparent;
+  border-radius: 7px;
+  background: #32243c;
+  cursor: pointer;
+  padding: 0;
+  scroll-snap-align: center;
+}
+.biya-theatre-filmstrip button.is-current {
+  border-color: #edbcf7;
+  box-shadow: 0 0 0 2px rgba(228,172,248,.17);
+}
+.biya-theatre-filmstrip img {
+  width: 100%; height: 100%; display: block;
+  object-fit: cover; max-width: 100%; max-height: 100%;
+  opacity: .75;
+  transition: opacity 190ms ease;
+}
+.biya-theatre-filmstrip button:hover img,
+.biya-theatre-filmstrip button.is-current img { opacity: 1; }
+.biya-theatre-filmstrip span {
+  position: absolute;
+  left: 4px; bottom: 4px;
+  padding: 2px 5px;
+  background: rgba(15,11,21,.83);
+  color: #fff; font-size: 9px; font-weight: 850;
+}
+@keyframes biya-theatre-arrive {
+  from { opacity: .3; transform: translateY(7px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Signature lighting: never blur, recolor or deform the original artwork.
+   Orbit and caustics exist only on separate CSS pseudo-elements. */
+.portal .art-stage { isolation: isolate; }
+.portal .art-stage::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  width: min(96%,750px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px dashed rgba(153,99,173,.31);
+  transform: translate(-50%,-50%) rotate(-8deg);
+  box-shadow: inset 0 0 50px rgba(244,226,246,.08);
+  pointer-events: none;
+  z-index: 0;
+}
+body[data-world="ghost"] .portal .art-stage::after {
+  border-style: solid;
+  border-color: rgba(209,141,233,.28);
+  border-radius: 42% 58% 48% 52% / 54% 42% 58% 46%;
+  box-shadow: 0 0 32px rgba(193,96,225,.1);
+}
+.portal .stage-inner { position: relative; z-index: 1; }
+.portal .stage-corner { z-index: 2; }
+.motion-ready .portal .art-stage::after {
+  animation: biya-halo-calm 22s ease-in-out infinite alternate;
+}
+body[data-world="ghost"].motion-ready .portal .art-stage::after,
+.motion-ready body[data-world="ghost"] .portal .art-stage::after {
+  animation-name: biya-halo-ghost;
+}
+@keyframes biya-halo-calm {
+  from { transform: translate(-50%,-50%) rotate(-12deg) scale(.97); opacity: .52; }
+  to { transform: translate(-50%,-50%) rotate(14deg) scale(1.03); opacity: .88; }
+}
+@keyframes biya-halo-ghost {
+  from { transform: translate(-50%,-50%) rotate(10deg) scale(.97); opacity: .44; }
+  to { transform: translate(-50%,-50%) rotate(-12deg) scale(1.03); opacity: .74; }
+}
+.archive {
+  background-image:
+    radial-gradient(ellipse at 87% 6%,rgba(129,84,165,.11),transparent 40%),
+    radial-gradient(ellipse at 13% 90%,rgba(185,114,179,.06),transparent 39%);
+}
+.archive-heading .mini-label { display: inline-flex; align-items: center; gap: 10px; }
+.archive .gallery-info { position: relative; isolation: isolate; }
+.archive .gallery-info::after {
+  content: "✦";
+  position: absolute; right: 26px; top: 28px;
+  color: rgba(245,210,246,.15);
+  font-size: 55px; line-height: 1;
+  pointer-events: none; z-index: -1;
+}
+.archive .art-showcase {
+  box-shadow: inset 0 0 65px rgba(18,9,32,.23);
+}
+body[data-world="ghost"] .archive {
+  background-image:
+    radial-gradient(ellipse at 75% 3%,rgba(119,53,145,.17),transparent 45%),
+    radial-gradient(ellipse at 4% 98%,rgba(96,51,132,.12),transparent 34%);
+}
+.signal .broadcast {
+  transform-origin: center center;
+  transition: transform 300ms var(--resonance-ease), border-color 300ms ease, box-shadow 300ms ease;
+}
+@media (hover:hover) and (pointer:fine) {
+  .signal .broadcast:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 22px 40px rgba(49,24,57,.12);
+  }
+  body[data-world="ghost"] .signal .broadcast:hover {
+    box-shadow: 0 24px 45px rgba(0,0,0,.3);
+  }
+  .archive-thumbs button:hover img { opacity: 1; }
+  .biya-world-dock-options button:hover:not(.is-current) { background: rgba(150,103,170,.16); }
+}
+.signal .broadcast:focus-visible {
+  outline: 3px solid #cd93dc;
+  outline-offset: 4px;
+}
+.about-art::after {
+  content: "";
+  position: absolute;
+  inset: 5%;
+  border: 1px solid rgba(255,255,255,.48);
+  border-radius: 50% 50% 7% 7%;
+  pointer-events: none;
+  z-index: 3;
+}
+body[data-world="ghost"] .about-art::after {
+  border-color: rgba(229,176,243,.33);
+}
+
+@media (max-width: 900px) {
+  .biya-world-dock {
+    right: 12px;
+    bottom: 12px;
+    padding: 8px;
+    gap: 3px;
+    border-radius: 12px;
+  }
+  .biya-world-dock-label { font-size: 8px; letter-spacing: .1em; }
+  .biya-world-dock-options button { min-height: 44px; padding-inline: 10px; font-size: 9px; }
+}
+@media (max-width: 720px) {
+  .portal .art-stage::after {
+    width: min(93vw,420px);
+    top: 50%; left: 50%;
+  }
+  .biya-world-dock { max-width: min(260px,calc(100vw - 24px)); }
+  .biya-theatre-header { padding: 8px 10px; }
+  .react-dialog.biya-theatre { width: 100%; max-height: 96dvh; border-radius: 10px; }
+  .biya-theatre-stage {
+    grid-template-columns: 39px minmax(0,1fr) 39px;
+    padding: 5px;
+    gap: 3px;
+  }
+  .biya-theatre-stage > .protected-frame {
+    height: min(46dvh,400px);
+  }
+  .biya-theatre-arrow {
+    min-height: 48px; width: 36px;
+    font-size: 20px; border-radius: 8px;
+  }
+  .biya-theatre-details {
+    display: block;
+    padding: 10px 15px;
+  }
+  .biya-theatre-details .dialog-rights {
+    margin-top: 9px; max-width: 100%;
+  }
+  .biya-theatre-details h3 { font-size: clamp(23px,6vw,33px); }
+  .biya-theatre-filmstrip { padding: 8px 11px 10px; }
+  .biya-theatre-filmstrip button { flex-basis: 60px; height: 62px; }
+}
+@media (max-width: 380px) {
+  .biya-theatre-header-copy > span:first-child { font-size: 8px; }
+  .biya-theatre-stage > .protected-frame { height: min(42dvh,360px); }
+  .biya-theatre-filmstrip button { flex-basis: 52px; height: 56px; }
+  .biya-world-dock-label { display: none; }
+  .biya-world-dock-options button { padding-inline: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion-ready .portal .art-stage::after,
+  .biya-world-dock,
+  .biya-theatre-stage img { animation: none !important; }
+  .signal .broadcast,
+  .biya-theatre-filmstrip img { transition: none !important; }
+}
+@media (prefers-contrast: more), (forced-colors: active) {
+  .portal .art-stage::after, .archive .gallery-info::after,
+  .about-art::after { display: none; }
+  .biya-world-dock { border: 2px solid currentColor; box-shadow: none; }
+  .biya-theatre-stage, .biya-theatre-filmstrip button { background: Canvas; }
+  .biya-theatre-stage img { forced-color-adjust: none; }
+}
