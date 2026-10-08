@@ -1,13 +1,30 @@
-# Plano de testes — Definition of Done
+# Test Plan — Bateria de 5
 
-**Funcionalidade:** alternância Crystal/Ghost (inclusive pela tecla G); uma só língua por vez, inclusive no título HTML, ARIA, imagens e estados dinâmicos; persistência; galeria; modal (abrir, fechar, Esc, retorno de foco); atalhos de teclado; rolagem.
+## Battery 1 — TypeScript
+`npm run battery:1`
 
-**Viewport:** 320, 390, 768 e 1440 px sem imagens quebradas ou overflow horizontal; verificação de toque e leitura vertical em dispositivos móveis.
+Valida tipagem estrita e contratos dos componentes React.
 
-**Acessibilidade:** WCAG 2.2 AA como objetivo de validação, contraste de texto/conteúdo, foco visível, leitores de tela, labels traduzidos, alvos interativos, movimento reduzido.
+## Battery 2 — Unit tests
+`npm run battery:2`
 
-**Conteúdo:** fontes autorizadas, créditos, URLs de streams, textos biográficos e títulos individuais. Nenhum conteúdo privado/canônico imaginado.
+Valida regras do Parallel Pulse, troca Crystal/Ghost, pontuação, combo, limites e contratos de conteúdo.
 
-**Desempenho:** medições reais com Lighthouse/Core Web Vitals; alvos de avaliação LCP ≤2,5s, INP ≤200ms, CLS ≤0,1 no percentil apropriado de navegação.
+## Battery 3 — Production build
+`npm run battery:3`
 
-**Publicação:** `noindex, nofollow` permanece ativo até aprovação expressa. Sem mudanças não autorizadas em `main`.
+Gera `dist/` via Vite sem source maps.
+
+## Battery 4 — Artwork/security audit
+`npm run battery:4`
+
+Confere CSP, headers, noimageindex, crawler opt-out, deterrence de drag/context menu, política anti-dataset/IA e quantidade limitada de assets públicos.
+
+## Battery 5 — Release artifact audit
+`npm run battery:5`
+
+Confere o conteúdo gerado em `dist/`, metadados sociais, sitemap, robots, policy page e ausência de avisos de desenvolvimento.
+
+## CI
+
+`.github/workflows/quality.yml` executa as cinco baterias em cada push/PR para `main`.
