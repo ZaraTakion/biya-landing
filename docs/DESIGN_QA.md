@@ -39,3 +39,18 @@ Referências:
 - Tipografia fluida: https://web.dev/learn/design/typography
 
 Os testes de tokens **não são uma declaração de conformidade WCAG completa**.
+
+## V5.6 — Navegação acessível e reflow (2026-10-08)
+
+**Escopo controlado:** não substituir artes, paletas Crystal/Ghost ou composição dos capítulos.
+
+- Menu móvel: Escape fecha e devolve foco ao botão; clique fora fecha; alteração para desktop encerra o estado aberto; `inert` desativa links enquanto fechado.
+- Modal de obras e Easter Egg: dimensões adaptadas ao viewport dinâmico, rolagem interna quando necessário e botão de fechar acessível durante o scroll.
+- Quatro novos roteiros Playwright: menu/teclado, modal de arte em 320×568, preferência de movimento reduzido e estresse de reflow com CSS `zoom:2`.
+- O teste CSS zoom **simula uma condição de ampliação**; não substitui inspeção humana com zoom nativo do navegador, texto ampliado ou testes de tecnologias assistivas.
+
+### Critérios de aceite
+- [ ] Baterias 1–5 aprovadas no último commit.
+- [ ] Testes Chromium antigos e V5.6 aprovados no último commit.
+- [ ] Verificação independente de Cloudflare: `version.json` corresponde ao SHA da `main`.
+- [ ] Revisão manual posterior de Chrome/Firefox/Safari, zoom de 200%, Android e iPhone.
