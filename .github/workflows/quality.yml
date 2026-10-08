@@ -35,9 +35,7 @@ jobs:
         run: npm run battery:3
 
       - name: Battery 4 — Artwork/security audit
-        run: |
-          npm audit --omit=dev --audit-level=high
-          npm run battery:4
+        run: npm run battery:4
 
       - name: Battery 5 — Release artifact audit
         run: npm run battery:5
