@@ -6,12 +6,14 @@ A experiência preserva a composição editorial Crystal × Ghost e aprofunda a 
 
 ## Produção
 
-- URL: https://biya-landing.zaratakion.workers.dev/
+- URL oficial: https://biya-prism.zaratakion.workers.dev/
 - Stack: React 19.3.0 · React DOM 19.3.0 · TypeScript 7.0.2 · Vite 8.3.3
 - Deploy: Cloudflare Workers static assets
+- Worker: `biya-prism`
 - Idiomas: PT-BR / EN
 - Build: `dist/`
-- Política: `/art-policy.html`
+- Política: `/art-policy`
+- 404 personalizado: ativo
 
 ## Crystal × Ghost
 
