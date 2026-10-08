@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import EasterEgg from './EasterEgg';
 import MiniGame from './MiniGame';
+import WorldDock from './WorldDock';
 import { useDialogAccessibility } from './useDialogAccessibility';
 import { artworks, copy, links, media, worlds, type Language, type World } from './data';
 import { useArtworkDeterrence, useDocumentMeta, useImmersion, useWorldBody } from './useImmersion';
@@ -452,13 +453,54 @@ function Archive({ language }: { language: Language }) {
         <div className="react-dialog-backdrop" role="presentation" onPointerDown={event => {
           if (event.target === event.currentTarget) setDialogOpen(false);
         }}>
-          <div ref={dialogRef} className="react-dialog" role="dialog" aria-modal="true" aria-label={artCopy.title} tabIndex={-1}>
-            <div className="dialog-top">
-              <span>{artCopy.title}</span>
+          <div
+            ref={dialogRef}
+            className="react-dialog biya-theatre"
+            role="dialog"
+            aria-modal="true"
+            aria-label={artCopy.title}
+            aria-describedby="theatre-description"
+            tabIndex={-1}
+            onKeyDown={event => {
+              if (event.key === 'ArrowRight') { event.preventDefault(); show(index + 1); }
+              if (event.key === 'ArrowLeft') { event.preventDefault(); show(index - 1); }
+            }}
+          >
+            <div className="dialog-top biya-theatre-header">
+              <div className="biya-theatre-header-copy">
+                <span>BIYA / ART THEATRE</span>
+                <span className="biya-theatre-count" aria-live="polite">{String(index + 1).padStart(2, '0')} / {String(artworks.length).padStart(2, '0')}</span>
+              </div>
               <button type="button" onClick={() => setDialogOpen(false)}>{language === 'pt' ? '✕ FECHAR' : '✕ CLOSE'}</button>
             </div>
-            <ProtectedImage src={art.src} alt={artCopy.alt} width={art.width} height={art.height} />
-            <p className="dialog-rights">{t.rightsShort}</p>
+            <div className="biya-theatre-stage">
+              <button className="biya-theatre-arrow" type="button" aria-label={t.previous} onClick={() => show(index - 1)}>←</button>
+              <ProtectedImage key={art.id} src={art.src} alt={artCopy.alt} width={art.width} height={art.height} />
+              <button className="biya-theatre-arrow" type="button" aria-label={t.next} onClick={() => show(index + 1)}>→</button>
+            </div>
+            <div className="biya-theatre-details">
+              <div>
+                <span className="biya-theatre-tag">{artCopy.tag}</span>
+                <h3>{artCopy.title}</h3>
+                <p id="theatre-description">{artCopy.desc}</p>
+              </div>
+              <p className="dialog-rights">{t.rightsShort}</p>
+            </div>
+            <div className="biya-theatre-filmstrip" role="group" aria-label={language === 'pt' ? 'Escolher uma arte' : 'Choose an artwork'}>
+              {artworks.map((item, itemIndex) => (
+                <button
+                  type="button"
+                  key={item.id}
+                  className={itemIndex === index ? 'is-current' : undefined}
+                  aria-pressed={itemIndex === index}
+                  aria-label={`${itemIndex + 1}: ${item[language].title}`}
+                  onClick={() => show(itemIndex)}
+                >
+                  <img src={item.src} alt="" width={item.width} height={item.height} loading="lazy" draggable={false} />
+                  <span>{String(itemIndex + 1).padStart(2, '0')}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       )}
@@ -629,6 +671,7 @@ export default function App() {
       <a className="skip-link" href="#main">{language === 'pt' ? 'Pular para o conteúdo' : 'Skip to content'}</a>
       <progress className="progress" value={progress} max={100} aria-hidden="true" />
       <Header language={language} setLanguage={setLanguage} active={active} />
+       <WorldDock language={language} world={world} setWorld={setWorld} active={active} />
       <main id="main">
         <Portal language={language} world={world} setWorld={setWorld} />
         <Archive language={language} />
