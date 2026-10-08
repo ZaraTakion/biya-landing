@@ -18,9 +18,14 @@ test('Crystal and Ghost receive distinct live scenes while the original portrait
 });
 
 test('fine pointer lights the scene without moving the artwork itself', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/');
-  await page.mouse.move(975, 410);
+  await page.locator('.portal').dispatchEvent('pointermove', {
+    pointerType: 'mouse',
+    clientX: 975,
+    clientY: 410,
+  });
   await expect.poll(async () => page.locator('.portal').evaluate(el => el.style.getPropertyValue('--pointer-x'))).not.toBe('');
   const data = await page.locator('.world-scene .scene-light').evaluate(el => ({
     transform: getComputedStyle(el).transform,
