@@ -380,7 +380,7 @@ function Archive({ language }: { language: Language }) {
         </div>
         <div className="gallery-info">
           <div className="gallery-progress" aria-hidden="true">
-            <span style={{ transform: `scaleX(${(index + 1) / artworks.length})` }} />
+            <span />
           </div>
           <span className="gallery-serial">
             <span>ARCHIVE / BIYA_YU</span>
