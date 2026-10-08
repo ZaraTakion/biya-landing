@@ -184,6 +184,12 @@ body[data-world="ghost"] .gallery-experience[data-art-index] .art-showcase {
   transform-origin: left center;
   transition: transform 420ms cubic-bezier(.22,1,.36,1);
 }
+.gallery-experience[data-art-index="0"] .gallery-progress > span { transform: scaleX(.1666667); }
+.gallery-experience[data-art-index="1"] .gallery-progress > span { transform: scaleX(.3333333); }
+.gallery-experience[data-art-index="2"] .gallery-progress > span { transform: scaleX(.5); }
+.gallery-experience[data-art-index="3"] .gallery-progress > span { transform: scaleX(.6666667); }
+.gallery-experience[data-art-index="4"] .gallery-progress > span { transform: scaleX(.8333333); }
+.gallery-experience[data-art-index="5"] .gallery-progress > span { transform: scaleX(1); }
 @keyframes biya-art-arrive {
   from { opacity: .25; transform: translateY(9px) scale(.975); }
   to { opacity: 1; transform: translateY(0) scale(1); }
