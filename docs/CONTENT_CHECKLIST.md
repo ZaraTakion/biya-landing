@@ -1,11 +1,17 @@
-# Inventário editorial — pendências antes da publicação
+# Inventário editorial — estado de publicação
 
-- [ ] Confirmar a identidade/autoria das **19 imagens** extraídas do ZIP e o escopo de autorização de uso de cada uma.
-- [ ] Substituir os títulos provisórios das seis obras exibidas no carrossel pelos nomes originais **se existirem**.
-- [ ] Inserir crédito individual, fonte e link verificável das obras (campos `creditVerified`, `titleVerified` e `sourceUrl`).
-- [ ] Conferir títulos/URLs das três miniaturas de lives e atualizar `media.js` com URLs diretas, se validadas.
-- [ ] Confirmar se as redes e os serviços estão ativos; não afirmar que comissões estão abertas sem confirmação.
-- [ ] Aprovar textos institucionais nas duas línguas diretamente com a Biya.
-- [ ] Definir administração futura, domínio e autorização para publicar como site oficial.
-- [ ] Realizar revisão de acessibilidade manual, incluindo leitores de tela, sem depender apenas de teste automático.
-- [ ] Verificar OG/social previews, favicon e canonical quando houver domínio definitivo.
+- [x] Biya autorizou a publicação do site e a exibição dos materiais selecionados.
+- [x] Site removido do estado de pré-lançamento.
+- [x] Indexação pública habilitada.
+- [x] Política pública de uso dos materiais adicionada em PT-BR e EN.
+- [x] Opt-out declarado para crawlers conhecidos de treinamento de IA.
+- [x] Open Graph / social preview configurado.
+- [x] Identidade Crystal × Ghost preservada e aprofundada com uma camada de imersão.
+- [x] Redes públicas verificadas: X, VGen e YouTube.
+
+## Observações permanentes
+
+- Os nomes mostrados na galeria são rótulos editoriais do site e não devem ser tratados como títulos canônicos quando a obra não possuir um nome confirmado.
+- A autorização para o site exibir uma imagem não transfere os direitos autorais do respectivo artista/titular.
+- URLs individuais de vídeos só devem substituir o link geral do canal quando forem verificadas.
+- Revisões futuras devem preservar acessibilidade, responsividade e `prefers-reduced-motion`.
