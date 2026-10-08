@@ -280,6 +280,12 @@ export default function MiniGame({ language }: { language: Language }) {
           ctx.globalAlpha = ghost ? 0.72 : 0.62;
           drawCrystal(ctx, width * 0.70, height * 0.34, 16);
           drawGhost(ctx, width * 0.78, height * 0.66, 19);
+          ctx.fillStyle = ghost ? 'rgba(245,232,252,.72)' : 'rgba(55,45,72,.58)';
+          ctx.font = '900 8px Arial';
+          ctx.textAlign = 'center';
+          ctx.fillText('CRYSTAL', width * 0.70, height * 0.34 + 35);
+          ctx.fillText('GHOST', width * 0.78, height * 0.66 + 38);
+          ctx.textAlign = 'start';
           ctx.strokeStyle = ghost ? 'rgba(218,177,238,.42)' : 'rgba(125,107,174,.34)';
           ctx.setLineDash([5, 7]);
           ctx.beginPath();
