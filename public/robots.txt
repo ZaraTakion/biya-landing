@@ -16,4 +16,4 @@ Disallow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://biya-landing.zaratakion.workers.dev/sitemap.xml
+Sitemap: https://biya-prism.zaratakion.workers.dev/sitemap.xml
