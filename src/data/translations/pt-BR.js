@@ -95,7 +95,8 @@ export const strings = {
   "about.signal": "SINAL / 004",
   "gallery.serial": "ARQUIVO / BIYA_YU",
   "world.number.prefix": "MUNDO_0",
-  "footer.policy": "POLÍTICA DAS ARTES",\n  "meta.locale": "pt_BR"
+  "footer.policy": "POLÍTICA DAS ARTES",
+  "meta.locale": "pt_BR"
 };
 export const worlds = {
   "crystal": {
