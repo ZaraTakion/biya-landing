@@ -1,0 +1,119 @@
+/* BIYA V8 — editorial interaction polish.
+   CSS-only ornamentation; original artwork pixels and aspect ratios stay untouched.
+   Emphasize visual hierarchy, discoverable keyboard focus, and quiet responsive motion. */
+:root {
+  --biya-v8-ease: cubic-bezier(.2,.8,.2,1);
+  --biya-v8-focus: #a45ab8;
+  --biya-v8-halo: rgba(146,89,177,.19);
+}
+body[data-world="ghost"] {
+  --biya-v8-focus: #f2c2ff;
+  --biya-v8-halo: rgba(195,128,231,.25);
+}
+::selection { background: #cfb0e5; color: #26182f; }
+body[data-world="ghost"] ::selection { background: #d4a6ee; color: #201025; }
+
+/* Improve headline composition without forcing image transforms or layout shifts. */
+:is(.hero-subtitle,.archive-heading h2,.signal-heading h2,.pulse-copy h2,.about-copy h2,.footer-top p) {
+  text-wrap: balance;
+}
+:is(.hero-description,.archive-lede p,.about-description) { text-wrap: pretty; }
+:where(#portal,#archive,#signal,#game,#about) { scroll-margin-top: 6rem; }
+
+/* Keyboard location is visible on both visual worlds. */
+:where(.world-choice,.button-enter,.hero-plain,.round-arrow,.expand-art,.archive-thumbs button,.broadcast,.social-table a,.footer-links a,.biya-world-dock-options button):focus-visible {
+  outline: 3px solid var(--biya-v8-focus);
+  outline-offset: 4px;
+}
+:where(.world-choice,.round-arrow,.expand-art,.archive-thumbs button,.biya-world-dock-options button) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Button and world control affordances, with motion restricted to compositor-safe properties. */
+.world-choice {
+  transition: color .24s ease, background-color .24s ease, box-shadow .24s ease;
+}
+.button-enter,
+.hero-plain,
+.round-arrow,
+.expand-art {
+  transition: color .22s ease, background-color .22s ease, border-color .22s ease,
+    box-shadow .3s var(--biya-v8-ease), transform .3s var(--biya-v8-ease);
+}
+.archive-thumbs button {
+  transition: transform .3s var(--biya-v8-ease), border-color .22s ease,
+    box-shadow .3s var(--biya-v8-ease);
+}
+.social-table a, .footer-links a {
+  transition: color .2s ease, background-color .2s ease, border-color .2s ease;
+}
+
+/* A little depth around the original art, never on the image itself. */
+.portal .art-stage {
+  filter: none;
+}
+.portal .stage-inner img,
+.gallery-experience img,
+.about-art img {
+  image-rendering: auto;
+}
+.world-control {
+  isolation: isolate;
+}
+.archive .gallery-title-area h3 {
+  text-wrap: balance;
+}
+.archive-overview .archive-thumbs button:focus-visible {
+  z-index: 1;
+  position: relative;
+}
+.pulse-machine:focus-within {
+  outline: 2px solid var(--biya-v8-halo);
+  outline-offset: 4px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .world-choice:not(.is-active):hover {
+    background-color: rgba(183,136,206,.14);
+  }
+  body[data-world="ghost"] .world-choice:not(.is-active):hover {
+    background-color: rgba(214,159,235,.2);
+  }
+  .button-enter:hover,
+  .round-arrow:hover,
+  .expand-art:hover {
+    transform: translateY(-2px);
+  }
+  .hero-plain:hover { text-decoration: underline; text-underline-offset: .35em; }
+  .archive-thumbs button:not(.is-active):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px var(--biya-v8-halo);
+  }
+  .social-table a:hover,
+  .footer-links a:hover {
+    border-color: var(--biya-v8-focus);
+  }
+}
+
+/* Do not add oversized motion targets on touchscreens. */
+@media (max-width: 720px) {
+  .hero-actions :is(.button-enter,.hero-plain) { min-height: 44px; }
+  .world-buttons .world-choice { min-height: 44px; }
+  .archive-thumbs button { scroll-margin-inline: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  .world-choice,.button-enter,.hero-plain,.round-arrow,.expand-art,
+  .archive-thumbs button,.social-table a,.footer-links a {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+@media (prefers-contrast: more), (forced-colors: active) {
+  :root { --biya-v8-focus: Highlight; }
+  :where(.world-choice,.button-enter,.round-arrow,.expand-art,.archive-thumbs button):focus-visible {
+    outline: 3px solid Highlight !important;
+  }
+  .archive-thumbs button:hover { box-shadow: none; }
+}

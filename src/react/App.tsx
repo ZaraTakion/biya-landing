@@ -28,15 +28,16 @@ function useActiveSection() {
   return active;
 }
 
-function useScrollProgress() {
-  const [progress, setProgress] = useState(0);
-
+function useScrollProgress(progressRef: React.RefObject<HTMLProgressElement | null>) {
   useEffect(() => {
     let frame = 0;
     const update = () => {
       frame = 0;
       const total = Math.max(1, document.documentElement.scrollHeight - innerHeight);
-      setProgress(Math.min(100, Math.max(0, (scrollY / total) * 100)));
+      const value = Math.min(100, Math.max(0, (scrollY / total) * 100));
+      // Keep the scroll indicator out of React state: otherwise scrolling
+      // continuously rerenders the entire page, including the canvas game.
+      if (progressRef.current) progressRef.current.value = value;
     };
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(update);
@@ -49,9 +50,7 @@ function useScrollProgress() {
       removeEventListener('resize', onScroll);
       if (frame) cancelAnimationFrame(frame);
     };
-  }, []);
-
-  return progress;
+  }, [progressRef]);
 }
 
 function ProtectedImage(props: React.ImgHTMLAttributes<HTMLImageElement>) {
@@ -216,6 +215,7 @@ function Portal({
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null;
+      if (document.querySelector('[aria-modal="true"]')) return;
       if (target?.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target?.tagName ?? '')) return;
       if (event.key.toLowerCase() === 'g' && !event.repeat && !event.metaKey && !event.ctrlKey && !event.altKey) {
         setWorld(world === 'crystal' ? 'ghost' : 'crystal');
@@ -387,7 +387,7 @@ function Archive({ language }: { language: Language }) {
             <span>ARCHIVE / BIYA_YU</span>
             <span>{String(index + 1).padStart(2, '0')} — {String(artworks.length).padStart(2, '0')}</span>
           </span>
-          <div className="gallery-title-area" key={art.id}>
+          <div className="gallery-title-area" key={art.id} aria-live="polite" aria-atomic="true">
             <p>{artCopy.tag}</p>
             <h3>{artCopy.title}</h3>
             <p>{artCopy.desc}</p>
@@ -412,7 +412,7 @@ function Archive({ language }: { language: Language }) {
 
       <div className="archive-overview" aria-label={language === 'pt' ? 'Visão geral do acervo' : 'Archive overview'} data-reveal>
         <div className="archive-overview-head">
-          <span>{language === 'pt' ? 'VISÃO GERAL / 06 OBRAS' : 'OVERVIEW / 06 WORKS'}</span>
+          <span>{language === 'pt' ? `VISÃO GERAL / ${artworks.length} OBRAS` : `OVERVIEW / ${artworks.length} WORKS`}</span>
           <span>{language === 'pt' ? 'ESCOLHA DIRETAMENTE' : 'CHOOSE DIRECTLY'}</span>
         </div>
         <div className="archive-thumbs">
@@ -425,7 +425,7 @@ function Archive({ language }: { language: Language }) {
               aria-pressed={thumbIndex === index}
               onClick={() => {
                 show(thumbIndex);
-                document.querySelector('.gallery-experience')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                document.querySelector('.gallery-experience')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
               }}
             >
               <img
@@ -650,7 +650,8 @@ export default function App() {
   });
   const [world, setWorld] = useState<World>('crystal');
   const active = useActiveSection();
-  const progress = useScrollProgress();
+  const progressRef = useRef<HTMLProgressElement>(null);
+  useScrollProgress(progressRef);
   const t = useMemo(() => copy[language], [language]);
 
   useDocumentMeta(t.title, t.description, t.htmlLang);
@@ -669,7 +670,7 @@ export default function App() {
   return (
     <>
       <a className="skip-link" href="#main">{language === 'pt' ? 'Pular para o conteúdo' : 'Skip to content'}</a>
-      <progress className="progress" value={progress} max={100} aria-hidden="true" />
+      <progress ref={progressRef} className="progress" value={0} max={100} aria-hidden="true" />
       <Header language={language} setLanguage={setLanguage} active={active} />
        <WorldDock language={language} world={world} setWorld={setWorld} active={active} />
       <main id="main">

@@ -420,12 +420,15 @@ export default function MiniGame({ language }: { language: Language }) {
           <p className="pulse-help" id="pulse-help">{t.gameHow}</p>
         </div>
         <div className="pulse-machine" data-world={world} data-reveal>
-          <div className="pulse-hud" aria-live="polite">
+          <div className="pulse-hud">
             <div><span>{t.gameScore}</span><strong>{score}</strong></div>
             <div><span>{t.gameCombo}</span><strong>×{combo}</strong></div>
             <div><span>{t.gameBest}</span><strong>{best}</strong></div>
             <div><span>{t.gameMiss}</span><strong>{misses}/3</strong></div>
           </div>
+          <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+            {status === 'over' ? `${t.gameOver}. ${t.gameScore}: ${score}. ${t.gameBest}: ${best}.` : ''}
+          </p>
           <canvas
             ref={canvasRef}
             className="pulse-canvas"
