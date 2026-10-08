@@ -5,6 +5,12 @@ export function useDocumentMeta(title: string, description: string, lang: string
   useEffect(() => {
     document.title = title;
     document.documentElement.lang = lang;
+    const locale = lang === 'en' ? 'en_US' : 'pt_BR';
+    const alternateLocale = lang === 'en' ? 'pt_BR' : 'en_US';
+    const ogLocale = document.querySelector<HTMLMetaElement>('meta[property="og:locale"]');
+    if (ogLocale) ogLocale.content = locale;
+    const ogAlternate = document.querySelector<HTMLMetaElement>('meta[property="og:locale:alternate"]');
+    if (ogAlternate) ogAlternate.content = alternateLocale;
     const meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
     if (meta) meta.content = description;
     const ogTitle = document.querySelector<HTMLMetaElement>('meta[property="og:title"]');
@@ -21,6 +27,8 @@ export function useDocumentMeta(title: string, description: string, lang: string
 export function useWorldBody(world: World) {
   useEffect(() => {
     document.body.dataset.world = world;
+    const theme = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+    if (theme) theme.content = world === 'ghost' ? '#1b1425' : '#f5f5fa';
     return () => {
       delete document.body.dataset.world;
     };
@@ -32,6 +40,7 @@ export function useImmersion() {
     const root = document.documentElement;
     root.classList.add('motion-ready');
     const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+    root.classList.toggle('motion-reduced', reduce.matches);
     let pointerFrame = 0;
     let scrollFrame = 0;
 
