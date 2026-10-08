@@ -1,56 +1,53 @@
 # BIYA — Parallel Worlds
 
-Website artístico **em desenvolvimento para a Biya**. Base de referência: `biya-parallel-worlds-v02-pt-en(1).zip`, fornecida por Zara. Esta é uma implementação técnica de pré-lançamento, **não uma publicação oficialmente aprovada**. A atribuição de propriedade, as credenciais, os conteúdos e a disponibilização pública dependem de revisão e autorização expressa da Biya.
+Site público de **Biya**, artista digital e VTuber, publicado com autorização informada pela própria Biya para uso dos materiais selecionados neste projeto.
+
+A composição original foi preservada. O passe final reforça a experiência **Crystal × Ghost** com movimento, profundidade, microinterações e transições ambientais sem transformar o projeto em um redesign.
+
+## Estado
+
+- **Publicação:** pública e autorizada
+- **URL:** https://biya-landing.zaratakion.workers.dev/
+- **Idiomas:** PT-BR / EN, um por vez
+- **Direção visual:** Parallel Worlds · Crystal × Ghost
+- **Política de artes:** `/art-policy.html`
+- **Indexação:** pública; crawlers conhecidos de treinamento de IA recebem opt-out em `robots.txt`
+
+## Experiência
+
+- troca interativa Crystal / Ghost;
+- movimento ambiental contínuo e discreto;
+- partículas e sigilos que mudam de comportamento entre os dois mundos;
+- parallax suave com ponteiro e scroll;
+- entrada progressiva das seções;
+- galeria interativa com teclado, swipe e modal;
+- microinterações em streams, links e controles;
+- suporte a `prefers-reduced-motion`.
+
+## Direitos
+
+Biya autorizou a exibição dos materiais selecionados neste site. Isso não transfere direitos autorais para o projeto nem cria uma licença de reutilização para terceiros.
+
+A política pública proíbe, sem permissão aplicável, repost, edição, uso comercial, scraping para datasets, treinamento, fine-tuning, LoRA e uso do material como entrada ou referência para geração de imagens por IA.
+
+## Compartilhamento
+
+Open Graph e Twitter Card usam o próprio universo visual do projeto para gerar preview ao compartilhar a URL no Discord e outras plataformas.
 
 ## Executar localmente
-
-Pré-requisitos: Python 3 ou outro servidor HTTP estático; navegador atualizado.
 
 ```powershell
 cd biya-landing
 python -m http.server 8000 --bind 127.0.0.1
 ```
 
-Abrir `http://127.0.0.1:8000`. Os arquivos usam **ES Modules**, portanto não abra `index.html` diretamente com `file://` (restrições de segurança do navegador).
+Abra `http://127.0.0.1:8000`.
 
-## Estrutura
+## Testes
 
-```text
-biya-landing/
-├── index.html
-├── assets/{artwork,avatars,streams}/
-├── src/css/{tokens,base,layout,components,motion}.css
-├── src/js/{main,state,i18n,world,gallery,navigation}.js
-├── src/data/{artworks,media}.js
-├── src/data/translations/{pt-BR,en}.js
-├── tests/
-├── docs/
-└── README.md
+```powershell
+python -m unittest discover -s tests
+python tests/browser_smoke.py
 ```
 
-## Recursos
-
-- **Crystal/Ghost:** modos de direção de arte, não histórias canônicas ou biografias da Biya. Botões e tecla **G** alternam o modo quando o foco não está em um campo editável ou modal.
-- **Galeria:** navegação por botões, indicadores, setas dentro do componente e gesto horizontal em telas de toque. `dialog` nativo com fechamento por Escape e botão.
-- **Idiomas exclusivos:** português do Brasil (`pt-BR`) e inglês (`en`). O idioma ativo cobre navegação, obras, elementos dinâmicos, documentos e atributos ARIA. Preferência salva quando o navegador permitir.
-- **Responsividade:** adaptação para telas pequenas e grandes, com opção de movimento reduzido.
-- **Sem dependências externas no código JavaScript:** projeto estático leve.
-
-## Conteúdo e edição
-
-- Dados e caminhos das obras: `src/data/artworks.js` (títulos/descrições em `src/data/translations/`).
-- Dados das transmissões: `src/data/media.js`. **As URLs de vídeos individuais ainda não foram verificadas; os cartões levam ao canal**, de forma intencional e explícita.
-- Cópias de interface e descrições: `src/data/translations/pt-BR.js` e `en.js`. Uma mesma chave precisa existir nos dois idiomas. Não inserir HTML arbitrário em conteúdo remoto.
-- Cores e tokens: `src/css/tokens.css`; padrões comuns: `base.css`; geometria responsiva: `layout.css`; controles: `components.css`; movimento: `motion.css`.
-
-## Validação e publicação
-
-1. O site usa `noindex, nofollow` durante a revisão. **Isso não é controle de privacidade**. Nunca publicar conteúdo restrito em repositório ou hospedagem pública.
-2. A identidade oficial e a publicação exigem aprovação da Biya. Não inventar lore, preferências ou dados biográficos.
-3. Todos os 19 recursos de imagem foram derivados da fonte anexada sem gerar novas artes. Escopo de autorização, direitos e créditos finais precisam ser documentados **individualmente**.
-4. Nomes de algumas obras são **rótulos editoriais provisórios**, não títulos oficiais. Consulte `docs/CONTENT_CHECKLIST.md`.
-5. Conferir links e vídeos antes do lançamento; abrir a revisão em uma branch dedicada e fazer testes manuais/automatizados.
-6. Para executar verificações: `python -m unittest discover -s tests` e `python tests/browser_smoke.py` (segundo comando requer `playwright` e Chromium).
-7. Remover `noindex, nofollow` somente após aprovação e testes finais, em configuração de publicação controlada.
-
-Arquitetura, decisões e critérios de aceite em `docs/ARCHITECTURE.md` e `docs/TEST_PLAN.md`.
+O segundo teste requer Playwright e Chromium.
