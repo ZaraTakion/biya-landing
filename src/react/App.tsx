@@ -273,32 +273,24 @@ function Portal({
         </div>
       </div>
 
-      <div className="art-stage" id="art-stage" aria-label={t.stageAria} data-reveal>
+      <div className="art-stage" id="art-stage" aria-label={t.stageAria} data-world={world} data-reveal>
         <div className="stage-shadow" aria-hidden="true" />
         <div className="stage-shape stage-shape-a" aria-hidden="true" />
         <div className="stage-shape stage-shape-b" aria-hidden="true" />
         <div className="stage-inner">
+          {/* Render only the selected portrait: stacked hidden image frames used
+              to intercept the mobile layout and leave an empty stage. */}
           <ProtectedImage
-            id="stage-crystal"
+            key={world}
+            id={world === 'crystal' ? 'stage-crystal' : 'stage-ghost'}
             className="stage-visual"
-            src="/assets/avatars/crystal.webp"
-            alt={t.crystalAlt}
-            width={768}
-            height={1280}
+            src={world === 'crystal' ? '/assets/avatars/crystal.webp' : '/assets/avatars/ghost.webp'}
+            alt={world === 'crystal' ? t.crystalAlt : t.ghostAlt}
+            width={world === 'crystal' ? 768 : 1700}
+            height={world === 'crystal' ? 1280 : 1160}
+            loading="eager"
             fetchPriority="high"
             decoding="async"
-            aria-hidden={world !== 'crystal'}
-          />
-          <ProtectedImage
-            id="stage-ghost"
-            className="stage-visual"
-            src="/assets/avatars/ghost.webp"
-            alt={t.ghostAlt}
-            width={1700}
-            height={1160}
-            fetchPriority="low"
-            decoding="async"
-            aria-hidden={world !== 'ghost'}
           />
         </div>
         <span className="stage-corner corner-top">{world === 'crystal' ? 'CRYSTAL WORLD' : 'GHOST WORLD'}</span>
