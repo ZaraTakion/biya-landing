@@ -2,7 +2,7 @@
 export const strings = {
   "language.group": "Language",
   "skip": "Skip to content",
-  "preview": "WORK IN PROGRESS",
+  "preview": "CRYSTAL × GHOST / PARALLEL WORLDS",
   "independent": "BIYA / ARTIST & VTUBER",
   "nav.aria": "Main navigation",
   "rail.aria": "Chapter navigation",
@@ -38,7 +38,7 @@ export const strings = {
   "gallery.dots.aria": "Select artwork",
   "gallery.swipe": "SWIPE / ◀ ▶",
   "archive.footer1": "A SELECTION FROM BIYA’S COLLECTION",
-  "archive.footer2": "TITLES AND CREDITS UNDER REVIEW",
+  "archive.footer2": "ARTWORK AND VISUALS AUTHORIZED FOR THE SITE",
   "intermission.aria": "Transition between worlds",
   "intermission.label": "THE OTHER SIDE",
   "intermission.title": "Art in many forms.<br>Expression in every detail.",
@@ -61,9 +61,9 @@ export const strings = {
   "footer.title": "BIYA’S ART, CHARACTERS<br>AND EXPERIENCES",
   "footer.back.aria": "Back to the beginning",
   "footer.back": "↑ BACK TO PORTAL",
-  "footer.study": "BIYA / PARALLEL WORLDS · PRE-LAUNCH",
-  "footer.art": "ARTWORK: MATERIALS PROVIDED FOR REVIEW · CREDITS PENDING",
-  "footer.design": "CONTENT AND RELEASE SUBJECT TO BIYA’S APPROVAL",
+  "footer.study": "BIYA / PARALLEL WORLDS",
+  "footer.art": "ARTWORK & VISUALS · RIGHTS PRESERVED",
+  "footer.design": "PUBLICATION AUTHORIZED BY BIYA",
   "rail.archive": "ARCHIVE",
   "rail.signal": "SIGNAL",
   "rail.about": "ABOUT",
@@ -72,19 +72,19 @@ export const strings = {
   "dialog.close.aria": "Close enlarged view",
   "dialog.close": "✕ CLOSE",
   "dialog.image.alt": "Enlarged art by Biya",
-  "meta.description": "A little place for Biya’s art, characters, streams and her universe. 💜👻",
+  "meta.description": "Art, characters, streams and Biya’s Crystal × Ghost worlds. 💜👻",
   "signal.stream1": "01 / STREAM ARCHIVE",
   "signal.stream2": "02 / STREAM ARCHIVE",
   "signal.stream3": "03 / STREAM ARCHIVE",
   "gallery.announce": "Artwork {index} of {total}: {title}",
   "world.announce": "Crystal visual selected",
-  "document.title": "💎 BIYA — Art, characters & VTuber ✨",
+  "document.title": "💎 BIYA — Parallel Worlds ✦",
   "switch.crystal": "Crystal",
   "switch.ghost": "Ghost",
   "world.announce.crystal": "Crystal mode selected.",
   "world.announce.ghost": "Ghost mode selected.",
   "nav.artworks": "Artworks",
-  "gallery.credit": "Individual credits pending verification",
+  "gallery.credit": "Copyright and credits preserved",
   "social.x": "Visit X profile",
   "social.yt": "Watch videos on YouTube",
   "social.vgen": "Explore portfolio on VGen",
@@ -95,7 +95,7 @@ export const strings = {
   "about.signal": "SIGNAL / 004",
   "gallery.serial": "ARCHIVE / BIYA_YU",
   "world.number.prefix": "WORLD_0",
-  "meta.locale": "en_US"
+  "footer.policy": "ARTWORK POLICY",\n  "meta.locale": "en_US"
 };
 export const worlds = {
   "crystal": {
@@ -116,7 +116,7 @@ export const artworkCopy = [
     "tag": "ILLUSTRATION / OC",
     "title": "Sweet Reverie",
     "alt": "Biya in a pink composition with sweets and flowers",
-    "desc": "Delicate scene with roses and sweets. Temporary display title."
+    "desc": "A delicate scene with roses, sweets and the character’s visual identity."
   },
   {
     "tag": "WARDROBE / ALT OUTFITS",
