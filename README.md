@@ -28,11 +28,11 @@ Os dois mundos são tratados como estados visuais completos, não como uma simpl
 
 Minijogo React + Canvas integrado ao universo da Biya.
 
-O jogador alterna entre **Crystal** e **Ghost** para sincronizar com os sinais que chegam. Acertos aumentam combo e pontuação; três erros encerram o sinal. O recorde é salvo localmente quando o navegador permite.
+O jogador alterna entre **Crystal** e **Ghost** para sincronizar com os sinais que chegam. Acertos aumentam combo e pontuação; corações brancos raros concedem bônus nos dois mundos e três erros encerram o sinal. O recorde é salvo localmente quando o navegador permite.
 
 ## Easter Egg
 
-Existe uma interação escondida inspirada no tom público da Biya: digitar **BIYA** — ou descobrir a interação secreta no wordmark — ativa uma pequena “frequência branca” com corações.
+Existe uma interação escondida inspirada no tom público da Biya: digitar **BIYA** — ou descobrir a interação secreta no wordmark — ativa uma pequena “frequência branca” com corações. O diálogo fecha com Escape, mantém o foco do teclado e devolve o foco ao acionador.
 
 ## Proteção das artes
 
