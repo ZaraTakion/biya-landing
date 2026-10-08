@@ -724,3 +724,52 @@ body[data-world="ghost"] .about-picture-caption { color: #e9d6ee; }
   .signal-summary { background: #fff; }
   body[data-world="ghost"] .signal-summary { background: #261832; }
 }
+
+/* The dual-world idea changes art direction, not merely the hex colors.
+   Crystal reads left-to-right like a daylight art journal.
+   Ghost places its visual apparition first, followed by a quieter serif voice. */
+body[data-world="ghost"] .portal h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(110px, 12.7vw, 223px);
+  font-weight: 800;
+  letter-spacing: -.105em;
+  line-height: .93;
+}
+body[data-world="ghost"] .hero-subtitle {
+  font-size: clamp(34px, 3.8vw, 64px);
+  line-height: 1.04;
+}
+body[data-world="ghost"] .art-stage::before {
+  border-radius: 35% 65% 60% 40% / 48% 40% 60% 52%;
+  transform: translate(-50%, -50%) rotate(-12deg);
+}
+@media (min-width: 1051px) {
+  body[data-world="ghost"] .portal {
+    grid-template-columns: minmax(0, 1.07fr) minmax(0, .93fr);
+  }
+  body[data-world="ghost"] .portal-copy {
+    grid-column: 2;
+    grid-row: 1;
+    padding-left: 5%;
+  }
+  body[data-world="ghost"] .art-stage {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  body[data-world="ghost"] .corner-top { left: 14%; }
+  .signal-rail { grid-template-columns: 1.17fr 1fr 1fr; }
+  body[data-world="ghost"] .signal-rail { grid-template-columns: 1fr 1fr 1.17fr; }
+  body[data-world="ghost"] .broadcast-three { transform: translateY(-16px); }
+}
+@media (max-width: 720px) {
+  body[data-world="ghost"] .portal h1 {
+    font-size: clamp(75px, 19vw, 135px);
+  }
+  body[data-world="ghost"] .hero-subtitle {
+    font-size: clamp(31px, 7vw, 49px);
+  }
+  body[data-world="ghost"] .broadcast-three { transform: none; }
+}
+@media (max-width: 350px) {
+  body[data-world="ghost"] .portal h1 { font-size: 70px; }
+}
