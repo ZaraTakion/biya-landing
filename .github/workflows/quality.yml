@@ -1,0 +1,42 @@
+name: Biya Five-Battery Quality Gate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  five-battery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install
+        run: npm install
+
+      - name: Battery 1 — TypeScript
+        run: npm run battery:1
+
+      - name: Battery 2 — Unit tests
+        run: npm run battery:2
+
+      - name: Battery 3 — Production build
+        run: npm run battery:3
+
+      - name: Battery 4 — Artwork/security audit
+        run: npm run battery:4
+
+      - name: Battery 5 — Release artifact audit
+        run: npm run battery:5
