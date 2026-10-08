@@ -1,4 +1,8 @@
-/** Source: the ZIP supplied by Zara. Titles are provisional and NOT canonical. */
+/**
+ * Source: the asset package supplied for the Biya project.
+ * Biya authorized display of these materials on this website.
+ * Display titles remain editorial labels; copyright stays with the applicable creators/rightsholders.
+ */
 export const artworks = [
   {
     "id": "work-01",
@@ -7,7 +11,8 @@ export const artworks = [
     "height": 2048,
     "titleVerified": false,
     "creditVerified": false,
-    "sourceUrl": null
+    "sourceUrl": null,
+    "siteUseAuthorized": true
   },
   {
     "id": "work-02",
@@ -16,7 +21,8 @@ export const artworks = [
     "height": 769,
     "titleVerified": false,
     "creditVerified": false,
-    "sourceUrl": null
+    "sourceUrl": null,
+    "siteUseAuthorized": true
   },
   {
     "id": "work-03",
@@ -25,7 +31,8 @@ export const artworks = [
     "height": 1160,
     "titleVerified": false,
     "creditVerified": false,
-    "sourceUrl": null
+    "sourceUrl": null,
+    "siteUseAuthorized": true
   },
   {
     "id": "work-04",
@@ -34,7 +41,8 @@ export const artworks = [
     "height": 1280,
     "titleVerified": false,
     "creditVerified": false,
-    "sourceUrl": null
+    "sourceUrl": null,
+    "siteUseAuthorized": true
   },
   {
     "id": "work-05",
@@ -43,7 +51,8 @@ export const artworks = [
     "height": 1700,
     "titleVerified": false,
     "creditVerified": false,
-    "sourceUrl": null
+    "sourceUrl": null,
+    "siteUseAuthorized": true
   },
   {
     "id": "work-06",
@@ -52,6 +61,7 @@ export const artworks = [
     "height": 546,
     "titleVerified": false,
     "creditVerified": false,
-    "sourceUrl": null
+    "sourceUrl": null,
+    "siteUseAuthorized": true
   }
 ];
