@@ -37,7 +37,7 @@ export default function EasterEgg({ language }: { language: Language }) {
     <div className="easter-layer" role="dialog" aria-modal="true" aria-label={t.easterEgg}>
       <div className="heart-rain" aria-hidden="true">
         {Array.from({ length: 18 }, (_, index) => (
-          <span key={index} style={{ '--heart-i': index } as React.CSSProperties}>♡</span>
+          <span key={index}>♡</span>
         ))}
       </div>
       <div className="easter-card">
