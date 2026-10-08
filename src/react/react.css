@@ -1,0 +1,325 @@
+/* React V5 integration layer — preserves Parallel Worlds composition. */
+
+.protected-frame {
+  position: relative;
+  display: block;
+  max-width: 100%;
+}
+.protected-art {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+.rights-badge {
+  position: absolute;
+  z-index: 6;
+  right: 10px;
+  bottom: 10px;
+  padding: 5px 8px;
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 999px;
+  background: rgb(18 14 28 / 62%);
+  color: rgb(255 255 255 / 78%);
+  font: 800 7px/1 Arial,sans-serif;
+  letter-spacing: .12em;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+}
+.broadcast .rights-badge { display: none; }
+
+.stage-inner > .protected-frame {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+.stage-inner .stage-visual {
+  inset: 0;
+  margin: auto;
+}
+.stage-inner .rights-badge {
+  right: 8%;
+  bottom: 8%;
+}
+
+.art-showcase > .protected-frame {
+  width: 87%;
+  height: min(535px, 90%);
+  display: grid;
+  place-items: center;
+  z-index: 1;
+}
+.art-showcase > .protected-frame > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 15px #0e0a1688);
+}
+
+.about-art > .protected-frame {
+  height: 92%;
+  width: 92%;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+}
+.about-art > .protected-frame img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  mix-blend-mode: multiply;
+  mask-image: linear-gradient(to bottom,black 85%,transparent 100%);
+}
+.about-art .rights-badge { bottom: 28px; right: 18px; }
+
+.broadcast-thumb > .protected-frame,
+.broadcast-thumb > .protected-frame img {
+  width: 100%;
+  height: 100%;
+}
+
+.react-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 220;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgb(16 12 25 / 86%);
+  backdrop-filter: blur(12px);
+}
+.react-dialog {
+  width: min(1100px, 96vw);
+  max-height: 94vh;
+  overflow: auto;
+  padding: 20px;
+  border: 1px solid #86769b;
+  background: #17131e;
+  color: #fff;
+  box-shadow: 0 20px 90px #0009;
+}
+.react-dialog .protected-frame {
+  max-height: 77vh;
+  display: grid;
+  place-items: center;
+}
+.react-dialog img {
+  max-width: 80vw;
+  max-height: 72vh;
+  object-fit: contain;
+}
+.dialog-rights {
+  margin: 10px 0 0;
+  color: #ae9fba;
+  font-size: 10px;
+  letter-spacing: .08em;
+}
+
+.pulse-section {
+  position: relative;
+  overflow: hidden;
+  padding: 110px 7% 120px;
+  background:
+    radial-gradient(circle at 16% 40%, rgb(225 190 220 / 50%), transparent 28%),
+    radial-gradient(circle at 83% 35%, rgb(181 182 232 / 48%), transparent 31%),
+    #efedf6;
+  color: #241f31;
+}
+.pulse-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to right, rgb(116 100 149 / 7%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(116 100 149 / 7%) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at center, black, transparent 82%);
+}
+.pulse-layout {
+  position: relative;
+  max-width: 1490px;
+  margin: 58px auto 0;
+  display: grid;
+  grid-template-columns: minmax(260px,.62fr) minmax(0,1.38fr);
+  gap: clamp(30px,5vw,80px);
+  align-items: center;
+}
+.pulse-copy h2 {
+  margin: 10px 0 18px;
+  font-size: clamp(54px,7vw,108px);
+  line-height: .86;
+  letter-spacing: -.09em;
+}
+.pulse-copy > p:not(.mini-label) {
+  max-width: 460px;
+  color: #6e6678;
+  line-height: 1.72;
+}
+.pulse-help {
+  padding-top: 16px;
+  border-top: 1px solid #c9c2d2;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .06em;
+}
+.pulse-machine {
+  position: relative;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #c6bdd2;
+  border-radius: 18px;
+  background: rgb(255 255 255 / 72%);
+  box-shadow: 0 24px 70px rgb(80 54 102 / 12%);
+  transition: background .45s ease, border-color .45s ease, box-shadow .45s ease;
+}
+.pulse-machine[data-world="ghost"] {
+  background: rgb(28 20 39 / 92%);
+  border-color: #73548c;
+  box-shadow: 0 24px 80px rgb(44 19 63 / 28%);
+}
+.pulse-hud {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 8px;
+  padding: 2px 4px 12px;
+}
+.pulse-hud div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.pulse-hud span {
+  color: #81768d;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+.pulse-hud strong {
+  color: #292335;
+  font-size: 19px;
+}
+.pulse-machine[data-world="ghost"] .pulse-hud strong { color: #f1e6f7; }
+.pulse-machine[data-world="ghost"] .pulse-hud span { color: #baa4c8; }
+.pulse-canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.85 / 1;
+  border: 1px solid #4e4360;
+  border-radius: 12px;
+  cursor: pointer;
+  touch-action: manipulation;
+  outline-offset: 4px;
+}
+.pulse-button {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 10px;
+  border: 0;
+  border-radius: 8px;
+  background: #272234;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .14em;
+  transition: transform 240ms var(--motion-signature), background .3s ease;
+}
+.pulse-machine[data-world="ghost"] .pulse-button {
+  background: #d6b3ec;
+  color: #281c33;
+}
+.pulse-button:hover { transform: translateY(-2px); }
+
+.easter-trigger {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  cursor: default;
+}
+.easter-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 24px;
+  background: radial-gradient(circle, rgb(93 63 116 / 18%), rgb(15 11 21 / 86%));
+  backdrop-filter: blur(12px);
+}
+.easter-card {
+  position: relative;
+  z-index: 2;
+  width: min(460px, 92vw);
+  padding: 36px;
+  border: 1px solid #d7c3e7;
+  background: #fbf8fd;
+  color: #272034;
+  text-align: center;
+  box-shadow: 0 30px 110px #0007;
+}
+.easter-sigil {
+  display: block;
+  margin-bottom: 16px;
+  color: #aa86ca;
+  font-size: 42px;
+}
+.easter-card strong {
+  display: block;
+  font-size: clamp(24px,5vw,40px);
+  letter-spacing: -.05em;
+}
+.easter-card p {
+  color: #786d82;
+  font-size: 12px;
+  letter-spacing: .12em;
+}
+.easter-card button {
+  margin-top: 16px;
+  padding: 11px 18px;
+  border: 1px solid #4e3c5c;
+  background: #261d30;
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+.heart-rain span {
+  --x: calc((var(--heart-i) * 53) % 100);
+  position: absolute;
+  left: calc(var(--x) * 1%);
+  top: -12%;
+  color: #fff;
+  font-size: calc(16px + (var(--heart-i) % 5) * 6px);
+  animation: heart-fall calc(3.8s + (var(--heart-i) % 4) * .7s) linear calc((var(--heart-i) % 6) * -.45s) infinite;
+}
+@keyframes heart-fall {
+  from { transform: translate3d(0,-5vh,0) rotate(0); opacity: 0; }
+  14% { opacity: 1; }
+  to { transform: translate3d(calc((var(--heart-i) % 2) * 35px - 16px),118vh,0) rotate(250deg); opacity: 0; }
+}
+
+@media (max-width: 900px) {
+  .pulse-layout { grid-template-columns: 1fr; }
+  .pulse-copy { max-width: 680px; }
+}
+@media (max-width: 720px) {
+  .pulse-section { padding: 82px 5% 88px; }
+  .pulse-layout { margin-top: 34px; }
+  .pulse-hud strong { font-size: 16px; }
+  .art-showcase > .protected-frame { width: 92%; height: 360px; }
+  .about-art > .protected-frame { height: 100%; width: 100%; }
+  .rights-badge { font-size: 6px; }
+}
+@media (max-width: 420px) {
+  .pulse-hud { grid-template-columns: repeat(2,1fr); }
+  .pulse-canvas { aspect-ratio: 1.3 / 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heart-rain span { animation: none !important; display: none; }
+  .pulse-button { transition: none !important; }
+}
