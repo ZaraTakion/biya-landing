@@ -12,7 +12,7 @@
     "battery:1": "npm run typecheck",
     "battery:2": "vitest run tests/react",
     "battery:3": "npm run build",
-    "battery:4": "node scripts/security-audit.mjs",
+    "battery:4": "npm audit --omit=dev --audit-level=high && node scripts/security-audit.mjs",
     "battery:5": "node scripts/release-audit.mjs",
     "verify:five": "npm run battery:1 && npm run battery:2 && npm run battery:3 && npm run battery:4 && npm run battery:5",
     "deploy": "npm run verify:five && wrangler deploy"
@@ -30,5 +30,8 @@
     "vitest": "5.0.3",
     "wrangler": "^4.148.0",
     "@types/node": "26.6.4"
+  },
+  "engines": {
+    "node": ">=22.12 <25"
   }
 }
