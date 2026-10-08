@@ -412,7 +412,7 @@ function Archive({ language }: { language: Language }) {
 
       <div className="archive-overview" aria-label={language === 'pt' ? 'Visão geral do acervo' : 'Archive overview'} data-reveal>
         <div className="archive-overview-head">
-          <span>{language === 'pt' ? 'VISÃO GERAL / 06 OBRAS' : 'OVERVIEW / 06 WORKS'}</span>
+          <span>{language === 'pt' ? `VISÃO GERAL / ${artworks.length} OBRAS` : `OVERVIEW / ${artworks.length} WORKS`}</span>
           <span>{language === 'pt' ? 'ESCOLHA DIRETAMENTE' : 'CHOOSE DIRECTLY'}</span>
         </div>
         <div className="archive-thumbs">
@@ -425,7 +425,7 @@ function Archive({ language }: { language: Language }) {
               aria-pressed={thumbIndex === index}
               onClick={() => {
                 show(thumbIndex);
-                document.querySelector('.gallery-experience')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                document.querySelector('.gallery-experience')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
               }}
             >
               <img
