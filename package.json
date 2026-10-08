@@ -15,7 +15,8 @@
     "battery:4": "npm audit --omit=dev --audit-level=high && node scripts/security-audit.mjs",
     "battery:5": "node scripts/release-audit.mjs",
     "verify:five": "npm run battery:1 && npm run battery:2 && npm run battery:3 && npm run battery:4 && npm run battery:5",
-    "deploy": "npm run verify:five && wrangler deploy"
+    "deploy": "npm run verify:five && wrangler deploy",
+    "test:responsive": "playwright test --config=playwright.config.ts"
   },
   "dependencies": {
     "react": "19.3.0",
@@ -29,7 +30,8 @@
     "vite": "8.3.3",
     "vitest": "5.0.3",
     "wrangler": "^4.148.0",
-    "@types/node": "26.6.4"
+    "@types/node": "26.6.4",
+    "@playwright/test": "1.63.0"
   },
   "engines": {
     "node": ">=22.12 <25"
