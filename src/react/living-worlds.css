@@ -1,0 +1,267 @@
+/* BIYA V6.2 — Living Worlds
+   CSS-only ambience: original illustrations remain untouched.
+   Motion budget: transform/opacity, three fragments, no video/canvas/particles. */
+.portal { isolation: isolate; }
+.portal-copy, .art-stage { position: relative; }
+.portal .art-stage { z-index: 2; }
+.portal .portal-serial, .portal .portal-bottom { z-index: 4; }
+
+.world-scene {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 1;
+  animation: biya-scene-arrive 800ms cubic-bezier(.2,.7,.2,1) both;
+}
+.world-scene > span { position: absolute; pointer-events: none; }
+.world-scene .scene-light {
+  top: 9%;
+  left: 43%;
+  width: 75%;
+  height: 88%;
+  opacity: .72;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center,
+    rgba(255,250,255,.72) 0%,
+    rgba(230,186,224,.27) 34%,
+    rgba(204,198,246,.12) 54%, transparent 73%);
+  transform: translate3d(
+    calc(var(--pointer-x, 0) * 11px),
+    calc(var(--pointer-y, 0) * 8px), 0);
+  transition: transform 540ms ease;
+}
+.world-scene .scene-ring {
+  width: min(46vw, 720px);
+  aspect-ratio: 1;
+  top: 16%;
+  right: 2%;
+  border-radius: 50%;
+  border: 1px solid rgba(145,91,168,.18);
+  box-shadow: 0 0 0 32px rgba(214,173,224,.035),
+              0 0 0 84px rgba(214,173,224,.018);
+  opacity: .78;
+  transform: rotate(-12deg);
+}
+.world-scene .scene-fragment {
+  width: clamp(14px,1.8vw,26px);
+  aspect-ratio: 1;
+  background: linear-gradient(135deg,
+    rgba(255,255,255,.82), rgba(210,178,229,.15));
+  border: 1px solid rgba(172,120,191,.28);
+  clip-path: polygon(50% 0, 100% 48%, 50% 100%, 0 52%);
+  box-shadow: 0 4px 16px rgba(140,90,162,.07);
+  opacity: .6;
+  animation: biya-fragment-float 10s ease-in-out infinite alternate;
+}
+.world-scene .scene-fragment-one { top: 19%; right: 14%; animation-delay: -2s; }
+.world-scene .scene-fragment-two { top: 59%; right: 5%; width: 15px; animation-delay: -7s; }
+.world-scene .scene-fragment-three { bottom: 16%; left: 53%; width: 11px; animation-delay: -4s; }
+
+body[data-world="ghost"] .world-scene .scene-light {
+  left: -22%;
+  top: 0;
+  width: 88%;
+  height: 99%;
+  opacity: .76;
+  background: radial-gradient(ellipse at 48% 52%,
+    rgba(168,99,207,.35) 0%,
+    rgba(97,46,144,.23) 34%,
+    rgba(67,35,91,.09) 57%, transparent 76%);
+}
+body[data-world="ghost"] .world-scene .scene-ring {
+  left: -6%; right: auto; top: 11%;
+  border-radius: 40% 60% 50% 50% / 52% 42% 58% 48%;
+  border-color: rgba(205,151,238,.25);
+  box-shadow: 0 0 0 32px rgba(165,93,211,.045),
+              0 0 0 88px rgba(165,93,211,.018);
+  transform: rotate(14deg);
+}
+body[data-world="ghost"] .world-scene .scene-fragment {
+  width: 27px;
+  background: radial-gradient(circle, rgba(229,185,245,.4),rgba(147,85,200,.18) 37%,transparent 72%);
+  border: 0;
+  border-radius: 50%;
+  clip-path: none;
+  box-shadow: 0 0 23px rgba(174,105,213,.18);
+  opacity: .55;
+  animation-name: biya-ghost-wisp;
+}
+body[data-world="ghost"] .world-scene .scene-fragment-one { left: 10%; right: auto; top: 17%; }
+body[data-world="ghost"] .world-scene .scene-fragment-two { left: 42%; right: auto; top: 70%; }
+body[data-world="ghost"] .world-scene .scene-fragment-three { left: 6%; bottom: 12%; }
+
+@keyframes biya-scene-arrive {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes biya-fragment-float {
+  from { translate: 0 0; rotate: -9deg; opacity: .36; }
+  to { translate: 4px -15px; rotate: 8deg; opacity: .72; }
+}
+@keyframes biya-ghost-wisp {
+  from { translate: -4px 8px; scale: .92; opacity: .32; }
+  to { translate: 9px -13px; scale: 1.13; opacity: .62; }
+}
+
+/* The new world's words arrive after the atmosphere; selector buttons keep focus. */
+.portal .hero-kicker,
+.portal .hero-subtitle,
+.portal .hero-description {
+  animation: biya-copy-arrive 440ms cubic-bezier(.22,1,.36,1) both;
+}
+.portal .hero-subtitle { animation-delay: 45ms; }
+.portal .hero-description { animation-delay: 80ms; }
+@keyframes biya-copy-arrive {
+  from { opacity: .15; transform: translateY(9px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Make the worlds tactile without shaking or obscuring the illustration. */
+.world-buttons { position: relative; overflow: hidden; }
+.world-choice {
+  position: relative;
+  isolation: isolate;
+  transition: background-color 240ms ease, color 240ms ease, box-shadow 240ms ease;
+}
+.world-choice .world-indicator {
+  transition: box-shadow 240ms ease, transform 240ms ease;
+}
+.world-choice.is-active .world-indicator {
+  box-shadow: 0 0 0 4px rgba(225,172,236,.18);
+  transform: scale(1.14);
+}
+.button-enter { position: relative; isolation: isolate; overflow: hidden; }
+.button-enter::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(108deg, transparent 28%, rgba(255,255,255,.13) 48%, transparent 66%);
+  transform: translateX(-120%);
+  transition: transform 680ms cubic-bezier(.2,.7,.2,1);
+  pointer-events: none;
+}
+.button-enter:focus-visible { outline: 3px solid #d9a3e6; outline-offset: 5px; }
+@media (hover: hover) and (pointer: fine) {
+  .button-enter:hover::before { transform: translateX(120%); }
+  .world-choice:not(.is-active):hover .world-indicator {
+    transform: scale(1.2);
+    box-shadow: 0 0 0 4px rgba(160,101,180,.16);
+  }
+}
+
+/* Each artwork opens into its own quiet tonal environment.
+   These are CSS backgrounds, not modifications to any underlying art file. */
+.gallery-experience[data-art-index="0"] .art-showcase {
+  background: radial-gradient(ellipse at 50% 42%, #956785 0%, #54415a 58%, #282032 100%);
+}
+.gallery-experience[data-art-index="1"] .art-showcase {
+  background: radial-gradient(ellipse at 50% 42%, #7a6382 0%, #4a3859 60%, #292039 100%);
+}
+.gallery-experience[data-art-index="2"] .art-showcase {
+  background: radial-gradient(ellipse at 49% 45%, #70468a 0%, #33234e 57%, #171225 100%);
+}
+.gallery-experience[data-art-index="3"] .art-showcase {
+  background: radial-gradient(ellipse at 50% 40%, #9188b0 0%, #5e547b 59%, #29273e 100%);
+}
+.gallery-experience[data-art-index="4"] .art-showcase {
+  background: radial-gradient(ellipse at 50% 40%, #8d719e 0%, #554065 58%, #2a203a 100%);
+}
+.gallery-experience[data-art-index="5"] .art-showcase {
+  background: radial-gradient(ellipse at 50% 42%, #80728c 0%, #483a5a 58%, #231b32 100%);
+}
+/* A keyed React image and caption replay only on deliberate selection. */
+.gallery-experience .art-showcase > .protected-frame {
+  animation: biya-art-arrive 490ms cubic-bezier(.22,1,.36,1) both;
+}
+.gallery-experience .gallery-title-area {
+  animation: biya-caption-arrive 420ms cubic-bezier(.22,1,.36,1) both;
+}
+.gallery-progress {
+  position: relative;
+  height: 2px;
+  width: 100%;
+  overflow: hidden;
+  background: rgba(225,199,234,.2);
+}
+.gallery-progress > span {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: linear-gradient(90deg, #bd8ed1, #f0d6f4);
+  transform-origin: left center;
+  transition: transform 420ms cubic-bezier(.22,1,.36,1);
+}
+.gallery-experience[data-art-index="0"] .gallery-progress > span { transform: scaleX(.1666667); }
+.gallery-experience[data-art-index="1"] .gallery-progress > span { transform: scaleX(.3333333); }
+.gallery-experience[data-art-index="2"] .gallery-progress > span { transform: scaleX(.5); }
+.gallery-experience[data-art-index="3"] .gallery-progress > span { transform: scaleX(.6666667); }
+.gallery-experience[data-art-index="4"] .gallery-progress > span { transform: scaleX(.8333333); }
+.gallery-experience[data-art-index="5"] .gallery-progress > span { transform: scaleX(1); }
+@keyframes biya-art-arrive {
+  from { opacity: .25; transform: translateY(9px) scale(.975); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes biya-caption-arrive {
+  from { opacity: .35; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (hover:hover) and (pointer:fine) {
+  .archive-thumbs button {
+    transition: border-color 220ms ease, background-color 220ms ease, transform 280ms ease;
+  }
+  .archive-thumbs button:hover {
+    transform: translateY(-4px);
+    border-color: #f0d1ef;
+  }
+}
+/* A touch device should never move the artwork out of its stable layout flow. */
+@media (max-width: 720px) {
+  .world-scene .scene-light {
+    left: 9%; top: 37%; width: 95%; height: 58%;
+    transform: none;
+  }
+  .world-scene .scene-ring {
+    width: min(91vw, 440px); right: -10%; top: 42%;
+  }
+  .world-scene .scene-fragment-one { right: 9%; top: 61%; }
+  .world-scene .scene-fragment-two,
+  .world-scene .scene-fragment-three { display: none; }
+  body[data-world="ghost"] .world-scene .scene-light {
+    left: -20%; top: 38%; width: 125%; height: 60%;
+  }
+  body[data-world="ghost"] .world-scene .scene-ring {
+    left: -14%; right: auto; top: 46%;
+  }
+  .world-scene .scene-fragment { animation: none; }
+  .gallery-experience .art-showcase > .protected-frame {
+    animation-name: biya-art-arrive-mobile;
+    animation-duration: 300ms;
+  }
+  @keyframes biya-art-arrive-mobile {
+    from { opacity: .2; } to { opacity: 1; }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .world-scene,
+  .world-scene .scene-fragment,
+  .portal .hero-kicker,
+  .portal .hero-subtitle,
+  .portal .hero-description,
+  .gallery-experience .art-showcase > .protected-frame,
+  .gallery-experience .gallery-title-area {
+    animation: none !important;
+  }
+  .world-scene .scene-light,
+  .world-choice, .world-choice .world-indicator,
+  .button-enter::before, .gallery-progress > span,
+  .archive-thumbs button { transition: none !important; }
+  .button-enter::before { display: none; }
+}
+@media (prefers-contrast: more), (forced-colors: active) {
+  .world-scene .scene-fragment, .world-scene .scene-ring,
+  .world-scene .scene-light { display: none; }
+  .gallery-progress { border: 1px solid currentColor; }
+}
