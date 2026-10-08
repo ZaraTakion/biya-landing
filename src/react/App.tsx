@@ -122,14 +122,9 @@ function Header({
 
   return (
     <>
-      <div className="concept-bar">
-        <span>BIYA / PARALLEL WORLDS</span>
-        <span className="bar-middle">{t.concept}</span>
-        <span>{t.role}</span>
-      </div>
       <header className="header">
         <a aria-label={language === 'pt' ? 'Biya, voltar ao início' : 'Biya, back to start'} className="brand" href="#portal">
-          B<span aria-hidden="true">✦</span>YA <span className="brand-mark">/ 02</span>
+          B<span aria-hidden="true">✦</span>YA <span className="brand-mark">STUDIO / WORLDS</span>
         </a>
         <nav className="header-nav" aria-label={language === 'pt' ? 'Navegação principal' : 'Main navigation'}>
           {nav.map(([id, label]) => (
@@ -231,17 +226,9 @@ function Portal({
 
   return (
     <section className="portal" id="portal" aria-labelledby="portal-title">
-      <div className="portal-noise" aria-hidden="true" />
-      <div className="portal-grid" aria-hidden="true" />
       <div className="aura aura-left" aria-hidden="true" />
       <div className="aura aura-right" aria-hidden="true" />
-      <div className="world-ambient" aria-hidden="true">
-        {Array.from({ length: 7 }, (_, index) => <i key={index} className={`ambient-node ambient-${(index % 5) + 1}`} />)}
-        <span className="ambient-sigil ambient-sigil-a">✦</span>
-        <span className="ambient-sigil ambient-sigil-b">✧</span>
-        <span className="ambient-sigil ambient-sigil-c">✦</span>
-      </div>
-      <span className="portal-serial" aria-hidden="true">CAP.01 / PORTAL</span>
+      <span className="portal-serial" aria-hidden="true">01 / {world === 'crystal' ? 'LIGHT STUDY' : 'AFTER DARK'}</span>
 
       <div className="portal-copy" data-reveal>
         <div className="section-index">
@@ -314,37 +301,15 @@ function Portal({
             aria-hidden={world !== 'ghost'}
           />
         </div>
-        <div className="stage-sticker">
-          <span className="sticker-symbol" aria-hidden="true">✳</span>
-          <span>BIYA<br />ART<br />STUDIO</span>
-        </div>
         <span className="stage-corner corner-top">{world === 'crystal' ? 'CRYSTAL WORLD' : 'GHOST WORLD'}</span>
         <span className="stage-corner corner-bottom">{w.caption}</span>
-        <span className="stage-vertical" aria-hidden="true">ART / IDENTITY / PARALLEL WORLDS</span>
       </div>
 
       <div className="portal-bottom">
         <span>{language === 'pt' ? 'EXPLORE AS OBRAS' : 'EXPLORE THE ARTWORK'}</span>
-        <span className="bottom-sigil" aria-hidden="true">✧　✦　✧</span>
         <a aria-label={language === 'pt' ? 'Ir para o arquivo de artes' : 'Go to art archive'} href="#archive">↓</a>
       </div>
     </section>
-  );
-}
-
-function Ribbon({ language }: { language: Language }) {
-  const words = language === 'pt'
-    ? ['ILUSTRAÇÃO', 'VTUBER', 'PERSONAGENS & ILUSTRAÇÕES', 'CRYSTAL / GHOST', 'ILUSTRAÇÃO', 'VTUBER']
-    : ['ILLUSTRATION', 'VTUBER', 'CHARACTERS & ILLUSTRATION', 'CRYSTAL / GHOST', 'ILLUSTRATION', 'VTUBER'];
-
-  return (
-    <div className="ribbon" aria-hidden="true">
-      <div className="ribbon-inner">
-        {words.map((word, index) => (
-          <span key={`${word}-${index}`}>{word}{index < words.length - 1 ? '　✳' : ''}</span>
-        ))}
-      </div>
-    </div>
   );
 }
 
@@ -362,7 +327,6 @@ function Archive({ language }: { language: Language }) {
 
   return (
     <section className="archive" id="archive" aria-labelledby="archive-title">
-      <div className="archive-decor" aria-hidden="true">A</div>
       <div className="archive-heading" data-reveal>
         <div>
           <span className="mini-label"><span className="little-cross">✳</span>{t.archiveChapter}</span>
@@ -371,7 +335,6 @@ function Archive({ language }: { language: Language }) {
         <div className="archive-lede">
           <span>{t.archivePre}</span>
           <p>{t.archiveDesc}</p>
-          <span className="archive-lede-arrow">↙</span>
         </div>
       </div>
 
@@ -499,16 +462,6 @@ function Archive({ language }: { language: Language }) {
   );
 }
 
-function Intermission({ language }: { language: Language }) {
-  return (
-    <section className="intermission" aria-label={language === 'pt' ? 'Transição entre universos' : 'Transition between worlds'}>
-      <div className="intermission-ink" aria-hidden="true">{language === 'pt' ? 'O OUTRO LADO' : 'THE OTHER SIDE'}</div>
-      <p data-reveal>{copy[language].intermission}</p>
-      <div className="intermission-symbol" aria-hidden="true">✦</div>
-    </section>
-  );
-}
-
 function Signal({ language }: { language: Language }) {
   const t = copy[language];
 
@@ -523,20 +476,10 @@ function Signal({ language }: { language: Language }) {
         <p>{t.signalDesc}</p>
       </div>
       <div className="signal-summary" data-reveal>
-        <div>
-          <span>{language === 'pt' ? 'ARQUIVO VISUAL' : 'VISUAL ARCHIVE'}</span>
-          <strong>03</strong>
-          <small>{language === 'pt' ? 'recortes de transmissões' : 'stream snapshots'}</small>
-        </div>
-        <div>
-          <span>PARALLEL WORLDS</span>
-          <strong>CRYSTAL / GHOST</strong>
-          <small>{language === 'pt' ? 'duas atmosferas, uma identidade' : 'two atmospheres, one identity'}</small>
-        </div>
+        <span>{language === 'pt' ? 'RECORTES DE LIVES / ARQUIVO VISUAL' : 'STREAM HIGHLIGHTS / VISUAL ARCHIVE'}</span>
         <a href={links.youtube} rel={externalRel} target="_blank">
-          <span>YOUTUBE</span>
-          <strong>@biyaYU ↗</strong>
-          <small>{language === 'pt' ? 'abrir canal oficial' : 'open official channel'}</small>
+          <strong>{language === 'pt' ? 'IR PARA O CANAL DA BIYA' : 'VISIT BIYA’S CHANNEL'} ↗</strong>
+          <small>YOUTUBE / @biyaYU</small>
         </a>
       </div>
       <div className="signal-rail">
@@ -641,30 +584,13 @@ function Footer({ language }: { language: Language }) {
       </div>
       <div className="footer-bottom">
         <span>BIYA / PARALLEL WORLDS</span>
-        <span>{t.protection}</span>
-        <span>{t.authorized}</span>
+        <a href="/art-policy">{t.policy}</a>
         <span>© 2026 BIYA</span>
         <span className="footer-version" title={__BIYA_BUILD_SHA__} aria-label={language === 'pt' ? `Versão publicada: ${__BIYA_BUILD_SHA__.slice(0, 7)}` : `Published version: ${__BIYA_BUILD_SHA__.slice(0, 7)}`}>
           {language === 'pt' ? 'VERSÃO' : 'VERSION'} / {__BIYA_BUILD_SHA__.slice(0, 7)}
         </span>
       </div>
     </footer>
-  );
-}
-
-function RailNav({ language, active }: { language: Language; active: string }) {
-  const labels = language === 'pt'
-    ? [['portal', 'PORTAL'], ['archive', 'ARQUIVO'], ['signal', 'SINAL'], ['game', 'JOGO'], ['about', 'SOBRE']]
-    : [['portal', 'PORTAL'], ['archive', 'ARCHIVE'], ['signal', 'SIGNAL'], ['game', 'GAME'], ['about', 'ABOUT']];
-
-  return (
-    <nav className="rail-nav" aria-label={language === 'pt' ? 'Navegação por capítulos' : 'Chapter navigation'}>
-      {labels.map(([id, label]) => (
-        <a key={id} href={`#${id}`} className={active === id ? 'is-active' : undefined} aria-current={active === id ? 'location' : undefined}>
-          <span className="rail-dot" /><span>{label}</span>
-        </a>
-      ))}
-    </nav>
   );
 }
 
@@ -701,19 +627,12 @@ export default function App() {
       <Header language={language} setLanguage={setLanguage} active={active} />
       <main id="main">
         <Portal language={language} world={world} setWorld={setWorld} />
-        <Ribbon language={language} />
         <Archive language={language} />
-        <Intermission language={language} />
         <Signal language={language} />
         <MiniGame language={language} />
         <About language={language} />
         <Footer language={language} />
       </main>
-      <RailNav language={language} active={active} />
-      <aside className="site-utility" aria-label={language === 'pt' ? 'Direitos e política' : 'Rights and policy'}>
-        <span>© BIYA</span>
-        <a href="/art-policy">{t.policy}</a>
-      </aside>
       <EasterEgg language={language} />
       <p className="sr-only" aria-live="polite" aria-atomic="true">
         {world === 'crystal' ? worlds[language].crystal.caption : worlds[language].ghost.caption}
