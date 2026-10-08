@@ -84,6 +84,14 @@ function Header({
     ['about', t.nav[4]],
   ] as const;
 
+  useEffect(() => {
+    const onEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMenuOpen(false);
+    };
+    addEventListener('keydown', onEscape);
+    return () => removeEventListener('keydown', onEscape);
+  }, []);
+
   return (
     <>
       <div className="concept-bar">
@@ -153,6 +161,10 @@ function Header({
               <small>{id === 'portal' ? '01' : id === 'archive' ? '02' : id === 'signal' ? '03' : id === 'game' ? '04' : '05'}</small>
             </a>
           ))}
+          <a href="/art-policy" onClick={() => setMenuOpen(false)}>
+            <span>{t.policy}</span>
+            <small>06</small>
+          </a>
           <a className="mobile-menu-social" href={links.x} rel={externalRel} target="_blank" onClick={() => setMenuOpen(false)}>
             @BiyA_YU ↗
           </a>
@@ -546,6 +558,11 @@ function About({ language }: { language: Language }) {
         <p className="script-word">{t.aboutScript}</p>
         <h2 id="about-title">{t.aboutTitleA}<br /><em>{t.aboutTitleB}</em></h2>
         <p className="about-description">{t.aboutDesc}</p>
+        <div className="about-facts" aria-label={language === 'pt' ? 'Áreas públicas da Biya' : 'Biya public creative areas'}>
+          <span>ART / CHARACTERS</span>
+          <span>VTUBER / STREAMS</span>
+          <span>COMMISSIONS / VGEN</span>
+        </div>
         <div className="social-table">
           <a href={links.x} rel={externalRel} target="_blank">
             <span>X / TWITTER</span><strong>@BiyA_YU</strong><span>↗</span>
@@ -657,6 +674,10 @@ export default function App() {
         <Footer language={language} />
       </main>
       <RailNav language={language} active={active} />
+      <aside className="site-utility" aria-label={language === 'pt' ? 'Direitos e política' : 'Rights and policy'}>
+        <span>© BIYA</span>
+        <a href="/art-policy">{t.policy}</a>
+      </aside>
       <EasterEgg language={language} />
       <p className="sr-only" aria-live="polite" aria-atomic="true">
         {world === 'crystal' ? worlds[language].crystal.caption : worlds[language].ghost.caption}
