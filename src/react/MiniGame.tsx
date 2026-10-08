@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Language, World } from './data';
 import { copy } from './data';
-import { nextWorld, resolvePulse, type PulseItem } from './gameLogic';
+import { nextWorld, resolvePulse, type PulseItem, type PulseKind } from './gameLogic';
 
 type Status = 'idle' | 'running' | 'over';
 
@@ -40,6 +40,25 @@ function drawGhost(ctx: CanvasRenderingContext2D, x: number, y: number, r: numbe
   ctx.arc(-r * 0.25, -r * 0.12, r * 0.08, 0, Math.PI * 2);
   ctx.arc(r * 0.25, -r * 0.12, r * 0.08, 0, Math.PI * 2);
   ctx.fill();
+  ctx.restore();
+}
+
+function drawHeart(ctx: CanvasRenderingContext2D, x: number, y: number, r: number) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.fillStyle = '#ffffff';
+  ctx.strokeStyle = '#b77db9';
+  ctx.lineWidth = 2;
+  ctx.shadowColor = '#e9c2ef';
+  ctx.shadowBlur = 14;
+  ctx.beginPath();
+  ctx.moveTo(0, r * 0.76);
+  ctx.bezierCurveTo(-r * 1.25, r * 0.04, -r * 0.95, -r * 0.82, -r * 0.3, -r * 0.58);
+  ctx.bezierCurveTo(0, -r * 0.38, 0, -r * 0.3, 0, -r * 0.3);
+  ctx.bezierCurveTo(r * 0.65, -r * 1.05, r * 1.25, -r * 0.16, 0, r * 0.76);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
   ctx.restore();
 }
 
@@ -85,7 +104,7 @@ export default function MiniGame({ language }: { language: Language }) {
     let spawnClock = 0;
     let nextId = 1;
     let items: PulseItem[] = [];
-    let particles: Array<{ x: number; y: number; vx: number; vy: number; life: number; world: World }> = [];
+    let particles: Array<{ x: number; y: number; vx: number; vy: number; life: number; world: PulseKind }> = [];
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
@@ -144,7 +163,7 @@ export default function MiniGame({ language }: { language: Language }) {
     toggleRef.current = toggle;
 
     const spawn = () => {
-      const kind: World = Math.random() > 0.5 ? 'crystal' : 'ghost';
+      const kind: PulseKind = Math.random() < 0.09 ? 'heart' : Math.random() > 0.5 ? 'crystal' : 'ghost';
       items.push({
         id: nextId++,
         x: width + 42,
@@ -155,7 +174,7 @@ export default function MiniGame({ language }: { language: Language }) {
       });
     };
 
-    const burst = (x: number, y: number, kind: World) => {
+    const burst = (x: number, y: number, kind: PulseKind) => {
       for (let i = 0; i < 8; i += 1) {
         const angle = (Math.PI * 2 * i) / 8;
         particles.push({
@@ -255,12 +274,13 @@ export default function MiniGame({ language }: { language: Language }) {
 
       for (const item of items) {
         if (item.kind === 'crystal') drawCrystal(ctx, item.x, item.y, item.radius);
+        else if (item.kind === 'heart') drawHeart(ctx, item.x, item.y, item.radius);
         else drawGhost(ctx, item.x, item.y, item.radius);
       }
 
       for (const p of particles) {
         ctx.globalAlpha = Math.max(0, p.life * 1.6);
-        ctx.fillStyle = p.world === 'crystal' ? '#f8d8ef' : '#c49be2';
+        ctx.fillStyle = p.world === 'heart' ? '#ffffff' : p.world === 'crystal' ? '#f8d8ef' : '#c49be2';
         ctx.beginPath();
         ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
         ctx.fill();
