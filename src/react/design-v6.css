@@ -880,3 +880,12 @@ body[data-world="ghost"] .art-stage::before {
     max-height: 455px;
   }
 }
+/* On narrow screens the old stage-breathe animation translated the entire
+   portrait by up to several pixels and could crop it against viewport edges. */
+@media (max-width: 720px) {
+  .motion-ready .portal .stage-inner {
+    animation: none !important;
+    transform: none !important;
+  }
+  .portal .art-stage { transform: none !important; }
+}
