@@ -1,40 +1,25 @@
-# Arquitetura e decisões de design
+# Arquitetura — BIYA / Parallel Worlds V5
 
-## Objetivo
+## Runtime
 
-Site público de apresentação e portfólio destinado à Biya, artista digital e VTuber. A publicação e a exibição dos materiais selecionados foram autorizadas pela Biya.
+A aplicação pública é React 19 + TypeScript e usa Vite para build. `index.html` inicializa `src/main.tsx`; a política de artes possui uma segunda entrada Vite em `art-policy.html`.
 
-Crystal/Ghost funciona como linguagem visual de contraste, luz e textura; o site não atribui lore ou biografia não confirmada.
+## Camadas
 
-## Componentes
+- `src/react/App.tsx`: composição principal, navegação, mundos, galeria, Signal, About e rodapé.
+- `src/react/data.ts`: conteúdo editorial tipado, links públicos e metadados das imagens.
+- `src/react/useImmersion.ts`: progressão de scroll, pointer parallax, reveal e deterrence de cópia casual.
+- `src/react/MiniGame.tsx`: Parallel Pulse em Canvas 2D.
+- `src/react/gameLogic.ts`: regras puras e testáveis do minijogo.
+- `src/react/EasterEgg.tsx`: frequência secreta baseada em interação de teclado/wordmark.
+- `src/react/PolicyApp.tsx`: política de uso das artes em PT/EN.
+- `src/css/*`: base visual histórica do Parallel Worlds, reutilizada pela camada React.
+- `src/react/react.css`: integração React, game, segurança visual e componentes novos.
 
-- `main`: inicializações.
-- `state`: idioma, atmosfera e obra ativa.
-- `i18n`: PT-BR / EN, com um idioma ativo por vez.
-- `world`: alternância Crystal/Ghost, cópia, ARIA e parallax.
-- `gallery`: galeria, foco, modal, teclado e swipe.
-- `navigation`: progresso de leitura e seção ativa.
-- `motion`: atmosfera, entradas, microinterações e transições, respeitando movimento reduzido.
-- `media/artworks`: metadados do acervo.
+## Estado
 
-## Imersão
-
-A versão final preserva a composição e adiciona:
-- partículas e sigilos ambientais;
-- movimento distinto em Crystal e Ghost;
-- profundidade sutil por ponteiro/scroll;
-- respiração visual da personagem e dos elementos de cenário;
-- entradas progressivas das seções;
-- feedback de hover discreto.
-
-## Acessibilidade
-
-Imagens dimensionadas, `aria-pressed`, regiões vivas, `dialog` nativo, skip-link, foco visível, teclado e `prefers-reduced-motion`.
+React controla idioma, mundo visual, galeria, modal, jogo, navegação ativa e Easter Egg. Não há dependência do antigo runtime vanilla JS.
 
 ## Direitos
 
-A autorização de exibição não concede licença de reutilização a terceiros. Consulte `/art-policy.html` e `docs/ART_POLICY.md`.
-
-## Correção de formato de mídia
-
-O pacote continha sete arquivos JPEG com extensão `.webp` (`shot1–4` e `live1–3`). Eles foram renomeados para `.jpg`, sem alteração dos pixels ou bytes.
+O site exibe somente o subconjunto necessário de assets em `public/assets`. Regras de crawler, headers e política pública formam uma camada de deterrence; não são DRM e não tornam imagens públicas tecnicamente impossíveis de copiar.
