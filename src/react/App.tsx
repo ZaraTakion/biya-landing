@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import EasterEgg from './EasterEgg';
 import MiniGame from './MiniGame';
+import { useDialogAccessibility } from './useDialogAccessibility';
 import { artworks, copy, links, media, worlds, type Language, type World } from './data';
 import { useArtworkDeterrence, useDocumentMeta, useImmersion, useWorldBody } from './useImmersion';
 
@@ -103,7 +104,7 @@ function Header({
         <a aria-label="Biya, back to start" className="brand" href="#portal">
           B<span aria-hidden="true">✦</span>YA <span className="brand-mark">/ 02</span>
         </a>
-        <nav className="header-nav" aria-label="Main navigation">
+        <nav className="header-nav" aria-label={language === 'pt' ? 'Navegação principal' : 'Main navigation'}>
           {nav.map(([id, label]) => (
             <a
               key={id}
@@ -138,7 +139,7 @@ function Header({
           type="button"
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
-          aria-label={language === 'pt' ? 'Abrir menu' : 'Open menu'}
+          aria-label={menuOpen ? language === 'pt' ? 'Fechar menu' : 'Close menu' : language === 'pt' ? 'Abrir menu' : 'Open menu'}
           onClick={() => setMenuOpen(value => !value)}
         >
           <span />
@@ -321,7 +322,9 @@ function Archive({ language }: { language: Language }) {
   const t = copy[language];
   const [index, setIndex] = useState(0);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const startX = useRef<number | null>(null);
+  useDialogAccessibility(dialogOpen, dialogRef, () => setDialogOpen(false));
   const art = artworks[index];
   const artCopy = art[language];
 
@@ -452,7 +455,7 @@ function Archive({ language }: { language: Language }) {
         <div className="react-dialog-backdrop" role="presentation" onPointerDown={event => {
           if (event.target === event.currentTarget) setDialogOpen(false);
         }}>
-          <div className="react-dialog" role="dialog" aria-modal="true" aria-label={artCopy.title}>
+          <div ref={dialogRef} className="react-dialog" role="dialog" aria-modal="true" aria-label={artCopy.title} tabIndex={-1}>
             <div className="dialog-top">
               <span>{artCopy.title}</span>
               <button type="button" onClick={() => setDialogOpen(false)}>{language === 'pt' ? '✕ FECHAR' : '✕ CLOSE'}</button>
