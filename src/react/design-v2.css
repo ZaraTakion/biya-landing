@@ -619,3 +619,14 @@ body[data-world="ghost"] .mobile-menu > a.current { color: #ead1fa; }
   .gallery-title-area > p:first-child { overflow-wrap: anywhere; }
   .social-table a { letter-spacing: .04em; }
 }
+
+/* Unselected options and textual section cues must remain readable. */
+body:not([data-world="ghost"]) .world-choice:not(.is-active),
+body:not([data-world="ghost"]) .about .mini-label,
+body:not([data-world="ghost"]) .pulse-section .mini-label {
+  color: var(--biya-copy-muted-light);
+}
+body[data-world="ghost"] .about .mini-label,
+body[data-world="ghost"] .pulse-section .mini-label {
+  color: var(--biya-copy-muted-dark);
+}
