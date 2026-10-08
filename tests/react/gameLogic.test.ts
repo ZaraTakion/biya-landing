@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { nextWorld, resolvePulse } from '../../src/react/gameLogic';
+import { canvasResolution, nextWorld, resolvePulse, shouldAdvancePulse } from '../../src/react/gameLogic';
 
 describe('Parallel Pulse game logic', () => {
   it('switches between Crystal and Ghost', () => {
@@ -31,5 +31,26 @@ describe('Parallel Pulse game logic', () => {
     expect(result.combo).toBe(0);
     expect(result.score).toBe(0);
     expect(result.misses).toBe(2);
+  });
+  it('uses the actual visible canvas box, even on a 320px phone', () => {
+    expect(canvasResolution(267.8, 144.2, 3)).toEqual({
+      width: 268, height: 144, dpr: 2, pixelWidth: 536, pixelHeight: 288,
+    });
+  });
+
+  it('caps oversized backing buffers and rejects invalid dimensions', () => {
+    const result = canvasResolution(3840, 2076, Number.NaN);
+    expect(result).toEqual({
+      width: 3840, height: 2076, dpr: 1, pixelWidth: 3840, pixelHeight: 2076,
+    });
+    expect(canvasResolution(0, 0, 0).pixelWidth).toBe(1);
+  });
+
+  it('does not spend frames or advance gameplay when hidden or idle', () => {
+    expect(shouldAdvancePulse('idle', true, true)).toBe(false);
+    expect(shouldAdvancePulse('over', true, true)).toBe(false);
+    expect(shouldAdvancePulse('running', false, true)).toBe(false);
+    expect(shouldAdvancePulse('running', true, false)).toBe(false);
+    expect(shouldAdvancePulse('running', true, true)).toBe(true);
   });
 });
