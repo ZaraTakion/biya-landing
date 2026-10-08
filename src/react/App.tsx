@@ -101,7 +101,7 @@ function Header({
         <span>{t.role}</span>
       </div>
       <header className="header">
-        <a aria-label="Biya, back to start" className="brand" href="#portal">
+        <a aria-label={language === 'pt' ? 'Biya, voltar ao início' : 'Biya, back to start'} className="brand" href="#portal">
           B<span aria-hidden="true">✦</span>YA <span className="brand-mark">/ 02</span>
         </a>
         <nav className="header-nav" aria-label={language === 'pt' ? 'Navegação principal' : 'Main navigation'}>
