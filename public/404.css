@@ -1,0 +1,11 @@
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 65% 25%,#3d2b50,transparent 34%),linear-gradient(145deg,#12101a,#201829);color:#f7f0fb;font-family:Arial,Helvetica,sans-serif}
+main{width:min(720px,100%);padding:42px;border:1px solid #5e4d70;background:#191522cc;box-shadow:0 24px 90px #0007}
+.sigil{color:#caa8e3;font-size:34px}
+.code{margin:14px 0 4px;color:#9d88ae;font-size:11px;font-weight:900;letter-spacing:.18em}
+h1{margin:0;font-size:clamp(56px,12vw,120px);letter-spacing:-.09em;line-height:.9}
+.accent{font-family:Georgia,serif;font-style:italic;color:#c4a0dc}
+p{max-width:520px;color:#bdb0c7;line-height:1.7}
+a{display:inline-block;margin-top:14px;padding:12px 16px;border:1px solid #866c9c;border-radius:999px;color:#fff;text-decoration:none;font-size:11px;font-weight:900;letter-spacing:.08em}
+a:focus-visible{outline:3px solid #d1a9ee;outline-offset:4px}
