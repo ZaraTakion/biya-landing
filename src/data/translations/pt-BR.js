@@ -2,7 +2,7 @@
 export const strings = {
   "language.group": "Idioma",
   "skip": "Pular para o conteúdo",
-  "preview": "VERSÃO EM DESENVOLVIMENTO",
+  "preview": "CRYSTAL × GHOST / PARALLEL WORLDS",
   "independent": "BIYA / ARTISTA & VTUBER",
   "nav.aria": "Navegação principal",
   "rail.aria": "Navegação por capítulos",
@@ -38,7 +38,7 @@ export const strings = {
   "gallery.dots.aria": "Selecionar obra",
   "gallery.swipe": "DESLIZE / ◀ ▶",
   "archive.footer1": "UMA SELEÇÃO DO ACERVO DA BIYA",
-  "archive.footer2": "TÍTULOS E CRÉDITOS EM VALIDAÇÃO",
+  "archive.footer2": "OBRAS E VISUAIS AUTORIZADOS PARA O SITE",
   "intermission.aria": "Transição entre universos",
   "intermission.label": "O OUTRO LADO",
   "intermission.title": "Arte em muitas formas.<br>Um olhar em cada detalhe.",
@@ -61,9 +61,9 @@ export const strings = {
   "footer.title": "ARTE, PERSONAGENS E<br>EXPERIÊNCIAS DE BIYA",
   "footer.back.aria": "Voltar para o início",
   "footer.back": "↑ VOLTAR AO PORTAL",
-  "footer.study": "BIYA / PARALLEL WORLDS · PRÉ-LANÇAMENTO",
-  "footer.art": "ARTES: MATERIAIS FORNECIDOS PARA REVISÃO · CRÉDITOS EM VALIDAÇÃO",
-  "footer.design": "CONTEÚDO E PUBLICAÇÃO SUJEITOS À APROVAÇÃO DA BIYA",
+  "footer.study": "BIYA / PARALLEL WORLDS",
+  "footer.art": "ARTES E VISUAIS · DIREITOS PRESERVADOS",
+  "footer.design": "PUBLICAÇÃO AUTORIZADA PELA BIYA",
   "rail.archive": "ARQUIVO",
   "rail.signal": "SINAL",
   "rail.about": "SOBRE",
@@ -72,19 +72,19 @@ export const strings = {
   "dialog.close.aria": "Fechar ampliação",
   "dialog.close": "✕ FECHAR",
   "dialog.image.alt": "Arte ampliada da Biya",
-  "meta.description": "Um cantinho para conhecer as artes, personagens, lives e o universo da Biya. 💜👻",
+  "meta.description": "Arte, personagens, streams e os mundos Crystal × Ghost da Biya. 💜👻",
   "signal.stream1": "01 / ARQUIVO DE LIVES",
   "signal.stream2": "02 / ARQUIVO DE LIVES",
   "signal.stream3": "03 / ARQUIVO DE LIVES",
   "gallery.announce": "Obra {index} de {total}: {title}",
   "world.announce": "Visual Crystal ativado",
-  "document.title": "💎 BIYA — Arte, personagens & VTuber ✨",
+  "document.title": "💎 BIYA — Parallel Worlds ✦",
   "switch.crystal": "Crystal",
   "switch.ghost": "Ghost",
   "world.announce.crystal": "Modo Crystal selecionado.",
   "world.announce.ghost": "Modo Ghost selecionado.",
   "nav.artworks": "Artes",
-  "gallery.credit": "Créditos individuais em validação",
+  "gallery.credit": "Direitos autorais e créditos preservados",
   "social.x": "Ver perfil no X",
   "social.yt": "Ver vídeos no YouTube",
   "social.vgen": "Explorar portfólio no VGen",
@@ -95,7 +95,7 @@ export const strings = {
   "about.signal": "SINAL / 004",
   "gallery.serial": "ARQUIVO / BIYA_YU",
   "world.number.prefix": "MUNDO_0",
-  "meta.locale": "pt_BR"
+  "footer.policy": "POLÍTICA DAS ARTES",\n  "meta.locale": "pt_BR"
 };
 export const worlds = {
   "crystal": {
@@ -116,7 +116,7 @@ export const artworkCopy = [
     "tag": "ILUSTRAÇÃO / OC",
     "title": "Doce Devaneio",
     "alt": "Biya em composição rosa com doces e decoração floral",
-    "desc": "Cena delicada com rosas e doces. Título de exibição provisório."
+    "desc": "Cena delicada com rosas, doces e a identidade visual da personagem."
   },
   {
     "tag": "FIGURINOS / ALTERNATIVOS",
