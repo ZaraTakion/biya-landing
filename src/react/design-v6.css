@@ -773,3 +773,5 @@ body[data-world="ghost"] .art-stage::before {
 @media (max-width: 350px) {
   body[data-world="ghost"] .portal h1 { font-size: 70px; }
 }
+/* Legacy summary item sizing no longer applies after the editorial simplification. */
+.signal-summary > * { min-height: 0; padding: 0; border: 0; }
