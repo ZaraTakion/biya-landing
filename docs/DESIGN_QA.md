@@ -82,6 +82,6 @@ Referências verificadas: https://www.w3.org/TR/WCAG22/#contrast-minimum, https:
 
 ### Defeito efetivamente reproduzido em Chromium
 
-A primeira bateria Chromium do PR #14 identificou **2,04:1** para o texto secundário de Sinal no mundo Ghost. A regra anterior de `background` composta em várias camadas deixava `background-color` calculada clara, apesar de o texto já mudar para a paleta clara de Ghost. Agora o tema declara explicitamente `background-color: #211a2b` e a imagem de gradiente separadamente; o teste em Chromium deve impedir a regressão.
+A primeira bateria Chromium do PR #14 identificou **2,04:1** para o texto secundário de Sinal imediatamente após alternar para Ghost. A investigação encontrou um fator adicional: a seção Sinal tinha **transição animada de 650 ms no fundo**, mas o texto auxiliar trocava para cores claras imediatamente. Isso produzia uma janela transitória de texto claro sobre fundo ainda claro. Agora o tema Ghost declara explicitamente a base escura `background-color: #211a2b` e a imagem de gradiente separadamente, enquanto a seção Sinal troca a sua superfície **sem transição**. As animações decorativas de outras áreas permanecem preservadas.
 
 Não marcar o contraste final como validado até a execução posterior deste commit passar.
