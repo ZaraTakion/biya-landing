@@ -54,3 +54,34 @@ Os testes de tokens **não são uma declaração de conformidade WCAG completa**
 - [ ] Testes Chromium antigos e V5.6 aprovados no último commit.
 - [ ] Verificação independente de Cloudflare: `version.json` corresponde ao SHA da `main`.
 - [ ] Revisão manual posterior de Chrome/Firefox/Safari, zoom de 200%, Android e iPhone.
+
+## V5.7 — Contraste das superfícies e espaçamento de texto (2026-10-08)
+
+**Hipóteses encontradas ao revisar CSS:**
+- O rótulo final da seção de transmissões e a descrição “Sobre” no mundo Crystal mantinham cores claras que não garantiam contraste suficiente sobre os fundos muito claros.
+- Em Ghost, os cartões das lives recebiam um painel translúcido branco herdado do layout Crystal, enquanto os textos tornavam-se claros — risco de perda de contraste.
+- Os números de capítulo já foram revisados na V5.4; esta rodada trabalha **legibilidade sobre fundos de camadas** sem reescrever a composição.
+
+**Correções:**
+- Texto auxiliar do fechamento de sinal e descrição de apresentação escurecidos apenas no tema claro.
+- Painel das transmissões em Ghost recebe uma transparência escura consistente com o fundo e texto claro legível.
+- Rótulos secundários do menu móvel e do rodapé ganham contraste/tamanho melhorados.
+- Preferência `prefers-contrast: more` reforça a cor dos textos editoriais de ambos os mundos.
+
+**Verificação automatizada em navegador:** `tests/e2e/editorial-contrast.spec.ts` compara cores de texto **computadas pelo CSS real** e compõe superfícies translúcidas sobre cores sólidas de base, nos mundos Crystal e Ghost. Um segundo roteiro injeta espaçamento compatível com WCAG 1.4.12 em uma viewport de 320 px e verifica reflow/navegação. Isso encontra regressões sem alterar ilustrações.
+
+**Limitação do método:** o contraste aproximado de `rgba()` sobre uma superfície base plana **não mede diretamente os pixels finais** de gradientes, sombras, filtros `backdrop-filter`, imagens e subpixels antialiasados. A análise automatizada é complementar à inspeção visual humana. Não anunciar conformidade WCAG AA completa.
+
+Referências verificadas: https://www.w3.org/TR/WCAG22/#contrast-minimum, https://www.w3.org/TR/WCAG22/#reflow e https://www.w3.org/TR/WCAG22/#text-spacing.
+
+### Aceite
+- [ ] 5 baterias aprovadas no commit final.
+- [ ] Todos os testes Chromium antigos e novos aprovados no commit final.
+- [ ] Deploy pós-merge identificado por SHA completo em `/version.json`.
+- [ ] Revisão humana de contraste sobre imagens/gradientes e zoom nativo 200/400%, incluindo Safari.
+
+### Defeito efetivamente reproduzido em Chromium
+
+A primeira bateria Chromium do PR #14 identificou **2,04:1** para o texto secundário de Sinal imediatamente após alternar para Ghost. A investigação encontrou um fator adicional: a seção Sinal tinha **transição animada de 650 ms no fundo**, mas o texto auxiliar trocava para cores claras imediatamente. Isso produzia uma janela transitória de texto claro sobre fundo ainda claro. Agora o tema Ghost declara explicitamente a base escura `background-color: #211a2b` e a imagem de gradiente separadamente, enquanto a seção Sinal troca a sua superfície **sem transição**. As animações decorativas de outras áreas permanecem preservadas.
+
+Não marcar o contraste final como validado até a execução posterior deste commit passar.

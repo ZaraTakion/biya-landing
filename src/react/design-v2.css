@@ -711,3 +711,67 @@ body[data-world="ghost"] .pulse-section .mini-label {
   .footer-links strong { overflow-wrap: anywhere; }
   .footer-bottom > span { overflow-wrap: anywhere; }
 }
+
+
+/* V5.7 — Contrast of layered editorial surfaces.
+   Preserve the palette and artwork; make informational text readable in both worlds. */
+body:not([data-world="ghost"]) .signal-end > span,
+body:not([data-world="ghost"]) .about-description {
+  color: var(--biya-copy-muted-light);
+}
+body[data-world="ghost"] .broadcast {
+  background: rgba(31, 24, 42, .9);
+  border-color: rgba(202, 171, 223, .24);
+}
+body[data-world="ghost"] .broadcast-meta strong {
+  color: #f0e7f6;
+}
+body:not([data-world="ghost"]) .mobile-menu a small {
+  color: #574a65;
+}
+body[data-world="ghost"] .mobile-menu a small {
+  color: #d5c6e2;
+}
+.signal-end > span,
+.about-description {
+  line-height: 1.65;
+}
+.footer-bottom > span {
+  font-size: 11px;
+  line-height: 1.55;
+}
+.footer-bottom > .footer-version { font-size: 10px; }
+
+/* The browser can request an even higher-contrast interface without recoloring art. */
+@media (prefers-contrast: more) {
+  body:not([data-world="ghost"]) .hero-description,
+  body:not([data-world="ghost"]) .signal-heading p,
+  body:not([data-world="ghost"]) .pulse-copy > p:not(.mini-label) {
+    color: #332b40;
+  }
+  body[data-world="ghost"] .hero-description,
+  body[data-world="ghost"] .signal-heading p,
+  body[data-world="ghost"] .pulse-copy > p:not(.mini-label) {
+    color: #f5eafb;
+  }
+  .mobile-menu-button:focus-visible,
+  .world-choice:focus-visible,
+  .language-option:focus-visible {
+    outline-width: 4px;
+    outline-offset: 4px;
+  }
+}
+
+/* Declare Ghost Signal's actual opaque canvas explicitly. The earlier
+   layered shorthand left a light computed base in Chromium. */
+body[data-world="ghost"] .signal {
+  background-color: #211a2b;
+  background-image: radial-gradient(circle at 83% 14%, rgba(92, 51, 114, .26), transparent 31%);
+  color: #f0e7f6;
+}
+
+/* On a world change the Signal foreground changes immediately. Animating its
+   backdrop for 650ms creates a brief light-on-light state (measured 2.04:1).
+   Keep decorative motions elsewhere, but switch this contrast-critical canvas
+   atomically with its text. */
+.signal { transition: none; }
