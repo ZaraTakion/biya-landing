@@ -275,3 +275,234 @@ body[data-world="ghost"] .art-stage.world-shift::after {
     transition: none !important;
   }
 }
+
+
+/* V4 FINAL IMMERSION — movement without redesign. */
+:root {
+  --page-progress: 0;
+}
+
+.world-ambient {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  perspective: 800px;
+}
+.ambient-node,
+.ambient-sigil {
+  position: absolute;
+  display: block;
+  will-change: transform, opacity;
+}
+.ambient-node {
+  width: 13px;
+  height: 13px;
+  border: 1px solid rgb(130 111 182 / 48%);
+  background: linear-gradient(135deg, rgb(255 255 255 / 82%), rgb(191 178 235 / 24%));
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  box-shadow: 0 0 22px rgb(195 176 240 / 20%);
+}
+.ambient-1 { left: 7%; top: 20%; animation: crystal-drift-a 8s ease-in-out infinite; }
+.ambient-2 { left: 43%; top: 12%; animation: crystal-drift-b 11s ease-in-out -3s infinite; }
+.ambient-3 { right: 12%; top: 18%; animation: crystal-drift-a 10s ease-in-out -5s infinite reverse; }
+.ambient-4 { right: 6%; bottom: 20%; animation: crystal-drift-b 12s ease-in-out -2s infinite; }
+.ambient-5 { left: 34%; bottom: 12%; animation: crystal-drift-a 9s ease-in-out -4s infinite; }
+.ambient-sigil {
+  color: rgb(152 130 195 / 42%);
+  text-shadow: 0 0 22px rgb(210 191 245 / 36%);
+  font-size: 19px;
+  animation: sigil-breathe 4.8s ease-in-out infinite;
+}
+.ambient-sigil-a { left: 15%; top: 44%; }
+.ambient-sigil-b { right: 31%; top: 27%; animation-delay: -1.7s; font-size: 13px; }
+.ambient-sigil-c { right: 17%; bottom: 13%; animation-delay: -3.1s; font-size: 24px; }
+
+.motion-ready .portal-grid {
+  transform: translate3d(
+    calc(var(--pointer-x, 0) * -7px),
+    calc(var(--pointer-y, 0) * -5px + var(--page-progress) * 16px),
+    0
+  );
+  transition: transform 700ms var(--motion-soft);
+}
+.motion-ready .portal-noise {
+  transform: translate3d(
+    calc(var(--pointer-x, 0) * 4px),
+    calc(var(--pointer-y, 0) * 3px),
+    0
+  );
+  transition: transform 900ms var(--motion-soft);
+}
+.motion-ready .stage-inner {
+  animation: stage-breathe 7.5s ease-in-out infinite alternate;
+}
+.motion-ready .stage-shape-a {
+  animation: crystal-frame-a 13s ease-in-out infinite;
+}
+.motion-ready .stage-shape-b {
+  animation: crystal-frame-b 17s ease-in-out infinite reverse;
+}
+.motion-ready .stage-sticker {
+  animation: sticker-float 5.6s ease-in-out infinite;
+}
+.motion-ready .aura-left {
+  animation: aura-breathe-left 8s ease-in-out infinite alternate;
+}
+.motion-ready .aura-right {
+  animation: aura-breathe-right 9s ease-in-out -3s infinite alternate;
+}
+.motion-ready .gallery-halo {
+  animation: gallery-orbit 20s linear infinite;
+}
+.motion-ready .archive-decor {
+  animation: archive-letter 9s ease-in-out infinite alternate;
+}
+.motion-ready .intermission-symbol {
+  animation: sigil-breathe 4.2s ease-in-out infinite;
+}
+.motion-ready .about-sun {
+  animation: about-aura 7.5s ease-in-out infinite alternate;
+}
+.motion-ready .footer-wordmark span {
+  display: inline-block;
+  animation: footer-star 4.5s ease-in-out infinite;
+}
+
+.motion-reveal {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  filter: blur(5px);
+}
+.motion-reveal.motion-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  filter: blur(0);
+  transition:
+    opacity 760ms var(--motion-signature),
+    transform 860ms var(--motion-signature),
+    filter 760ms var(--motion-signature);
+}
+.signal-rail .broadcast:nth-child(2).motion-visible { transition-delay: 90ms; }
+.signal-rail .broadcast:nth-child(3).motion-visible { transition-delay: 180ms; }
+
+@media (hover:hover) and (pointer:fine) {
+  .broadcast,
+  .social-table a,
+  .hero-plain,
+  .header-link {
+    transition: transform 320ms var(--motion-signature), color 220ms ease, border-color 220ms ease;
+  }
+  .broadcast:hover { transform: translateY(-7px); }
+  .broadcast-two:hover { transform: translateY(31px); }
+  .broadcast-three:hover { transform: translateY(-22px); }
+  .social-table a:hover { transform: translateX(7px); }
+  .hero-plain:hover, .header-link:hover { transform: translateY(-2px); }
+  .about-art:hover img { transform: scale(1.015) translateY(-4px); }
+}
+
+body[data-world="ghost"] .ambient-node {
+  border-radius: 50%;
+  clip-path: none;
+  border: 0;
+  background: radial-gradient(circle, rgb(220 173 255 / 66%), rgb(121 64 164 / 14%) 60%, transparent 72%);
+  filter: blur(2px);
+  box-shadow: 0 0 30px rgb(164 92 211 / 24%);
+}
+body[data-world="ghost"] .ambient-sigil {
+  color: rgb(218 176 245 / 55%);
+  text-shadow: 0 0 24px rgb(168 92 219 / 52%);
+}
+body[data-world="ghost"] .stage-inner { animation-name: ghost-hover; }
+body[data-world="ghost"] .stage-shape-a { animation-name: ghost-frame-a; }
+body[data-world="ghost"] .stage-shape-b { animation-name: ghost-frame-b; }
+
+@keyframes crystal-drift-a {
+  0%,100% { transform: translate3d(0,0,0) rotate(0deg); opacity: .3; }
+  48% { transform: translate3d(18px,-24px,38px) rotate(95deg); opacity: .88; }
+}
+@keyframes crystal-drift-b {
+  0%,100% { transform: translate3d(0,0,0) rotate(20deg) scale(.8); opacity: .28; }
+  50% { transform: translate3d(-24px,18px,52px) rotate(155deg) scale(1.15); opacity: .74; }
+}
+@keyframes sigil-breathe {
+  0%,100% { opacity: .25; transform: scale(.86) rotate(0); }
+  50% { opacity: .8; transform: scale(1.12) rotate(9deg); }
+}
+@keyframes stage-breathe {
+  from { transform: translate3d(0,4px,0) scale(.995); }
+  to { transform: translate3d(0,-7px,0) scale(1.006); }
+}
+@keyframes ghost-hover {
+  0%,100% { transform: translate3d(0,4px,0) scale(.993); }
+  50% { transform: translate3d(0,-10px,0) scale(1.008); }
+}
+@keyframes crystal-frame-a {
+  0%,100% { transform: rotate(-1.2deg) scale(.992); opacity: .64; }
+  50% { transform: rotate(2deg) scale(1.018); opacity: .92; }
+}
+@keyframes crystal-frame-b {
+  0%,100% { transform: rotate(12deg) scale(.75); opacity: .48; }
+  50% { transform: rotate(18deg) scale(.79); opacity: .85; }
+}
+@keyframes ghost-frame-a {
+  0%,100% { transform: rotate(-2deg) scale(.985); opacity: .45; filter: blur(0); }
+  50% { transform: rotate(3deg) scale(1.02); opacity: .78; filter: blur(.5px); }
+}
+@keyframes ghost-frame-b {
+  0%,100% { transform: rotate(11deg) scale(.74); opacity: .38; }
+  50% { transform: rotate(20deg) scale(.8); opacity: .7; }
+}
+@keyframes sticker-float {
+  0%,100% { transform: translateY(2px) rotate(11deg); }
+  50% { transform: translateY(-9px) rotate(8deg); }
+}
+@keyframes aura-breathe-left {
+  from { transform: translate3d(-2%,2%,0) scale(.94); opacity: .48; }
+  to { transform: translate3d(8%,-5%,0) scale(1.12); opacity: .72; }
+}
+@keyframes aura-breathe-right {
+  from { transform: translate3d(3%,-2%,0) scale(.95); opacity: .45; }
+  to { transform: translate3d(-7%,6%,0) scale(1.1); opacity: .7; }
+}
+@keyframes gallery-orbit { to { transform: rotate(372deg); } }
+@keyframes archive-letter {
+  from { transform: translate3d(0,0,0) rotate(-1deg); opacity: .75; }
+  to { transform: translate3d(-18px,12px,0) rotate(1deg); opacity: 1; }
+}
+@keyframes about-aura {
+  from { transform: scale(.96); filter: blur(2px); opacity: .8; }
+  to { transform: scale(1.06); filter: blur(8px); opacity: 1; }
+}
+@keyframes footer-star {
+  0%,100% { transform: rotate(0) scale(.9); opacity: .65; }
+  50% { transform: rotate(20deg) scale(1.08); opacity: 1; }
+}
+
+@media (max-width:720px) {
+  .ambient-2, .ambient-5 { display: none; }
+  .ambient-node { opacity: .6; }
+  .motion-ready .stage-inner { animation-duration: 9s; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .world-ambient *,
+  .motion-ready .stage-inner,
+  .motion-ready .stage-shape-a,
+  .motion-ready .stage-shape-b,
+  .motion-ready .stage-sticker,
+  .motion-ready .aura,
+  .motion-ready .gallery-halo,
+  .motion-ready .archive-decor,
+  .motion-ready .intermission-symbol,
+  .motion-ready .about-sun,
+  .motion-ready .footer-wordmark span {
+    animation: none !important;
+    transform: none !important;
+  }
+  .motion-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
