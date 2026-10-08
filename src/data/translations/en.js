@@ -95,7 +95,8 @@ export const strings = {
   "about.signal": "SIGNAL / 004",
   "gallery.serial": "ARCHIVE / BIYA_YU",
   "world.number.prefix": "WORLD_0",
-  "footer.policy": "ARTWORK POLICY",\n  "meta.locale": "en_US"
+  "footer.policy": "ARTWORK POLICY",
+  "meta.locale": "en_US"
 };
 export const worlds = {
   "crystal": {
