@@ -508,3 +508,114 @@ body[data-world="ghost"] .easter-card:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .pulse-canvas { scroll-behavior: auto; }
 }
+
+
+/* V5.4 — Editorial readability for the two worlds.
+   These tokens belong to interface text, NOT the artist's illustrations. */
+:root {
+  --biya-copy-muted-light: #554b63;
+  --biya-copy-muted-dark: #d5c6e2;
+}
+
+/* Chapter cues are meaningful navigation, not tiny decoration. */
+.section-number,
+.archive-overview-head,
+.archive-footer {
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: .11em;
+}
+body:not([data-world="ghost"]) .section-number {
+  color: var(--biya-copy-muted-light);
+}
+body:not([data-world="ghost"]) .archive .section-number,
+body:not([data-world="ghost"]) .archive-footer,
+.archive-overview-head {
+  color: var(--biya-copy-muted-dark);
+}
+body[data-world="ghost"] .section-number,
+body[data-world="ghost"] .archive-footer {
+  color: var(--biya-copy-muted-dark);
+}
+
+/* World-switch description is instructional text in both palettes. */
+.hero-kicker,
+.switch-name,
+.mini-label {
+  font-size: 11px;
+  line-height: 1.55;
+  letter-spacing: .12em;
+}
+body:not([data-world="ghost"]) .hero-kicker,
+body:not([data-world="ghost"]) .switch-name {
+  color: var(--biya-copy-muted-light);
+}
+body[data-world="ghost"] .hero-kicker,
+body[data-world="ghost"] .switch-name {
+  color: var(--biya-copy-muted-dark);
+}
+.stage-vertical { font-size: 11px; line-height: 1.3; }
+body:not([data-world="ghost"]) .stage-vertical { color: #615373; }
+body[data-world="ghost"] .stage-vertical { color: #dcc4ea; }
+
+/* High-value gallery/navigation metadata needs to survive the first glance. */
+.archive-thumbs span { font-size: 10px; line-height: 1.35; }
+.archive-thumbs strong { font-size: 12px; line-height: 1.3; }
+.gallery-title-area > p:first-child,
+.gallery-bottom > span { font-size: 11px; letter-spacing: .1em; }
+.archive-overview-head { letter-spacing: .12em; }
+.rail-nav a { font-size: 11px; color: #625a72; }
+.rail-nav a.is-active { color: #644981; }
+body[data-world="ghost"] .rail-nav a { color: #d0bedf; }
+body[data-world="ghost"] .rail-nav a.is-active { color: #f2d6ff; }
+
+/* Stream facts, social paths and final actions are practical information. */
+body:not([data-world="ghost"]) .broadcast-meta > span,
+body:not([data-world="ghost"]) .signal-summary span,
+body:not([data-world="ghost"]) .signal-summary small,
+body:not([data-world="ghost"]) .social-table a span:first-child {
+  color: var(--biya-copy-muted-light);
+}
+body[data-world="ghost"] .broadcast-meta > span,
+body[data-world="ghost"] .signal-summary span,
+body[data-world="ghost"] .signal-summary small,
+body[data-world="ghost"] .social-table a span:first-child {
+  color: var(--biya-copy-muted-dark);
+}
+.broadcast-meta > span,
+.signal-summary span,
+.signal-summary small,
+.social-table a,
+.social-table a span:first-child { font-size: 11px; line-height: 1.5; }
+.footer-links span {
+  color: var(--biya-copy-muted-dark);
+  font-size: 11px;
+  line-height: 1.4;
+}
+.footer-links strong { font-size: 13px; line-height: 1.35; }
+
+/* Keep calls to action readable while retaining the original sharp shapes. */
+.hero-plain,
+.button-enter,
+.world-choice { font-size: 12px; line-height: 1.4; }
+.language-option { font-size: 11px; }
+.mobile-menu > a.current { color: #68477f; }
+body[data-world="ghost"] .mobile-menu > a.current { color: #ead1fa; }
+
+@media (max-width: 720px) {
+  .hero-kicker,
+  .switch-name,
+  .mini-label { font-size: 11px; }
+  .section-number,
+  .archive-footer { font-size: 11px; }
+  .hero-plain,
+  .button-enter,
+  .world-choice { font-size: 12px; }
+  .portal-bottom a { min-width: 44px; min-height: 44px; }
+  .archive-thumbs strong { font-size: 12px; }
+}
+@media (max-width: 380px) {
+  .concept-bar { letter-spacing: 0; }
+  .gallery-title-area > p:first-child { overflow-wrap: anywhere; }
+  .social-table a { letter-spacing: .04em; }
+}
