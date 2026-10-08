@@ -1,6 +1,8 @@
-# Integridade do acervo enviado
+# Integridade e autorização do acervo
 
-Foram preservados **todos os 19 recursos visuais** do ZIP fornecido. Não houve geração ou retoque de imagens.
+Foram preservados **todos os 19 recursos visuais** do pacote fornecido. Não houve geração ou retoque de imagens.
+
+A Biya autorizou a exibição dos materiais selecionados neste site. Essa autorização de publicação não altera a autoria nem transfere direitos dos respectivos artistas, criadores ou demais titulares.
 
 Os sete arquivos JPEG denominados `.webp` foram apenas **renomeados `.jpg`**, sem alteração dos bytes.
 
