@@ -241,14 +241,15 @@ export default function MiniGame({ language }: { language: Language }) {
       ctx.globalAlpha = 1;
 
       const captureX = width * 0.22;
+      const pulse = (Math.sin(performance.now() * 0.004) + 1) / 2;
       ctx.strokeStyle = ghost ? '#d7adf1' : '#8e85c8';
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.arc(captureX, height / 2, 38, 0, Math.PI * 2);
+      ctx.arc(captureX, height / 2, 38 + pulse * 2, 0, Math.PI * 2);
       ctx.stroke();
       ctx.beginPath();
-      ctx.arc(captureX, height / 2, 53, 0, Math.PI * 2);
-      ctx.globalAlpha = 0.25;
+      ctx.arc(captureX, height / 2, 51 + pulse * 6, 0, Math.PI * 2);
+      ctx.globalAlpha = 0.18 + pulse * 0.16;
       ctx.stroke();
       ctx.globalAlpha = 1;
 
@@ -273,6 +274,21 @@ export default function MiniGame({ language }: { language: Language }) {
       if (statusRef.current !== 'running') {
         ctx.fillStyle = ghost ? 'rgba(13,9,18,.66)' : 'rgba(247,245,255,.76)';
         ctx.fillRect(0, 0, width, height);
+
+        if (statusRef.current === 'idle') {
+          ctx.save();
+          ctx.globalAlpha = ghost ? 0.72 : 0.62;
+          drawCrystal(ctx, width * 0.70, height * 0.34, 16);
+          drawGhost(ctx, width * 0.78, height * 0.66, 19);
+          ctx.strokeStyle = ghost ? 'rgba(218,177,238,.42)' : 'rgba(125,107,174,.34)';
+          ctx.setLineDash([5, 7]);
+          ctx.beginPath();
+          ctx.moveTo(width * 0.64, height * 0.50);
+          ctx.lineTo(width * 0.84, height * 0.50);
+          ctx.stroke();
+          ctx.restore();
+        }
+
         ctx.textAlign = 'center';
         ctx.fillStyle = ghost ? '#f6e8ff' : '#28243a';
         ctx.font = '900 23px Arial';
@@ -319,7 +335,7 @@ export default function MiniGame({ language }: { language: Language }) {
           <p className="mini-label">CRYSTAL × GHOST / ARCADE</p>
           <h2 id="pulse-title">{t.gameTitle}</h2>
           <p>{t.gameDesc}</p>
-          <p className="pulse-help">{t.gameHow}</p>
+          <p className="pulse-help" id="pulse-help">{t.gameHow}</p>
         </div>
         <div className="pulse-machine" data-world={world} data-reveal>
           <div className="pulse-hud" aria-live="polite">
@@ -333,6 +349,7 @@ export default function MiniGame({ language }: { language: Language }) {
             className="pulse-canvas"
             tabIndex={0}
             aria-label={t.gameHow}
+            aria-describedby="pulse-help"
             onPointerDown={event => {
               event.preventDefault();
               activate();
