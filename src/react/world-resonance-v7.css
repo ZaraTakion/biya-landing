@@ -412,3 +412,26 @@ body[data-world="ghost"] .about-art::after {
   .biya-theatre-stage, .biya-theatre-filmstrip button { background: Canvas; }
   .biya-theatre-stage img { forced-color-adjust: none; }
 }
+
+/* A zoomed mobile viewport must keep the dialog dismissal within reach.
+   Top alignment is safer than centering a tall scrollable dialog. */
+@media (max-width: 720px) {
+  .react-dialog-backdrop:has(.biya-theatre) {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    overflow-y: auto;
+    padding: 8px;
+    overscroll-behavior: contain;
+  }
+  .react-dialog.biya-theatre {
+    flex: 0 1 auto;
+    max-height: calc(100dvh - 16px);
+    margin-inline: auto;
+  }
+  .biya-theatre-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+}
