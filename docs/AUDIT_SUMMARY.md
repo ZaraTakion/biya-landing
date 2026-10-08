@@ -1,25 +1,22 @@
-# Auditoria V02 — síntese executiva
+# Auditoria V5 — BIYA / Parallel Worlds
 
-**Fonte única de implementação:** `biya-parallel-worlds-v02-pt-en(1).zip` fornecido pelo usuário. A aparência artística, as ilustrações e os principais componentes foram preservados. Não foi utilizado o documento TXT anterior.
+## Estado
 
-| Antes | Refatoração aplicada |
-| --- | --- |
-| HTML + CSS + JS e traduções monolíticas | HTML semântico com CSS modular e ES Modules por responsabilidade |
-| Textos institucionais como tributo/fan project | Apresentação centrada na Biya e no acervo; pré-lançamento sem afirmar autorização final |
-| Texto de galeria não estruturado em HTML | Dados das obras separados de traduções e controles |
-| Traduções abrangendo a maior parte da interface | PT/EN exclusivo incluindo título, metadados, descrições de mídia, seleção do mundo, ARIA e obra/modal |
-| Imagem da outra atmosfera oculta apenas por opacidade | Estado `aria-hidden` acompanha a imagem visível |
-| Imagens sem `width` e `height` | Dimensões intrínsecas para reduzir layout shift |
-| Controles da galeria sem feedback acessível explícito | `aria-current`, região ao vivo, foco restaurado, alvos interativos ampliados |
-| Sete JPEGs com extensão `.webp` | Renomeados corretamente como `.jpg` sem recompactar ou alterar conteúdo original |
-| Sem plano de testes | Testes estruturais e testes no Chromium em diferentes viewports |
+Migração concluída para React + TypeScript + Vite.
 
-## O que falta para a Biya validar
-- Autoria e créditos de todas as artes, inclusive a possibilidade de obras feitas por terceiros.
-- Títulos verdadeiros das obras, caso existam, e localização das fontes.
-- Links de transmissões individuais; os links atuais vão apenas ao canal.
-- Conteúdo institucional, redes, permissões de divulgação e governança.
-- Medições Lighthouse reais, WCAG assistiva/manual, testes em outros navegadores, domínio/SEO de produção.
+## Mudanças principais
 
-## Posição de lançamento
-A presença digital foi desenhada **para a Biya** e deverá ser administrada pela artista se aprovada. O código não deve se declarar lançamento oficial enquanto não houver a autorização final. `noindex,nofollow` está ativo, mas não protege a confidencialidade do conteúdo publicado.
+- runtime vanilla JS removido;
+- estado e interações migrados para React;
+- Crystal/Ghost transformados em estados de identidade com motion distinto;
+- Parallel Pulse criado como minijogo autoral;
+- Easter Egg adicionado com base em comportamento público verificável da Biya;
+- política de uso das artes migrada para React;
+- site marcado como público/final;
+- Open Graph e Discord preview preservados;
+- proteção em camadas aplicada às artes;
+- cinco baterias automatizadas no GitHub Actions.
+
+## Limite técnico importante
+
+Nenhum site público consegue garantir que uma imagem exibida no navegador nunca será copiada. O projeto reduz exposição e comunica/protege direitos, mas não representa essas medidas como DRM.
