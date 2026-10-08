@@ -310,6 +310,10 @@ body[data-world="ghost"] .site-utility a {
     right: 0;
     display: grid;
     padding: 12px 5% 18px;
+    max-height: calc(100svh - 84px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
     border-bottom: 1px solid #d8d1df;
     background: rgba(248,247,251,.96);
     box-shadow: 0 24px 40px rgba(45,34,56,.12);
