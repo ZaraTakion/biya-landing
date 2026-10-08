@@ -20,3 +20,10 @@ Migração concluída para React + TypeScript + Vite.
 ## Limite técnico importante
 
 Nenhum site público consegue garantir que uma imagem exibida no navegador nunca será copiada. O projeto reduz exposição e comunica/protege direitos, mas não representa essas medidas como DRM.
+
+## Produção
+
+- Worker: `biya-prism`
+- URL canônica: https://biya-prism.zaratakion.workers.dev/
+- 404: personalizado e não indexável
+- CSP: sem `unsafe-inline`
