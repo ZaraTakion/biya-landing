@@ -18,16 +18,30 @@ export default function WorldDock({ language, world, active, setWorld }: Props) 
   useEffect(() => {
     const portal = document.getElementById('portal');
     if (!portal) return undefined;
-    const observer = new IntersectionObserver(([entry]) => {
-      setPastPortal(!entry.isIntersecting && entry.boundingClientRect.bottom < 140);
-    }, { rootMargin: '-115px 0px 0px 0px', threshold: 0 });
-    observer.observe(portal);
-    return () => observer.disconnect();
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      // Reveal the control when the opening composition is almost out of view.
+      // Direct geometry also handles programmatic jumps to an archive anchor.
+      const remaining = portal.getBoundingClientRect().bottom;
+      setPastPortal(remaining < Math.max(140, window.innerHeight * .36));
+    };
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   // The full-size frequency selector remains in the portal.
   // Don't overlay interactive game controls or an open modal.
-  if (!pastPortal || active === 'portal' || active === 'game') return null;
+  if (!pastPortal || active === 'game') return null;
 
   return (
     <aside className="biya-world-dock" aria-label={language === 'pt' ? 'Mudar a atmosfera do site' : 'Change the site atmosphere'}>
