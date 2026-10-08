@@ -16,15 +16,20 @@ class TestStructure(unittest.TestCase):
         cls.page = (ROOT/'index.html').read_text(encoding='utf-8')
         cls.parser=DocumentParser(); cls.parser.feed(cls.page)
 
-    def test_html_is_explicitly_unindexed(self):
-        self.assertRegex(self.page, r'(?is)name="robots"[^>]*content="noindex, nofollow"|content="noindex, nofollow"[^>]*name="robots"')
+    def test_html_is_public_and_protects_artwork_indexing(self):
+        self.assertRegex(self.page, r'(?is)name="robots"[^>]*content="index, follow, noimageindex, max-snippet:-1"|content="index, follow, noimageindex, max-snippet:-1"[^>]*name="robots"')
+        self.assertIn('rel="canonical"', self.page)
+        self.assertIn('property="og:image"', self.page)
+        self.assertTrue((ROOT/'art-policy.html').exists())
+        self.assertTrue((ROOT/'robots.txt').exists())
+        self.assertTrue((ROOT/'sitemap.xml').exists())
 
     def test_expected_files_exist(self):
         for name in ['index.html','src/css/tokens.css','src/css/base.css','src/css/layout.css',
                      'src/css/components.css','src/css/motion.css','src/js/main.js','src/js/state.js',
                      'src/js/i18n.js','src/js/world.js','src/js/gallery.js','src/js/navigation.js',
                      'src/data/artworks.js','src/data/media.js','src/data/translations/pt-BR.js',
-                     'src/data/translations/en.js','README.md']:
+                     'src/data/translations/en.js','README.md','art-policy.html','robots.txt','sitemap.xml']:
             with self.subTest(name=name): self.assertTrue((ROOT/name).exists())
 
     def test_assets_and_dimensions(self):
