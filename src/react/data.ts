@@ -5,7 +5,6 @@ export const links = {
   x: 'https://x.com/BiyA_YU',
   vgen: 'https://vgen.co/BiyA_YU',
   youtube: 'https://www.youtube.com/@biyaYU',
-  livepix: 'https://livepix.gg/biya',
 } as const;
 
 export const worlds = {
