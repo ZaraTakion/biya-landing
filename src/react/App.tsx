@@ -387,7 +387,7 @@ function Archive({ language }: { language: Language }) {
             <span>ARCHIVE / BIYA_YU</span>
             <span>{String(index + 1).padStart(2, '0')} — {String(artworks.length).padStart(2, '0')}</span>
           </span>
-          <div className="gallery-title-area" key={art.id}>
+          <div className="gallery-title-area" key={art.id} aria-live="polite" aria-atomic="true">
             <p>{artCopy.tag}</p>
             <h3>{artCopy.title}</h3>
             <p>{artCopy.desc}</p>
