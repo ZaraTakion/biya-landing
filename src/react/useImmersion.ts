@@ -66,7 +66,7 @@ export function useImmersion() {
     };
 
     const setPointer = (event: PointerEvent) => {
-      if (!portal || reduce.matches || !matchMedia('(pointer:fine)').matches || pointerFrame) return;
+      if (!portal || reduce.matches || event.pointerType !== 'mouse' || pointerFrame) return;
       pointerFrame = requestAnimationFrame(() => {
         pointerFrame = 0;
         const rect = portal.getBoundingClientRect();
