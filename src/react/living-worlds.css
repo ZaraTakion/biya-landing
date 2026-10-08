@@ -159,9 +159,6 @@ body[data-world="ghost"] .world-scene .scene-fragment-three { left: 6%; bottom: 
 .gallery-experience[data-art-index="5"] .art-showcase {
   background: radial-gradient(ellipse at 50% 42%, #80728c 0%, #483a5a 58%, #231b32 100%);
 }
-body[data-world="ghost"] .gallery-experience[data-art-index] .art-showcase {
-  filter: saturate(.88);
-}
 /* A keyed React image and caption replay only on deliberate selection. */
 .gallery-experience .art-showcase > .protected-frame {
   animation: biya-art-arrive 490ms cubic-bezier(.22,1,.36,1) both;
