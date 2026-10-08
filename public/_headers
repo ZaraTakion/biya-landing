@@ -20,3 +20,8 @@
 
 /assets/avatars/*
   Content-Disposition: inline
+
+/version.json
+  Cache-Control: no-store, max-age=0, must-revalidate
+  Content-Type: application/json; charset=utf-8
+  X-Robots-Tag: noindex, nofollow

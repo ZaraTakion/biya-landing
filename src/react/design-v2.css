@@ -630,3 +630,32 @@ body[data-world="ghost"] .about .mini-label,
 body[data-world="ghost"] .pulse-section .mini-label {
   color: var(--biya-copy-muted-dark);
 }
+
+/* V5.5 — quiet release signature and responsive finishing touches. */
+.footer-bottom {
+  flex-wrap: wrap;
+  align-items: center;
+  row-gap: 10px;
+}
+.footer-version {
+  font-variant-numeric: tabular-nums;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: .07em;
+  white-space: nowrap;
+  color: #d5c6e2;
+}
+@media (max-width: 900px) {
+  .mobile-menu-button { min-width: 44px; min-height: 44px; }
+  .mobile-menu a { min-height: 48px; }
+}
+@media (max-width: 420px) {
+  .footer-bottom {
+    align-items: flex-start;
+    gap: 9px;
+  }
+  .footer-version { opacity: .9; }
+  .gallery-title-area h3 { overflow-wrap: anywhere; }
+  .about-facts { flex-wrap: wrap; }
+}

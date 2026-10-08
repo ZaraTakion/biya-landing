@@ -77,3 +77,41 @@ npm run dev
 npm run build
 npm run deploy
 ```
+
+## Versão publicada e confirmação automática
+
+Cada build de produção agora grava o commit Git que gerou os arquivos em `dist/version.json`, por exemplo:
+
+```json
+{
+  "site": "biya-prism",
+  "revision": "<SHA completo do commit que gerou o build>",
+  "shortRevision": "<primeiros 7 caracteres>"
+}
+```
+
+No rodapé do site, **VERSÃO / abc1234** mostra o mesmo identificador. O endpoint público é `https://biya-prism.zaratakion.workers.dev/version.json` (sem cache de navegador).
+
+O fluxo usa dois portões distintos:
+1. **Qualidade do código**: cinco baterias + teste real de Chromium em 320, 375, 768, 1080, 1440 e 3840 px.
+2. **Publicação real**: após o sucesso da qualidade na `main`, o workflow `.github/workflows/production-verification.yml` verifica repetidamente se `/version.json` contém o SHA exato do commit. Se o deploy estiver atrasado ou falhar, a verificação fica vermelha, em vez de declarar sucesso sem evidência. Commits já superados pela `main` não disparam alertas de versão obsoleta.
+
+O workflow de produção **não faz deploy**; monitora o deploy automático já configurado no provedor. Não substitui a conferência de direitos de arte nem avaliações visuais humanas.
+
+### Testes de design em navegador
+
+```bash
+npm run build
+npx playwright install chromium
+npm run test:responsive
+```
+
+A instalação do Chromium roda no GitHub Actions. O computador local não precisa instalar esse navegador para o CI funcionar. Esses testes detectam possíveis regressões de navegação, viewport e UI responsiva, mas não são uma avaliação estética automática.
+
+Para verificar apenas a produção a partir do terminal, execute:
+
+```bash
+EXPECTED_SHA=$(git rev-parse HEAD) node scripts/verify-production.mjs
+```
+
+No Windows PowerShell, use `$env:EXPECTED_SHA = (git rev-parse HEAD); node scripts/verify-production.mjs`.

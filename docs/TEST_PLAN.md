@@ -59,3 +59,20 @@ O checklist manual complementa as cinco baterias automatizadas; não é marcado 
 - [ ] Confirmar que a partida funciona após voltar para a aba e sem animação constante na página inicial.
 
 As cinco baterias de CI **não substituem** estes testes manuais. Não marcar itens não observados como aprovados.
+
+## V5.5 — Rastreabilidade da publicação e QA responsivo automatizado
+
+### Rastreabilidade
+- [x] Build injeta commit SHA no rodapé e gera `dist/version.json` com o mesmo valor.
+- [x] Auditoria do artefato verifica a presença e formato do manifesto; em CI compara com o commit do checkout.
+- [x] Manifesto sem cache para permitir comparação de produção.
+- [x] Workflow separado consulta `/version.json` na Cloudflare depois do CI da `main`, falha em divergência/timeout.
+- [ ] Confirmar a **primeira execução efetiva** do workflow pós-deploy do commit integrado.
+
+### Browser QA (Chromium CI)
+- [x] Criados testes para 320 × 740, 375 × 812, 768 × 1024, 1080 × 1080, 1440 × 900 e 3840 × 2160.
+- [x] Roteiros cobrem larguras, bordas de componentes essenciais, menu móvel, idioma, alternância de mundos, galeria e manifesto.
+- [ ] Aguardar resultados do GitHub Actions com navegador real.
+- [ ] Complementar com testes humanos em Android/iOS e zoom de 200%.
+
+Não confundir criação de testes com aprovação dos testes nem versão no GitHub com versão publicada.

@@ -1,0 +1,44 @@
+name: Verify BIYA Production Revision
+
+on:
+  workflow_run:
+    workflows: ["Biya Five-Battery Quality Gate"]
+    branches: [main]
+    types: [completed]
+
+permissions:
+  contents: read
+
+jobs:
+  verify-cloudflare:
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    concurrency:
+      group: biya-production-version
+      cancel-in-progress: true
+    env:
+      EXPECTED_SHA: ${{ github.event.workflow_run.head_sha }}
+      SITE_URL: https://biya-prism.zaratakion.workers.dev
+      MAX_WAIT_MS: 480000
+    steps:
+      - name: Check out verified commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Check if this release was superseded
+        id: current
+        shell: bash
+        run: |
+          MAIN_SHA="$(git ls-remote origin refs/heads/main | cut -f1)"
+          if [ "$MAIN_SHA" != "$EXPECTED_SHA" ]; then
+            echo "superseded=true" >> "$GITHUB_OUTPUT"
+            echo "A newer main commit exists; skipping the obsolete release."
+          else
+            echo "superseded=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Verify Cloudflare serves the exact Git revision
+        if: steps.current.outputs.superseded == 'false'
+        run: node scripts/verify-production.mjs

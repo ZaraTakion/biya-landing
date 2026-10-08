@@ -39,3 +39,27 @@ jobs:
 
       - name: Battery 5 — Release artifact audit
         run: npm run battery:5
+
+  responsive-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install app dependencies
+        run: npm install
+
+      - name: Install headless Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build production preview
+        run: npm run build
+
+      - name: Responsive Chromium smoke (320-3840px)
+        run: npm run test:responsive

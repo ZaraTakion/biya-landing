@@ -614,6 +614,9 @@ function Footer({ language }: { language: Language }) {
         <span>{t.protection}</span>
         <span>{t.authorized}</span>
         <span>© 2026 BIYA</span>
+        <span className="footer-version" title={__BIYA_BUILD_SHA__} aria-label={language === 'pt' ? `Versão publicada: ${__BIYA_BUILD_SHA__.slice(0, 7)}` : `Published version: ${__BIYA_BUILD_SHA__.slice(0, 7)}`}>
+          {language === 'pt' ? 'VERSÃO' : 'VERSION'} / {__BIYA_BUILD_SHA__.slice(0, 7)}
+        </span>
       </div>
     </footer>
   );
