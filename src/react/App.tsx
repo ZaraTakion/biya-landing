@@ -502,7 +502,7 @@ function Footer({ language }: { language: Language }) {
         <span>BIYA / PARALLEL WORLDS</span>
         <span>{t.protection}</span>
         <span>{t.authorized}</span>
-        <a className="footer-policy" href="/art-policy.html">{t.policy}</a>
+        <a className="footer-policy" href="/art-policy">{t.policy}</a>
       </div>
     </footer>
   );
@@ -553,7 +553,7 @@ export default function App() {
   return (
     <>
       <a className="skip-link" href="#main">{language === 'pt' ? 'Pular para o conteúdo' : 'Skip to content'}</a>
-      <div className="progress" aria-hidden="true"><span style={{ width: `${progress}%` }} /></div>
+      <progress className="progress" value={progress} max={100} aria-hidden="true" />
       <Header language={language} setLanguage={setLanguage} active={active} />
       <main id="main">
         <Portal language={language} world={world} setWorld={setWorld} />
