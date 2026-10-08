@@ -16,6 +16,9 @@ test('V7 keeps the frequency switch available past the portal, in PT and EN', as
   await expect(page.locator('body')).toHaveAttribute('data-world', 'crystal');
 
   await page.locator('.language-switch button[lang="en"]').click();
+  // The sticky header can scroll into view during a programmatic click.
+  // Return to the archive before asserting that the dock is available there.
+  await page.locator('.gallery-experience').scrollIntoViewIfNeeded();
   await expect(dock.getByRole('button', { name: 'Switch to Ghost' })).toBeVisible();
   await dock.getByRole('button', { name: 'Switch to Ghost' }).click();
   await expect(page.locator('body')).toHaveAttribute('data-world', 'ghost');
