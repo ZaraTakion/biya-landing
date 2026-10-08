@@ -761,3 +761,11 @@ body[data-world="ghost"] .mobile-menu a small {
     outline-offset: 4px;
   }
 }
+
+/* Declare Ghost Signal's actual opaque canvas explicitly. The earlier
+   layered shorthand left a light computed base in Chromium. */
+body[data-world="ghost"] .signal {
+  background-color: #211a2b;
+  background-image: radial-gradient(circle at 83% 14%, rgba(92, 51, 114, .26), transparent 31%);
+  color: #f0e7f6;
+}
