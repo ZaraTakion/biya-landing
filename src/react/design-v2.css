@@ -1,0 +1,432 @@
+/* BIYA / DESIGN POLISH V5.1
+   Senior UI/UX refinement without changing the Parallel Worlds composition. */
+
+:root {
+  --biya-focus: #7d4fa6;
+  --biya-crystal: #a493d4;
+  --biya-ghost: #c49bdf;
+  --biya-ink: #272234;
+}
+
+/* Accessibility is visual design, not an afterthought. */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--biya-focus);
+  outline-offset: 4px;
+}
+body[data-world="ghost"] a:focus-visible,
+body[data-world="ghost"] button:focus-visible,
+body[data-world="ghost"] [tabindex]:focus-visible {
+  outline-color: #d5acee;
+}
+
+/* Hero: retain the geometry but make the background feel more atmospheric. */
+.portal-grid {
+  opacity: .62;
+  background:
+    linear-gradient(to right, rgba(124,126,162,.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(124,126,162,.04) 1px, transparent 1px);
+  background-size: 86px 86px;
+  mask-image: radial-gradient(ellipse at 70% 45%, black 0 35%, transparent 78%);
+}
+.portal-noise {
+  opacity: .32;
+  background-size: 14px 15px;
+}
+.hero-subtitle em {
+  color: #7965a5;
+}
+.hero-description {
+  color: #625e70;
+}
+body[data-world="ghost"] .hero-subtitle em {
+  color: #d2a9e6;
+}
+body[data-world="ghost"] .hero-description {
+  color: #c8b9d1;
+}
+.art-stage {
+  filter: drop-shadow(0 24px 45px rgba(71,52,86,.08));
+}
+body[data-world="ghost"] .art-stage {
+  filter: drop-shadow(0 28px 52px rgba(20,8,29,.32));
+}
+
+/* Gallery: controls should read instantly as navigation. */
+.showcase-controls {
+  gap: 10px;
+}
+.round-arrow {
+  width: 48px;
+  height: 48px;
+  border-width: 1px;
+  background: rgba(24,20,34,.72);
+  color: #fff;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px rgba(0,0,0,.16);
+}
+.round-arrow:hover {
+  background: #f4e9fb;
+  color: #282036;
+}
+.expand-art {
+  border-color: rgba(255,255,255,.25);
+  background: rgba(24,20,34,.7);
+  color: #fff;
+  backdrop-filter: blur(10px);
+}
+.gallery-info {
+  background:
+    linear-gradient(180deg, rgba(42,35,51,.98), rgba(29,24,37,.99));
+}
+.gallery-title-area > p:last-child {
+  color: #bcb0c7;
+}
+
+/* Signal: transform the bridge into a deliberate editorial chapter. */
+.signal {
+  background:
+    radial-gradient(circle at 9% 18%, rgba(226,201,224,.42), transparent 25%),
+    radial-gradient(circle at 88% 72%, rgba(193,192,231,.34), transparent 28%),
+    #f3f1f7;
+}
+.signal-heading p {
+  max-width: 360px;
+  color: #595361;
+  font-size: 15px;
+}
+.signal-summary {
+  margin: -26px 0 38px;
+  overflow: hidden;
+  border: 1px solid #d6cfdd;
+  border-radius: 16px;
+  background: rgba(255,255,255,.58);
+  box-shadow: 0 20px 55px rgba(79,59,93,.07);
+  backdrop-filter: blur(10px);
+}
+.signal-summary > * {
+  padding: 24px 22px;
+}
+.signal-summary strong {
+  margin-top: 3px;
+  font-size: clamp(18px,1.65vw,25px);
+}
+.signal-rail {
+  gap: 22px;
+}
+.broadcast {
+  overflow: hidden;
+  border-color: rgba(139,118,151,.18);
+  border-radius: 14px;
+  background: rgba(255,255,255,.5);
+  box-shadow: 0 16px 40px rgba(60,45,72,.06);
+}
+.broadcast-two,
+.broadcast-three {
+  transform: none;
+}
+.broadcast-thumb {
+  overflow: hidden;
+  border-radius: 13px 13px 0 0;
+}
+.broadcast-thumb img {
+  transition: transform 520ms var(--motion-signature), filter 520ms ease;
+}
+.broadcast:hover .broadcast-thumb img {
+  transform: scale(1.025);
+  filter: saturate(1.05) contrast(1.02);
+}
+.broadcast-meta {
+  padding: 18px 18px 20px;
+}
+.broadcast-meta strong {
+  font-size: clamp(18px,1.75vw,26px);
+}
+
+/* Game: make the rules and focus state impossible to miss. */
+.pulse-help {
+  color: #514a5d;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.pulse-canvas:focus-visible {
+  outline: 4px solid #8059aa;
+  outline-offset: 5px;
+}
+.pulse-machine {
+  border-color: #b8adc5;
+  box-shadow: 0 28px 80px rgba(73,50,91,.14);
+}
+.pulse-machine[data-world="ghost"] {
+  box-shadow: 0 32px 90px rgba(31,13,43,.34);
+}
+.pulse-button {
+  min-height: 52px;
+  border-radius: 12px;
+}
+
+/* About: more depth without inventing personal biography. */
+.about-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 520px;
+  margin: -12px 0 34px;
+}
+.about-facts span {
+  padding: 7px 10px;
+  border: 1px solid #d7cfdf;
+  border-radius: 999px;
+  color: #655c70;
+  background: rgba(255,255,255,.62);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+body[data-world="ghost"] .about-facts span {
+  border-color: #4a3855;
+  background: rgba(85,57,101,.16);
+  color: #c4b3cd;
+}
+
+/* Side rail is now chapter progress, not a duplicate primary navigation. */
+.rail-nav {
+  gap: 11px;
+}
+.rail-nav a {
+  min-height: 22px;
+  justify-content: flex-end;
+}
+.rail-nav a > span:last-child {
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  white-space: nowrap;
+  transform: translateX(8px);
+  transition: max-width 320ms var(--motion-signature), opacity 220ms ease, transform 320ms var(--motion-signature);
+}
+.rail-nav:hover a > span:last-child,
+.rail-nav a:focus-visible > span:last-child {
+  max-width: 110px;
+  opacity: 1;
+  transform: none;
+}
+.rail-dot {
+  box-shadow: 0 0 0 4px rgba(139,115,170,.08);
+}
+.rail-nav a.is-active .rail-dot {
+  box-shadow: 0 0 0 5px rgba(153,120,188,.15), 0 0 18px rgba(157,117,200,.28);
+}
+
+/* A tiny persistent rights shortcut makes legal information available everywhere. */
+.site-utility {
+  position: fixed;
+  z-index: 90;
+  left: 18px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 10px;
+  border: 1px solid rgba(117,99,132,.28);
+  border-radius: 999px;
+  background: rgba(249,247,251,.82);
+  color: #62586c;
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 28px rgba(47,35,58,.08);
+}
+.site-utility a {
+  color: #5d486d;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+body[data-world="ghost"] .site-utility {
+  border-color: rgba(203,170,223,.25);
+  background: rgba(27,21,34,.8);
+  color: #b9a8c3;
+}
+body[data-world="ghost"] .site-utility a {
+  color: #e0c5ee;
+}
+
+/* Footer is a real destination rather than legal residue. */
+.footer-top {
+  padding-bottom: 22px;
+}
+.footer-links {
+  border-radius: 12px;
+  overflow: hidden;
+}
+.footer-links a {
+  min-height: 104px;
+}
+.footer-links a:hover strong {
+  transform: translateX(3px);
+}
+.footer-links strong {
+  transition: transform 240ms var(--motion-signature);
+}
+
+/* Functional mobile menu: editorial, compact, and touch friendly. */
+.mobile-menu-button {
+  display: none;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid #d4cfdb;
+  border-radius: 50%;
+  background: rgba(255,255,255,.72);
+}
+.mobile-menu-button span {
+  position: absolute;
+  width: 16px;
+  height: 1px;
+  background: #302a3a;
+  transition: transform 280ms var(--motion-signature);
+}
+.mobile-menu-button span:first-child { transform: translateY(-3px); }
+.mobile-menu-button span:last-child { transform: translateY(3px); }
+.mobile-menu-button[aria-expanded="true"] span:first-child { transform: rotate(45deg); }
+.mobile-menu-button[aria-expanded="true"] span:last-child { transform: rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+}
+@media (max-width: 900px) {
+  .mobile-menu-button {
+    position: relative;
+    display: grid;
+    flex: 0 0 42px;
+  }
+  .mobile-menu {
+    position: absolute;
+    z-index: 50;
+    top: calc(100% + 1px);
+    left: 0;
+    right: 0;
+    display: grid;
+    padding: 12px 5% 18px;
+    border-bottom: 1px solid #d8d1df;
+    background: rgba(248,247,251,.96);
+    box-shadow: 0 24px 40px rgba(45,34,56,.12);
+    backdrop-filter: blur(18px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 220ms ease, visibility 220ms ease, transform 320ms var(--motion-signature);
+  }
+  .mobile-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .mobile-menu a {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e4dee8;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: .08em;
+  }
+  .mobile-menu a small {
+    color: #9b8ca7;
+    font-size: 8px;
+  }
+  .mobile-menu-social {
+    border-bottom: 0 !important;
+    color: #72588a;
+  }
+  body[data-world="ghost"] .mobile-menu {
+    border-color: #45344f;
+    background: rgba(25,19,32,.96);
+  }
+  body[data-world="ghost"] .mobile-menu a {
+    border-color: #3b2d45;
+    color: #eee4f3;
+  }
+  body[data-world="ghost"] .mobile-menu-button {
+    border-color: #5d486a;
+    background: rgba(38,28,48,.84);
+  }
+  body[data-world="ghost"] .mobile-menu-button span {
+    background: #e8d8f0;
+  }
+}
+
+/* Refined motion: enough to feel alive, never enough to become noisy. */
+.motion-ready .portal-copy {
+  animation: biya-copy-arrive 820ms var(--motion-signature) both;
+}
+.motion-ready .art-stage {
+  animation: biya-stage-arrive 960ms 80ms var(--motion-signature) both;
+}
+.motion-ready .signal-heading h2 em,
+.motion-ready .about h2 em {
+  background: linear-gradient(100deg, currentColor 0 38%, #ead8f2 48%, currentColor 58% 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: biya-glint 10s linear infinite;
+}
+@keyframes biya-copy-arrive {
+  from { opacity: 0; transform: translate3d(-14px,18px,0); filter: blur(5px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+@keyframes biya-stage-arrive {
+  from { opacity: 0; transform: translate3d(18px,24px,0) scale(.985); filter: blur(7px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+@keyframes biya-glint {
+  to { background-position: -220% 0; }
+}
+
+/* Mobile cleanup and comfortable touch targets. */
+@media (max-width: 720px) {
+  .portal-grid {
+    opacity: .45;
+    background-size: 64px 64px;
+  }
+  .round-arrow {
+    width: 46px;
+    height: 46px;
+  }
+  .signal-summary {
+    margin-top: 0;
+    border-radius: 12px;
+  }
+  .broadcast {
+    border-radius: 12px;
+  }
+  .pulse-help {
+    font-size: 13px;
+  }
+  .about-facts {
+    margin-bottom: 28px;
+  }
+  .about-facts span {
+    font-size: 7px;
+  }
+  .site-utility {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-ready .portal-copy,
+  .motion-ready .art-stage,
+  .motion-ready .signal-heading h2 em,
+  .motion-ready .about h2 em {
+    animation: none !important;
+  }
+  .mobile-menu,
+  .mobile-menu-button span,
+  .rail-nav a > span:last-child {
+    transition: none !important;
+  }
+}
