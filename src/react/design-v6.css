@@ -775,3 +775,117 @@ body[data-world="ghost"] .art-stage::before {
 }
 /* Legacy summary item sizing no longer applies after the editorial simplification. */
 .signal-summary > * { min-height: 0; padding: 0; border: 0; }
+
+/* V6.1 — Mobile hero regression fix.
+   One active portrait in normal layout flow, not two absolutely positioned
+   image wrappers. Keep original pixels, aspect ratios and the rights notice. */
+.art-stage[data-world="crystal"] #stage-crystal,
+.art-stage[data-world="ghost"] #stage-ghost {
+  opacity: 1;
+  transform: none;
+}
+.art-stage[data-world="ghost"] #stage-ghost {
+  object-fit: contain;
+  mix-blend-mode: normal;
+}
+
+@media (max-width: 720px) {
+  .portal .art-stage {
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 0;
+    margin-top: 30px;
+    padding: 24px 0 12px;
+    overflow: visible;
+    align-items: center;
+    justify-content: center;
+    isolation: isolate;
+  }
+
+  .portal .art-stage::before {
+    width: min(90vw, 420px);
+    height: auto;
+    aspect-ratio: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .portal .stage-inner {
+    position: relative;
+    display: block;
+    width: min(100%, 450px);
+    max-width: 100%;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    mask-image: none;
+    z-index: 1;
+  }
+
+  .portal .stage-inner > .protected-frame {
+    display: block;
+    position: relative;
+    inset: auto;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 0;
+    margin-inline: auto;
+    overflow: visible;
+  }
+
+  .portal .stage-inner .stage-visual#stage-crystal,
+  .portal .stage-inner .stage-visual#stage-ghost {
+    display: block;
+    position: relative;
+    inset: auto;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: min(570px, 140vw);
+    margin: 0 auto;
+    opacity: 1;
+    transform: none;
+    object-fit: contain;
+    object-position: center;
+    mix-blend-mode: normal;
+    border-radius: 0;
+    mask-image: none;
+  }
+
+  .portal .stage-inner .rights-badge {
+    right: 8px;
+    bottom: 10px;
+  }
+
+  .portal .stage-corner {
+    z-index: 2;
+    font-size: 10px;
+  }
+  .portal .corner-top { top: 2%; left: 6%; }
+  .portal .corner-bottom { bottom: -10px; left: 6%; }
+  .portal .portal-bottom { margin-top: 33px; }
+}
+
+@media (max-width: 350px) {
+  .portal .art-stage { padding-top: 30px; }
+  .portal .stage-inner .stage-visual#stage-crystal,
+  .portal .stage-inner .stage-visual#stage-ghost {
+    max-height: 455px;
+  }
+}
+/* On narrow screens the old stage-breathe animation translated the entire
+   portrait by up to several pixels and could crop it against viewport edges. */
+@media (max-width: 720px) {
+  .motion-ready .portal .stage-inner {
+    animation: none !important;
+    transform: none !important;
+  }
+  .portal .art-stage { transform: none !important; }
+}
