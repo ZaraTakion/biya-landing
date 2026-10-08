@@ -75,6 +75,7 @@ function Header({
   active: string;
 }) {
   const t = copy[language];
+  const [menuOpen, setMenuOpen] = useState(false);
   const nav = [
     ['portal', t.nav[0]],
     ['archive', t.nav[1]],
@@ -101,6 +102,7 @@ function Header({
               href={`#${id}`}
               className={active === id ? 'current' : undefined}
               aria-current={active === id ? 'location' : undefined}
+              onClick={() => setMenuOpen(false)}
             >
               {label}
             </a>
@@ -123,6 +125,38 @@ function Header({
         <a className="header-link" href={links.x} rel={externalRel} target="_blank">
           @BIYA_YU <span aria-hidden="true">↗</span>
         </a>
+        <button
+          className="mobile-menu-button"
+          type="button"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+          aria-label={language === 'pt' ? 'Abrir menu' : 'Open menu'}
+          onClick={() => setMenuOpen(value => !value)}
+        >
+          <span />
+          <span />
+        </button>
+        <nav
+          id="mobile-menu"
+          className={`mobile-menu ${menuOpen ? 'is-open' : ''}`}
+          aria-label={language === 'pt' ? 'Menu móvel' : 'Mobile menu'}
+        >
+          {nav.map(([id, label]) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              className={active === id ? 'current' : undefined}
+              aria-current={active === id ? 'location' : undefined}
+              onClick={() => setMenuOpen(false)}
+            >
+              <span>{label}</span>
+              <small>{id === 'portal' ? '01' : id === 'archive' ? '02' : id === 'signal' ? '03' : id === 'game' ? '04' : '05'}</small>
+            </a>
+          ))}
+          <a className="mobile-menu-social" href={links.x} rel={externalRel} target="_blank" onClick={() => setMenuOpen(false)}>
+            @BiyA_YU ↗
+          </a>
+        </nav>
       </header>
     </>
   );
@@ -193,7 +227,7 @@ function Portal({
               >
                 <span className="world-indicator" />
                 {value.toUpperCase()}
-                <span className="shortcut">0{index + 1}</span>
+                <span className="shortcut" aria-hidden="true">{index === 0 ? '◇' : '◌'}</span>
               </button>
             ))}
           </div>
@@ -241,7 +275,7 @@ function Portal({
           <span className="sticker-symbol" aria-hidden="true">✳</span>
           <span>BIYA<br />ART<br />STUDIO</span>
         </div>
-        <span className="stage-corner corner-top">WORLD_0{world === 'crystal' ? '1' : '2'}</span>
+        <span className="stage-corner corner-top">{world === 'crystal' ? 'CRYSTAL WORLD' : 'GHOST WORLD'}</span>
         <span className="stage-corner corner-bottom">{w.caption}</span>
         <span className="stage-vertical" aria-hidden="true">ART / IDENTITY / PARALLEL WORLDS</span>
       </div>
@@ -363,6 +397,40 @@ function Archive({ language }: { language: Language }) {
         </div>
       </div>
 
+      <div className="archive-overview" aria-label={language === 'pt' ? 'Visão geral do acervo' : 'Archive overview'} data-reveal>
+        <div className="archive-overview-head">
+          <span>{language === 'pt' ? 'VISÃO GERAL / 06 OBRAS' : 'OVERVIEW / 06 WORKS'}</span>
+          <span>{language === 'pt' ? 'ESCOLHA DIRETAMENTE' : 'CHOOSE DIRECTLY'}</span>
+        </div>
+        <div className="archive-thumbs">
+          {artworks.map((item, thumbIndex) => (
+            <button
+              key={item.id}
+              type="button"
+              className={thumbIndex === index ? 'is-active' : undefined}
+              aria-label={`${thumbIndex + 1}: ${item[language].title}`}
+              aria-pressed={thumbIndex === index}
+              onClick={() => {
+                show(thumbIndex);
+                document.querySelector('.gallery-experience')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }}
+            >
+              <img
+                className="protected-art"
+                src={item.src}
+                alt=""
+                width={item.width}
+                height={item.height}
+                loading="lazy"
+                draggable={false}
+              />
+              <span>{String(thumbIndex + 1).padStart(2, '0')}</span>
+              <strong>{item[language].title}</strong>
+            </button>
+          ))}
+        </div>
+      </div>
+
       <div className="archive-footer">
         <span>{language === 'pt' ? 'UMA SELEÇÃO DO ACERVO DA BIYA' : 'A SELECTION FROM BIYA’S COLLECTION'}</span>
         <span>{t.archiveFooter}</span>
@@ -408,6 +476,23 @@ function Signal({ language }: { language: Language }) {
       <div className="signal-heading" data-reveal>
         <h2 id="signal-title">{t.signalTitleA} <em>{t.signalTitleB}</em><span>↗</span></h2>
         <p>{t.signalDesc}</p>
+      </div>
+      <div className="signal-summary" data-reveal>
+        <div>
+          <span>{language === 'pt' ? 'ARQUIVO VISUAL' : 'VISUAL ARCHIVE'}</span>
+          <strong>03</strong>
+          <small>{language === 'pt' ? 'recortes de transmissões' : 'stream snapshots'}</small>
+        </div>
+        <div>
+          <span>PARALLEL WORLDS</span>
+          <strong>CRYSTAL / GHOST</strong>
+          <small>{language === 'pt' ? 'duas atmosferas, uma identidade' : 'two atmospheres, one identity'}</small>
+        </div>
+        <a href={links.youtube} rel={externalRel} target="_blank">
+          <span>YOUTUBE</span>
+          <strong>@biyaYU ↗</strong>
+          <small>{language === 'pt' ? 'abrir canal oficial' : 'open official channel'}</small>
+        </a>
       </div>
       <div className="signal-rail">
         {media.map((item, index) => (
@@ -498,11 +583,17 @@ function Footer({ language }: { language: Language }) {
       >
         B<span>✦</span>YA
       </button>
+      <div className="footer-links">
+        <a href={links.x} rel={externalRel} target="_blank"><span>X / TWITTER</span><strong>@BiyA_YU ↗</strong></a>
+        <a href={links.vgen} rel={externalRel} target="_blank"><span>VGEN</span><strong>{language === 'pt' ? 'ARTES & COMISSÕES' : 'ART & COMMISSIONS'} ↗</strong></a>
+        <a href={links.youtube} rel={externalRel} target="_blank"><span>YOUTUBE</span><strong>{language === 'pt' ? 'VÍDEOS & LIVES' : 'VIDEOS & STREAMS'} ↗</strong></a>
+        <a href="/art-policy"><span>RIGHTS</span><strong>{t.policy} ↗</strong></a>
+      </div>
       <div className="footer-bottom">
         <span>BIYA / PARALLEL WORLDS</span>
         <span>{t.protection}</span>
         <span>{t.authorized}</span>
-        <a className="footer-policy" href="/art-policy">{t.policy}</a>
+        <span>© 2026 BIYA</span>
       </div>
     </footer>
   );
