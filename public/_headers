@@ -1,0 +1,18 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  X-Frame-Options: DENY
+  Cross-Origin-Resource-Policy: same-origin
+  X-Robots-Tag: index, follow, noimageindex
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'
+
+/assets/*
+  Cache-Control: public, max-age=604800
+  X-Robots-Tag: noindex, noimageindex
+
+/assets/artwork/*
+  Content-Disposition: inline
+
+/assets/avatars/*
+  Content-Disposition: inline
