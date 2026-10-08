@@ -6,6 +6,8 @@
 - [x] Política pública de uso dos materiais adicionada em PT-BR e EN.
 - [x] Opt-out declarado para crawlers conhecidos de treinamento de IA.
 - [x] Open Graph / social preview configurado.
+- [x] URL canônica e sitemap alinhados com `biya-prism.zaratakion.workers.dev`.
+- [x] 404 personalizado configurado no Cloudflare.
 - [x] Identidade Crystal × Ghost preservada e aprofundada com uma camada de imersão.
 - [x] Redes públicas verificadas: X, VGen e YouTube.
 
