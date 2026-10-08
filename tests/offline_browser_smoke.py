@@ -20,7 +20,7 @@ with sync_playwright() as pw:
         page.locator('[data-set-language="en"]').click()
         assert page.locator('html').get_attribute('lang')=='en'
         assert page.locator('.language-switch').get_attribute('aria-label')=='Language'
-        assert page.locator('meta[name=description]').get_attribute('content').startswith('Biya — digital')
+        assert page.locator('meta[name=description]').get_attribute('content').startswith('Art, characters, streams')
         assert page.locator('img[data-i18n-alt="media.1.alt"]').first.get_attribute('alt') == 'Phasmophobia video thumbnail'
         assert page.locator('#archive-title').inner_text().startswith('Fragments')
         assert 'night' in page.locator('#world-title').inner_text().lower()
@@ -34,7 +34,7 @@ with sync_playwright() as pw:
         assert page.locator('#gallery-title').inner_text()=='Muitas Facetas'
         assert page.locator('html').get_attribute('lang')=='pt-BR'
         assert page.locator('.language-switch').get_attribute('aria-label') == 'Idioma'
-        assert page.locator('meta[name=description]').get_attribute('content').startswith('Biya — artista digital')
+        assert page.locator('meta[name=description]').get_attribute('content').startswith('Arte, personagens, streams')
         assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),('overflow2',width)
         page.evaluate('document.querySelectorAll("img[loading=lazy]").forEach(x=>x.loading="eager")');page.wait_for_function('Array.from(document.images).every(x=>x.complete && x.naturalWidth>0)',timeout=15000);assert page.locator('img').evaluate_all('(xs)=>xs.every(x=>x.complete&&x.naturalWidth>0)'), page.locator('img').evaluate_all('(xs)=>xs.filter(x=>!(x.complete&&x.naturalWidth>0)).map(x=>({id:x.id,src:x.src.slice(0,120),complete:x.complete,width:x.naturalWidth}))')
         assert not errors,errors
