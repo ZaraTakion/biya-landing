@@ -341,3 +341,457 @@
   .heart-rain span { animation: none !important; display: none; }
   .pulse-button { transition: none !important; }
 }
+
+
+/* V5.1 DESIGN REFINEMENT — preserve the layout, strengthen the identity. */
+:root {
+  --world-accent: #9a82c1;
+  --world-accent-soft: #e5daef;
+  --world-surface: #f2eff7;
+  --world-ink: #241f31;
+  --world-muted: #766f80;
+}
+body[data-world="ghost"] {
+  --world-accent: #c398dc;
+  --world-accent-soft: #3b284b;
+  --world-surface: #1d1726;
+  --world-ink: #f0e7f6;
+  --world-muted: #b3a2bd;
+}
+
+/* Remove decorative friction while keeping the chapter language. */
+.portal-serial {
+  left: 5.6%;
+  top: 28px;
+  writing-mode: horizontal-tb;
+  transform: none;
+  letter-spacing: .18em;
+  opacity: .72;
+}
+.shortcut {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 8px;
+  opacity: .52;
+}
+
+/* Mobile navigation: one deliberate navigation system instead of compressed desktop links. */
+.mobile-menu-button,
+.mobile-menu {
+  display: none;
+}
+.mobile-menu-button {
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  gap: 5px;
+  padding: 0;
+  border: 1px solid var(--edge);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+}
+.mobile-menu-button span {
+  width: 17px;
+  height: 1px;
+  background: currentColor;
+  transition: transform 240ms ease;
+}
+.mobile-menu-button[aria-expanded="true"] span:first-child { transform: translateY(3px) rotate(45deg); }
+.mobile-menu-button[aria-expanded="true"] span:last-child { transform: translateY(-3px) rotate(-45deg); }
+
+.mobile-menu {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 1px);
+  left: 4%;
+  right: 4%;
+  padding: 10px;
+  border: 1px solid #d6cfdd;
+  background: rgb(249 247 251 / 96%);
+  box-shadow: 0 28px 70px rgb(34 23 47 / 18%);
+  backdrop-filter: blur(18px);
+}
+.mobile-menu.is-open { display: grid; }
+.mobile-menu > a {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  border-bottom: 1px solid #e1dbe6;
+  color: #30283a;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+.mobile-menu > a.current { color: #8d6cad; }
+.mobile-menu > a small {
+  color: #9d92a5;
+  font-size: 9px;
+}
+.mobile-menu > a:last-child { border-bottom: 0; }
+.mobile-menu-social {
+  margin-top: 5px;
+  border-radius: 3px;
+  background: #261f30;
+  color: #fff !important;
+}
+
+/* Archive overview: discoverability without turning the museum viewer into a grid-first page. */
+.archive-overview {
+  max-width: 1490px;
+  margin: 26px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid #43394f;
+}
+.archive-overview-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 12px;
+  color: #8e8298;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .15em;
+}
+.archive-thumbs {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+}
+.archive-thumbs button {
+  position: relative;
+  min-width: 0;
+  min-height: 142px;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid #41384c;
+  background: #201b29;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 280ms var(--motion-signature),
+    border-color 240ms ease,
+    box-shadow 280ms ease;
+}
+.archive-thumbs img {
+  width: 100%;
+  height: 142px;
+  display: block;
+  object-fit: cover;
+  opacity: .52;
+  filter: saturate(.74) contrast(1.04);
+  transition: opacity 280ms ease, filter 280ms ease, transform 420ms var(--motion-signature);
+}
+.archive-thumbs button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(20 15 27 / 92%) 0, transparent 58%);
+  pointer-events: none;
+}
+.archive-thumbs span,
+.archive-thumbs strong {
+  position: absolute;
+  z-index: 2;
+  left: 10px;
+}
+.archive-thumbs span {
+  top: 9px;
+  color: #cab1dc;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+.archive-thumbs strong {
+  right: 9px;
+  bottom: 10px;
+  font-size: 10px;
+  line-height: 1.15;
+}
+.archive-thumbs button.is-active {
+  border-color: #c3a4dc;
+  box-shadow: inset 0 0 0 1px #c3a4dc, 0 12px 30px rgb(0 0 0 / 18%);
+}
+.archive-thumbs button.is-active img {
+  opacity: .9;
+  filter: saturate(1) contrast(1.02);
+}
+@media (hover:hover) and (pointer:fine) {
+  .archive-thumbs button:hover { transform: translateY(-5px); border-color: #9d80b4; }
+  .archive-thumbs button:hover img { opacity: .85; filter: saturate(1); transform: scale(1.035); }
+}
+
+/* Intermission should carry momentum, not feel like an empty spacer. */
+.intermission::before,
+.intermission::after {
+  content: "";
+  position: absolute;
+  width: min(24vw, 320px);
+  height: 1px;
+  top: 50%;
+  background: linear-gradient(90deg, transparent, rgb(92 61 114 / 34%), transparent);
+}
+.intermission::before { left: 4%; }
+.intermission::after { right: 4%; }
+.intermission p {
+  max-width: 620px;
+  padding-inline: 24px;
+}
+
+/* Signal: turn three screenshots into a deliberate broadcast archive. */
+.signal {
+  position: relative;
+  overflow: hidden;
+  transition: background .65s ease, color .65s ease;
+}
+.signal-summary {
+  display: grid;
+  grid-template-columns: .65fr 1.35fr 1fr;
+  max-width: 1490px;
+  margin: -34px auto 42px;
+  border: 1px solid #cbc4d5;
+  background: rgb(255 255 255 / 58%);
+  backdrop-filter: blur(12px);
+}
+.signal-summary > * {
+  min-height: 104px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding: 18px 22px;
+  border-right: 1px solid #d9d2e0;
+}
+.signal-summary > *:last-child { border-right: 0; }
+.signal-summary span,
+.signal-summary small {
+  color: #8d8496;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.signal-summary strong {
+  color: #2a2434;
+  font-size: clamp(15px, 1.5vw, 22px);
+  letter-spacing: -.025em;
+}
+.signal-summary a {
+  color: inherit;
+  transition: background 220ms ease;
+}
+.signal-summary a:hover { background: rgb(177 145 203 / 10%); }
+.broadcast {
+  border: 1px solid transparent;
+  border-radius: 2px;
+}
+.broadcast:hover { border-color: rgb(145 116 168 / 28%); }
+
+/* Game: make the idle state feel like a portal console before Canvas paints. */
+.pulse-machine {
+  isolation: isolate;
+  overflow: hidden;
+}
+.pulse-machine::before,
+.pulse-machine::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+.pulse-machine::before {
+  width: 220px;
+  height: 220px;
+  right: -70px;
+  top: -70px;
+  border: 1px solid rgb(137 118 178 / 18%);
+  transform: rotate(45deg);
+}
+.pulse-machine::after {
+  width: 160px;
+  height: 160px;
+  left: -72px;
+  bottom: -72px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(221 190 218 / 24%), transparent 70%);
+}
+.pulse-canvas {
+  background:
+    linear-gradient(to right, rgb(116 100 149 / 8%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(116 100 149 / 8%) 1px, transparent 1px),
+    radial-gradient(circle at 28% 50%, #f5e7f1, #e9e7f7 62%, #e3e0f0);
+  background-size: 48px 48px, 48px 48px, auto;
+}
+.pulse-machine[data-world="ghost"] .pulse-canvas {
+  background:
+    linear-gradient(to right, rgb(210 171 235 / 7%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(210 171 235 / 7%) 1px, transparent 1px),
+    radial-gradient(circle at 28% 50%, #3a2949, #21192c 62%, #15111c);
+  background-size: 48px 48px, 48px 48px, auto;
+}
+
+/* The selected world subtly influences the rest of the page. */
+body[data-world="ghost"] .intermission {
+  background: radial-gradient(circle at 50% 50%, #684879, #34243f 48%, #18131f);
+  color: #f2e9f7;
+}
+body[data-world="ghost"] .intermission-ink { color: #d5afe7; }
+body[data-world="ghost"] .intermission-symbol { color: #d2a6e9; }
+body[data-world="ghost"] .signal {
+  background:
+    radial-gradient(circle at 83% 14%, rgb(92 51 114 / 26%), transparent 31%),
+    #211a2b;
+  color: #f0e7f6;
+}
+body[data-world="ghost"] .signal-heading p,
+body[data-world="ghost"] .signal-end span { color: #b5a6c0; }
+body[data-world="ghost"] .signal-summary {
+  border-color: #4d3a5b;
+  background: rgb(30 22 40 / 72%);
+}
+body[data-world="ghost"] .signal-summary > * { border-color: #493753; }
+body[data-world="ghost"] .signal-summary span,
+body[data-world="ghost"] .signal-summary small { color: #a997b4; }
+body[data-world="ghost"] .signal-summary strong { color: #f4ebf8; }
+body[data-world="ghost"] .signal-end { border-color: #4e3d58; }
+body[data-world="ghost"] .pulse-section {
+  background:
+    radial-gradient(circle at 18% 30%, rgb(115 68 137 / 28%), transparent 27%),
+    radial-gradient(circle at 82% 38%, rgb(78 54 115 / 35%), transparent 32%),
+    #18131f;
+  color: #f2eaf7;
+}
+body[data-world="ghost"] .pulse-copy > p:not(.mini-label),
+body[data-world="ghost"] .pulse-help { color: #b8a9c2; }
+body[data-world="ghost"] .pulse-help { border-color: #493956; }
+body[data-world="ghost"] .about { background: #221a2c; color: #f1e8f6; }
+body[data-world="ghost"] .about-art {
+  background: linear-gradient(145deg, #36263f, #201826);
+}
+body[data-world="ghost"] .about-copy {
+  background: #1b1622;
+}
+body[data-world="ghost"] .about-description,
+body[data-world="ghost"] .about-picture-caption { color: #ae9fb8; }
+body[data-world="ghost"] .about h2 em { color: #c69cdd; }
+body[data-world="ghost"] .about-sun {
+  background: #6f4e80;
+  opacity: .42;
+}
+body[data-world="ghost"] .about-art img {
+  mix-blend-mode: normal;
+  filter: saturate(.82) contrast(1.02);
+}
+
+/* Footer becomes a deliberate final destination. */
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 4px 0 28px;
+  border-top: 1px solid #554861;
+  border-left: 1px solid #554861;
+}
+.footer-links a {
+  min-height: 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 18px;
+  border-right: 1px solid #554861;
+  border-bottom: 1px solid #554861;
+  color: #e9dfef;
+  transition: background 260ms ease, color 260ms ease;
+}
+.footer-links a:hover {
+  background: #241c2e;
+  color: #fff;
+}
+.footer-links span {
+  color: #887a92;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .14em;
+}
+.footer-links strong {
+  font-size: 11px;
+  letter-spacing: .05em;
+}
+
+/* The right rail is a large-screen enhancement, not a competing primary nav. */
+@media (max-width: 1180px) {
+  .rail-nav { display: none; }
+}
+@media (min-width: 1181px) {
+  .rail-nav { opacity: .74; }
+  .rail-nav:hover { opacity: 1; }
+}
+
+/* Strong mobile hierarchy. */
+@media (max-width: 720px) {
+  .header {
+    position: relative;
+    justify-content: flex-start;
+  }
+  .header-nav { display: none; }
+  .language-switch { margin-left: auto; }
+  .mobile-menu-button { display: grid; margin-left: 3px; }
+  .portal-serial { display: none; }
+
+  .archive-overview {
+    margin-top: 18px;
+  }
+  .archive-overview-head span:last-child { display: none; }
+  .archive-thumbs {
+    display: flex;
+    overflow-x: auto;
+    gap: 8px;
+    padding-bottom: 8px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+  .archive-thumbs button {
+    flex: 0 0 132px;
+    min-height: 126px;
+    scroll-snap-align: start;
+  }
+  .archive-thumbs img { height: 126px; }
+
+  .signal-summary {
+    grid-template-columns: 1fr;
+    margin: -15px 0 28px;
+  }
+  .signal-summary > * {
+    min-height: 82px;
+    border-right: 0;
+    border-bottom: 1px solid #d9d2e0;
+  }
+  .signal-summary > *:last-child { border-bottom: 0; }
+  body[data-world="ghost"] .signal-summary > * { border-bottom-color: #493753; }
+
+  .intermission { min-height: 300px; }
+  .intermission::before,
+  .intermission::after { width: 17vw; }
+  .intermission p { font-size: clamp(28px, 8vw, 38px); }
+
+  .footer-links {
+    grid-template-columns: 1fr 1fr;
+  }
+  .footer-links a { min-height: 82px; }
+  .footer-bottom { gap: 8px; }
+}
+
+@media (max-width: 460px) {
+  .concept-bar > span:first-child { max-width: 62%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .language-option { padding-inline: 6px; }
+  .brand-mark { display: none; }
+  .footer-links { grid-template-columns: 1fr; }
+  .footer-wordmark { font-size: 31vw; }
+}
