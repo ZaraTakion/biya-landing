@@ -53,11 +53,22 @@ const contentByLanguage = {
 } as const;
 
 export default function PolicyApp() {
-  const [language, setLanguage] = useState<Language>('pt');
+  const [language, setLanguage] = useState<Language>(() => {
+    try {
+      return localStorage.getItem('biya-language') === 'en' ? 'en' : 'pt';
+    } catch {
+      return 'pt';
+    }
+  });
   const t = contentByLanguage[language];
 
   useEffect(() => {
     document.documentElement.lang = language === 'pt' ? 'pt-BR' : 'en';
+    try {
+      localStorage.setItem('biya-language', language);
+    } catch {
+      // Browsers may disable storage; language switching still works.
+    }
     document.title = language === 'pt'
       ? 'Política das artes — BIYA / Parallel Worlds'
       : 'Artwork policy — BIYA / Parallel Worlds';
@@ -76,6 +87,7 @@ export default function PolicyApp() {
             key={value}
             type="button"
             className={language === value ? 'is-active' : undefined}
+            lang={value === 'pt' ? 'pt-BR' : 'en'}
             aria-pressed={language === value}
             onClick={() => setLanguage(value)}
           >
