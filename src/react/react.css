@@ -795,3 +795,12 @@ body[data-world="ghost"] .about-art img {
   .footer-links { grid-template-columns: 1fr; }
   .footer-wordmark { font-size: 31vw; }
 }
+
+
+/* Tablet navigation joins the mobile pattern before the header becomes crowded. */
+@media (max-width: 900px) {
+  .header-nav { display: none; }
+  .header-link { display: none; }
+  .language-switch { margin-left: auto; }
+  .mobile-menu-button { display: grid; margin-left: 4px; }
+}
