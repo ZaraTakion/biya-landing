@@ -804,3 +804,58 @@ body[data-world="ghost"] .about-art img {
   .language-switch { margin-left: auto; }
   .mobile-menu-button { display: grid; margin-left: 4px; }
 }
+
+/* V5.1 — responsive editorial polish, without changing the Parallel Worlds identity */
+:root { text-size-adjust: 100%; }
+img, video, canvas { max-width: 100%; }
+.header-nav a, .header-link, .pulse-button, .policy-back { -webkit-tap-highlight-color: transparent; }
+.header-nav a:focus-visible, .header-link:focus-visible, .pulse-button:focus-visible,
+.pulse-canvas:focus-visible, .easter-trigger:focus-visible, .gallery-experience button:focus-visible {
+  outline: 3px solid #bb93e6;
+  outline-offset: 4px;
+}
+.portal h1 { font-size: clamp(82px, 13vw, 220px); }
+.archive h2 { overflow-wrap: anywhere; }
+.pulse-copy h2 { overflow-wrap: anywhere; }
+.pulse-canvas { background: #191526; }
+.art-showcase > .protected-frame { min-width: 0; }
+.art-showcase > .protected-frame > img { max-width: 100%; }
+.pulse-machine { isolation: isolate; }
+@media (min-width: 1600px) {
+  .portal { max-height: 960px; }
+  .portal-copy { max-width: 740px; }
+  .portal h1 { font-size: clamp(150px, 12vw, 245px); }
+}
+@media (max-width: 1050px) {
+  .header-nav { gap: clamp(10px, 2vw, 25px); }
+  .portal h1 { font-size: clamp(76px, 13vw, 150px); }
+  .archive { padding-top: 94px; }
+  .signal { padding-top: 86px; }
+}
+@media (max-width: 720px) {
+  .portal { min-height: 0; }
+  .portal h1 { font-size: clamp(72px, 20vw, 132px); }
+  .archive { padding: 76px 5% 74px; }
+  .archive h2 { font-size: clamp(43px, 12vw, 76px); }
+  .gallery-experience { min-height: 0; }
+  .art-showcase { min-height: 360px; }
+  .signal { padding: 75px 5% 90px; }
+  .signal-heading h2 { font-size: clamp(60px, 15vw, 110px); }
+  .pulse-copy h2 { font-size: clamp(55px, 15vw, 94px); }
+  .pulse-machine { padding: 10px; }
+  .pulse-hud { gap: 8px; }
+  .footer-wordmark { font-size: clamp(90px, 26vw, 180px); }
+}
+@media (max-width: 380px) {
+  .portal h1 { font-size: clamp(64px, 19vw, 84px); }
+  .art-showcase { min-height: 300px; }
+  .art-showcase > .protected-frame { height: 285px; }
+  .pulse-copy h2 { font-size: 52px; }
+  .pulse-machine { padding: 7px; }
+  .pulse-hud span { font-size: 7px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pulse-machine, .pulse-button, .art-showcase > .protected-frame > img {
+    transition-duration: .01ms !important;
+  }
+}
